@@ -550,7 +550,7 @@ const frameShiftIssues = [
     relatedEvents: ["deepfake-elections", "congress-ai-hearings", "white-house-eo"],
     relatedDocuments: ["State deepfake election laws", "Congressional AI hearing records", "Platform synthetic-media policies"],
     sources: [
-      { label: "White House AI Executive Order", type: "Official source", url: "https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/" },
+      { label: "GovInfo: AI Executive Order 14110", type: "Official source", url: "https://www.govinfo.gov/content/pkg/FR-2023-11-01/pdf/2023-24283.pdf" },
       { label: "Brennan Center: AI deepfakes in politics", type: "Policy report", url: "https://www.brennancenter.org/our-work/research-reports/regulating-ai-deepfakes-and-synthetic-media-political-arena" },
       { label: "Brennan Center: state AI election regulation", type: "Policy report", url: "https://www.brennancenter.org/our-work/research-reports/states-take-lead-regulating-ai-elections-within-limits" },
       { label: "Congressional AI hearings", type: "Hearing context", url: "https://www.congress.gov/search?q=%7B%22source%22%3A%22committee%22%2C%22search%22%3A%22artificial+intelligence%22%7D" }
@@ -570,7 +570,7 @@ const frameShiftIssues = [
     relatedEvents: ["facial-recognition", "eu-ai-act", "white-house-eo"],
     relatedDocuments: ["Facial recognition policy debates", "EU AI Act high-risk provisions", "Agency AI procurement guidance"],
     sources: [
-      { label: "White House AI Executive Order", type: "Official source", url: "https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/" },
+      { label: "GovInfo: AI Executive Order 14110", type: "Official source", url: "https://www.govinfo.gov/content/pkg/FR-2023-11-01/pdf/2023-24283.pdf" },
       { label: "EU AI Act text", type: "Official source", url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" },
       { label: "NIST AI Risk Management Framework", type: "Framework", url: "https://www.nist.gov/itl/ai-risk-management-framework" },
       { label: "Government AI procurement and mandates at NIST", type: "Government source", url: "https://www.nist.gov/artificial-intelligence/ai-congressional-mandates-executive-orders-and-actions" }
@@ -593,7 +593,7 @@ const frameShiftIssues = [
       { label: "NIST AI Risk Management Framework", type: "Framework", url: "https://www.nist.gov/itl/ai-risk-management-framework" },
       { label: "EEOC AI and employment selection technical assistance", type: "Government guidance", url: "https://www.eeoc.gov/technical-assistance-document/select-issues-assessing-adverse-impact-software-algorithms-and" },
       { label: "EU AI Act text", type: "Official source", url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" },
-      { label: "White House AI Executive Order", type: "Official source", url: "https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/" }
+      { label: "GovInfo: AI Executive Order 14110", type: "Official source", url: "https://www.govinfo.gov/content/pkg/FR-2023-11-01/pdf/2023-24283.pdf" }
     ],
     framingScores: { Innovation: 45, Safety: 76, Privacy: 66, Accountability: 96, "Free Speech": 24, Copyright: 8, "National Security": 30 },
     conflict: "The core conflict is between automation efficiency and enforceable rights against discriminatory outcomes."
@@ -608,9 +608,9 @@ const frameShiftIssues = [
     constitutionalAnchors: ["Administrative Law", "National Security", "Consumer Protection"],
     relatedInstitutions: ["government", "companies", "researchers", "international"],
     relatedEvents: ["white-house-eo", "congress-ai-hearings", "eu-ai-act"],
-    relatedDocuments: ["White House AI Executive Order", "NIST AI RMF", "Frontier model safety commitments"],
+    relatedDocuments: ["GovInfo: AI Executive Order 14110", "NIST AI RMF", "Frontier model safety commitments"],
     sources: [
-      { label: "White House AI Executive Order", type: "Official source", url: "https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/" },
+      { label: "GovInfo: AI Executive Order 14110", type: "Official source", url: "https://www.govinfo.gov/content/pkg/FR-2023-11-01/pdf/2023-24283.pdf" },
       { label: "NIST AI Risk Management Framework", type: "Framework", url: "https://www.nist.gov/itl/ai-risk-management-framework" },
       { label: "NIST AI executive orders and mandates", type: "Government source", url: "https://www.nist.gov/artificial-intelligence/ai-congressional-mandates-executive-orders-and-actions" },
       { label: "EU AI Act text", type: "Official source", url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" }
@@ -630,7 +630,7 @@ const frameShiftIssues = [
     relatedEvents: ["deepfake-elections", "congress-ai-hearings"],
     relatedDocuments: ["Platform policy updates", "AI-generated content disclosures", "Consumer protection enforcement theories"],
     sources: [
-      { label: "White House AI Executive Order", type: "Official source", url: "https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/" },
+      { label: "GovInfo: AI Executive Order 14110", type: "Official source", url: "https://www.govinfo.gov/content/pkg/FR-2023-11-01/pdf/2023-24283.pdf" },
       { label: "Brennan Center: synthetic political media", type: "Policy report", url: "https://www.brennancenter.org/our-work/research-reports/regulating-ai-deepfakes-and-synthetic-media-political-arena" },
       { label: "Congressional AI hearings", type: "Hearing context", url: "https://www.congress.gov/search?q=%7B%22source%22%3A%22committee%22%2C%22search%22%3A%22artificial+intelligence%22%7D" },
       { label: "FTC AI enforcement and business guidance", type: "Government guidance", url: "https://www.ftc.gov/business-guidance/technology/artificial-intelligence" }
@@ -652,7 +652,7 @@ const frameShiftIssues = [
     sources: [
       { label: "NYC Automated Employment Decision Tools law", type: "Local law", url: "https://www.nyc.gov/site/dca/about/automated-employment-decision-tools.page" },
       { label: "EEOC AI and employment selection technical assistance", type: "Government guidance", url: "https://www.eeoc.gov/technical-assistance-document/select-issues-assessing-adverse-impact-software-algorithms-and" },
-      { label: "White House AI Executive Order", type: "Official source", url: "https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/" },
+      { label: "GovInfo: AI Executive Order 14110", type: "Official source", url: "https://www.govinfo.gov/content/pkg/FR-2023-11-01/pdf/2023-24283.pdf" },
       { label: "NIST AI Risk Management Framework", type: "Framework", url: "https://www.nist.gov/itl/ai-risk-management-framework" }
     ],
     framingScores: { Innovation: 58, Safety: 60, Privacy: 78, Accountability: 94, "Free Speech": 14, Copyright: 6, "National Security": 18 },
@@ -661,7 +661,7 @@ const frameShiftIssues = [
 ];
 
 const governanceEvents = [
-  { id: "white-house-eo", year: "2023", title: "White House AI Executive Order", detail: "Federal AI governance framed around safety, security, civil rights, procurement, and agency capacity." },
+  { id: "white-house-eo", year: "2023", title: "GovInfo: AI Executive Order 14110", detail: "Federal AI governance framed around safety, security, civil rights, procurement, and agency capacity." },
   { id: "eu-ai-act", year: "2024", title: "EU AI Act", detail: "Risk-classification model for AI obligations, transparency, and high-risk system compliance." },
   { id: "nytimes-openai", year: "2023", title: "New York Times v. OpenAI", detail: "Copyright litigation over training data and generated outputs." },
   { id: "getty-stability", year: "2023", title: "Getty Images v. Stability AI", detail: "Image-generation dispute about copyrighted visual works and model training." },
