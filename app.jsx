@@ -1019,6 +1019,7 @@ function TrialSimPage() {
       </section>
 
       <TrialArgumentPanel caseType={caseType} result={result} scenario={scenario} />
+      <TrialModelExplanation result={result} />
       <TrialComparisonPanel current={result} comparison={comparisonResult} excludedEvidence={excludedEvidence} />
       <TrialExplanation />
     </>
@@ -1171,6 +1172,36 @@ function TrialArgumentPanel({ caseType, result, scenario }) {
           <strong>{scenario.constitutionalIssue}</strong>
         </article>
       </div>
+    </section>
+  );
+}
+
+function TrialModelExplanation({ result }) {
+  return (
+    <section className="panel trialPanel modelExplanationPanel">
+      <div className="sectionHeader">
+        <div>
+          <p className="label">Model Explanation</p>
+          <h2>Why the score moved</h2>
+          <p>TrialSim uses a transparent weighted model. The goal is not to predict real cases, but to show how legal variables can change modeled scenario pressure.</p>
+        </div>
+        <div className="modelFinalScore">
+          <strong>{result.rawCaseScore}</strong>
+          <span>raw score before clamp</span>
+        </div>
+      </div>
+      <div className="modelRows">
+        {result.modelBreakdown.map((item) => (
+          <div key={item.label} className="modelRow">
+            <span>{item.label}</span>
+            <i>{item.detail}</i>
+            <strong className={item.value >= 0 ? "positive" : "negative"}>{formatSigned(item.value)}</strong>
+          </div>
+        ))}
+      </div>
+      <p className="modelNote">
+        Final case viability is the raw score clamped to a 0-100 range: <strong>{result.caseViability}%</strong>.
+      </p>
     </section>
   );
 }
@@ -2338,18 +2369,24 @@ function filterFrameShiftIssues(query, category) {
 
 function simulateTrialScenario(scenario) {
   const issueRisk = getConstitutionalRisk(scenario.constitutionalIssue, scenario.excludedEvidence);
-  const strategyBoost = getStrategyBoost(scenario.plaintiffStrategy) - getDefenseDrag(scenario.defenseStrategy);
+  const plaintiffStrategyBoost = getStrategyBoost(scenario.plaintiffStrategy);
+  const defenseStrategyDrag = getDefenseDrag(scenario.defenseStrategy);
+  const strategyBoost = plaintiffStrategyBoost - defenseStrategyDrag;
   const jurisdictionAdjustment = getJurisdictionAdjustment(scenario.jurisdiction);
   const evidenceValue = scenario.excludedEvidence ? scenario.evidenceStrength * 0.56 : scenario.evidenceStrength;
-  const caseViability = clampScore(
+  const evidenceContribution = (evidenceValue - 50) * 0.42;
+  const witnessContribution = (scenario.witnessReliability - 50) * 0.26;
+  const juryContribution = -(scenario.jurySkepticism - 50) * 0.18;
+  const constitutionalContribution = -issueRisk * 0.24;
+  const rawCaseScore =
     scenario.caseType.basePressure +
-    (evidenceValue - 50) * 0.42 +
-    (scenario.witnessReliability - 50) * 0.26 -
-    (scenario.jurySkepticism - 50) * 0.18 -
-    issueRisk * 0.24 +
+    evidenceContribution +
+    witnessContribution +
+    juryContribution +
+    constitutionalContribution +
     strategyBoost +
-    jurisdictionAdjustment
-  );
+    jurisdictionAdjustment;
+  const caseViability = clampScore(rawCaseScore);
   const movingPressure = clampScore(caseViability + (scenario.evidenceStrength - scenario.witnessReliability) * 0.08 - (scenario.excludedEvidence ? 8 : 0));
   const settlementPressure = clampScore(44 + Math.abs(caseViability - 50) * 0.42 + issueRisk * 0.18 + (scenario.jurisdiction === "Settlement posture" ? 16 : 0));
   const constitutionalRisk = clampScore(issueRisk + (scenario.defenseStrategy === "Constitutional challenge" ? 14 : 0) + (scenario.excludedEvidence ? 10 : 0));
@@ -2361,6 +2398,17 @@ function simulateTrialScenario(scenario) {
     movingPressure,
     settlementPressure,
     constitutionalRisk,
+    rawCaseScore: Math.round(rawCaseScore),
+    modelBreakdown: [
+      { label: "Base case pressure", value: scenario.caseType.basePressure, detail: scenario.caseType.title },
+      { label: "Evidence strength", value: evidenceContribution, detail: scenario.excludedEvidence ? "Discounted because key evidence is excluded" : `${scenario.evidenceStrength}/100 evidence input` },
+      { label: "Witness reliability", value: witnessContribution, detail: `${scenario.witnessReliability}/100 reliability input` },
+      { label: "Jury skepticism", value: juryContribution, detail: `${scenario.jurySkepticism}/100 skepticism input` },
+      { label: "Constitutional risk", value: constitutionalContribution, detail: scenario.constitutionalIssue },
+      { label: "Moving-side strategy", value: plaintiffStrategyBoost, detail: scenario.plaintiffStrategy },
+      { label: "Defense strategy", value: -defenseStrategyDrag, detail: scenario.defenseStrategy },
+      { label: "Jurisdiction modifier", value: jurisdictionAdjustment, detail: scenario.jurisdiction }
+    ].map((item) => ({ ...item, value: Math.round(item.value) })),
     headline,
     summary,
     strongestPoint: caseViability >= 58 ? "The moving side benefits from coherent facts and enough proof to sustain pressure." : "The moving side needs a clearer evidentiary path before the case feels durable.",
@@ -2415,6 +2463,11 @@ function buildTrialSummary(caseViability, constitutionalRisk, scenario) {
   const pressure = caseViability >= 70 ? "high" : caseViability >= 52 ? "moderate" : "low";
   const risk = constitutionalRisk >= 65 ? "a significant constitutional constraint" : "a manageable constitutional constraint";
   return `With ${evidencePhrase}, the model shows ${pressure} case pressure and ${risk}. The output is a teaching model for comparing legal variables, not a prediction.`;
+}
+
+function formatSigned(value) {
+  if (value > 0) return `+${value}`;
+  return `${value}`;
 }
 
 function clampScore(value) {
