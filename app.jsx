@@ -720,7 +720,7 @@ function SiteNav({ view, setView }) {
       <div className="navLinks">
         <button className={view === "home" ? "active" : ""} onClick={() => setView("home")}>Profile</button>
         <button className={view === "precedent" ? "active" : ""} onClick={() => setView("precedent")}>CourtMap</button>
-        <button className={view === "frameshift" ? "active" : ""} onClick={() => setView("frameshift")}>FrameShift</button>
+        <button className={view === "frameshift" ? "active" : ""} onClick={() => setView("frameshift")}>FrameShift (WIP)</button>
         <a href="mailto:kamrane02@gmail.com">Contact</a>
       </div>
     </nav>
