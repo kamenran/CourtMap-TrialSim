@@ -969,14 +969,14 @@ function IssueExplorer({ issues, selectedIssue, issueQuery, setIssueQuery, categ
           <input value={issueQuery} onChange={(event) => setIssueQuery(event.target.value)} placeholder="Try copyright, elections, surveillance..." />
         </label>
       </div>
-      <div className="catalogControls frameControls">
-        <label>
-          <span>Category</span>
-          <select value={category} onChange={(event) => setCategory(event.target.value)}>
-            <option value="all">All categories</option>
-            {categories.map((item) => <option key={item} value={item}>{item}</option>)}
-          </select>
-        </label>
+      <div className="frameCategoryBar" aria-label="FrameShift issue categories">
+        <span>Category</span>
+        <button className={category === "all" ? "active" : ""} onClick={() => setCategory("all")}>All</button>
+        {categories.map((item) => (
+          <button key={item} className={category === item ? "active" : ""} onClick={() => setCategory(item)}>
+            {item}
+          </button>
+        ))}
       </div>
       <div className="frameIssueGrid">
         {issues.map((issue) => <IssueCard key={issue.id} issue={issue} active={issue.id === selectedIssue.id} onClick={() => setSelectedIssueId(issue.id)} />)}

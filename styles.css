@@ -523,9 +523,50 @@ button {
   align-items: start;
 }
 
-.frameControls {
-  grid-template-columns: minmax(220px, 340px);
-  margin-top: 14px;
+.frameCategoryBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 14px 0 16px;
+  padding: 10px;
+  border: 1px solid rgba(232, 226, 220, 0.86);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.54);
+}
+
+.frameCategoryBar > span {
+  flex: 0 0 auto;
+  margin-right: 2px;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.frameCategoryBar button {
+  min-height: 34px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.76);
+  color: var(--navy);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 850;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.frameCategoryBar button.active {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #fff;
+}
+
+.frameCategoryBar button:hover:not(.active) {
+  border-color: rgba(59, 95, 130, 0.32);
+  background: #fff;
 }
 
 .frameIssueGrid {
@@ -627,8 +668,7 @@ button {
   text-transform: uppercase;
 }
 
-.institutionSelectRow select,
-.frameControls select {
+.institutionSelectRow select {
   width: 100%;
   min-height: 44px;
   padding: 0 12px;
