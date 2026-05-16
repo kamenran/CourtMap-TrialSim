@@ -529,6 +529,12 @@ const frameShiftIssues = [
     relatedInstitutions: ["courts", "companies", "researchers", "government"],
     relatedEvents: ["nytimes-openai", "getty-stability", "copyright-office"],
     relatedDocuments: ["NYT v. OpenAI complaint", "Getty Images v. Stability AI", "U.S. Copyright Office AI guidance"],
+    sources: [
+      { label: "The New York Times v. Microsoft/OpenAI docket", type: "Case docket", url: "https://www.docketalarm.com/cases/New_York_Southern_District_Court/1--23-cv-11195/The_New_York_Times_Company_v._Microsoft_Corporation_et_al/" },
+      { label: "Getty Images v. Stability AI complaint", type: "Court filing", url: "https://copyrightlately.com/wp-content/uploads/2023/02/Getty-Images-v.-Stability-AI-Complaint.pdf" },
+      { label: "U.S. Copyright Office AI initiative", type: "Government source", url: "https://www.copyright.gov/ai/" },
+      { label: "NIST AI Risk Management Framework", type: "Framework", url: "https://www.nist.gov/itl/ai-risk-management-framework" }
+    ],
     framingScores: { Innovation: 82, Safety: 38, Privacy: 42, Accountability: 66, "Free Speech": 64, Copyright: 96, "National Security": 20 },
     conflict: "The core conflict is between model development at scale and creator control over copyrighted works."
   },
@@ -543,6 +549,12 @@ const frameShiftIssues = [
     relatedInstitutions: ["government", "civil-liberties", "companies", "international"],
     relatedEvents: ["deepfake-elections", "congress-ai-hearings", "white-house-eo"],
     relatedDocuments: ["State deepfake election laws", "Congressional AI hearing records", "Platform synthetic-media policies"],
+    sources: [
+      { label: "White House AI Executive Order", type: "Official source", url: "https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/" },
+      { label: "Brennan Center: AI deepfakes in politics", type: "Policy report", url: "https://www.brennancenter.org/our-work/research-reports/regulating-ai-deepfakes-and-synthetic-media-political-arena" },
+      { label: "Brennan Center: state AI election regulation", type: "Policy report", url: "https://www.brennancenter.org/our-work/research-reports/states-take-lead-regulating-ai-elections-within-limits" },
+      { label: "Congressional AI hearings", type: "Hearing context", url: "https://www.congress.gov/search?q=%7B%22source%22%3A%22committee%22%2C%22search%22%3A%22artificial+intelligence%22%7D" }
+    ],
     framingScores: { Innovation: 44, Safety: 78, Privacy: 48, Accountability: 84, "Free Speech": 90, Copyright: 18, "National Security": 72 },
     conflict: "The core conflict is between election integrity rules and avoiding overbroad restrictions on political speech."
   },
@@ -557,6 +569,12 @@ const frameShiftIssues = [
     relatedInstitutions: ["civil-liberties", "government", "courts", "international"],
     relatedEvents: ["facial-recognition", "eu-ai-act", "white-house-eo"],
     relatedDocuments: ["Facial recognition policy debates", "EU AI Act high-risk provisions", "Agency AI procurement guidance"],
+    sources: [
+      { label: "White House AI Executive Order", type: "Official source", url: "https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/" },
+      { label: "EU AI Act text", type: "Official source", url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" },
+      { label: "NIST AI Risk Management Framework", type: "Framework", url: "https://www.nist.gov/itl/ai-risk-management-framework" },
+      { label: "Government AI procurement and mandates at NIST", type: "Government source", url: "https://www.nist.gov/artificial-intelligence/ai-congressional-mandates-executive-orders-and-actions" }
+    ],
     framingScores: { Innovation: 36, Safety: 74, Privacy: 98, Accountability: 86, "Free Speech": 56, Copyright: 10, "National Security": 84 },
     conflict: "The core conflict is between security and administrative efficiency on one side and privacy/civil-liberties protections on the other."
   },
@@ -571,6 +589,12 @@ const frameShiftIssues = [
     relatedInstitutions: ["civil-liberties", "international", "government", "researchers"],
     relatedEvents: ["hiring-bias", "white-house-eo", "eu-ai-act"],
     relatedDocuments: ["Algorithmic hiring rules", "NIST AI Risk Management Framework", "Civil rights agency guidance"],
+    sources: [
+      { label: "NIST AI Risk Management Framework", type: "Framework", url: "https://www.nist.gov/itl/ai-risk-management-framework" },
+      { label: "EEOC AI and employment selection technical assistance", type: "Government guidance", url: "https://www.eeoc.gov/technical-assistance-document/select-issues-assessing-adverse-impact-software-algorithms-and" },
+      { label: "EU AI Act text", type: "Official source", url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" },
+      { label: "White House AI Executive Order", type: "Official source", url: "https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/" }
+    ],
     framingScores: { Innovation: 45, Safety: 76, Privacy: 66, Accountability: 96, "Free Speech": 24, Copyright: 8, "National Security": 30 },
     conflict: "The core conflict is between automation efficiency and enforceable rights against discriminatory outcomes."
   },
@@ -585,6 +609,12 @@ const frameShiftIssues = [
     relatedInstitutions: ["government", "companies", "researchers", "international"],
     relatedEvents: ["white-house-eo", "congress-ai-hearings", "eu-ai-act"],
     relatedDocuments: ["White House AI Executive Order", "NIST AI RMF", "Frontier model safety commitments"],
+    sources: [
+      { label: "White House AI Executive Order", type: "Official source", url: "https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/" },
+      { label: "NIST AI Risk Management Framework", type: "Framework", url: "https://www.nist.gov/itl/ai-risk-management-framework" },
+      { label: "NIST AI executive orders and mandates", type: "Government source", url: "https://www.nist.gov/artificial-intelligence/ai-congressional-mandates-executive-orders-and-actions" },
+      { label: "EU AI Act text", type: "Official source", url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" }
+    ],
     framingScores: { Innovation: 70, Safety: 98, Privacy: 44, Accountability: 82, "Free Speech": 28, Copyright: 12, "National Security": 96 },
     conflict: "The core conflict is between rapid frontier-model development and state capacity to manage systemic risk."
   },
@@ -599,6 +629,12 @@ const frameShiftIssues = [
     relatedInstitutions: ["companies", "courts", "government", "civil-liberties"],
     relatedEvents: ["deepfake-elections", "congress-ai-hearings"],
     relatedDocuments: ["Platform policy updates", "AI-generated content disclosures", "Consumer protection enforcement theories"],
+    sources: [
+      { label: "White House AI Executive Order", type: "Official source", url: "https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/" },
+      { label: "Brennan Center: synthetic political media", type: "Policy report", url: "https://www.brennancenter.org/our-work/research-reports/regulating-ai-deepfakes-and-synthetic-media-political-arena" },
+      { label: "Congressional AI hearings", type: "Hearing context", url: "https://www.congress.gov/search?q=%7B%22source%22%3A%22committee%22%2C%22search%22%3A%22artificial+intelligence%22%7D" },
+      { label: "FTC AI enforcement and business guidance", type: "Government guidance", url: "https://www.ftc.gov/business-guidance/technology/artificial-intelligence" }
+    ],
     framingScores: { Innovation: 62, Safety: 70, Privacy: 40, Accountability: 88, "Free Speech": 92, Copyright: 26, "National Security": 58 },
     conflict: "The core conflict is between platform speech flexibility and accountability for scaled AI-generated harm."
   },
@@ -613,6 +649,12 @@ const frameShiftIssues = [
     relatedInstitutions: ["government", "civil-liberties", "international", "companies"],
     relatedEvents: ["hiring-bias", "white-house-eo"],
     relatedDocuments: ["NYC automated employment decision tool law", "EEOC technical assistance", "Workplace surveillance reports"],
+    sources: [
+      { label: "NYC Automated Employment Decision Tools law", type: "Local law", url: "https://www.nyc.gov/site/dca/about/automated-employment-decision-tools.page" },
+      { label: "EEOC AI and employment selection technical assistance", type: "Government guidance", url: "https://www.eeoc.gov/technical-assistance-document/select-issues-assessing-adverse-impact-software-algorithms-and" },
+      { label: "White House AI Executive Order", type: "Official source", url: "https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/" },
+      { label: "NIST AI Risk Management Framework", type: "Framework", url: "https://www.nist.gov/itl/ai-risk-management-framework" }
+    ],
     framingScores: { Innovation: 58, Safety: 60, Privacy: 78, Accountability: 94, "Free Speech": 14, Copyright: 6, "National Security": 18 },
     conflict: "The core conflict is between efficiency in labor markets and rights-based protections against opaque automated decisions."
   }
@@ -1086,17 +1128,18 @@ function ConstitutionalIssueMap({ selectedIssue, setLeftInstitutionId }) {
 function RelatedDocuments({ selectedIssue }) {
   return (
     <section className="panel framePanel relatedDocs">
-      <p className="label">Related Documents</p>
-      <h2>Policies, cases, and source material to add next</h2>
+      <p className="label">Sources & References</p>
+      <h2>Grounded links for the selected issue</h2>
       <div className="docGrid">
-        {selectedIssue.relatedDocuments.map((document) => (
-          <article key={document}>
-            <strong>{document}</strong>
-            <span>Curated source placeholder</span>
-          </article>
+        {selectedIssue.sources.map((source) => (
+          <a key={source.label} href={source.url} target="_blank" rel="noreferrer">
+            <span>{source.type}</span>
+            <strong>{source.label}</strong>
+            <small>Open source</small>
+          </a>
         ))}
       </div>
-      <p className="sourceNote">FrameShift is a structured MVP. It does not provide legal advice or predict legal outcomes.</p>
+      <p className="sourceNote">FrameShift is a structured civic-tech MVP. These links provide attribution and research context; the project does not provide legal advice or predict legal outcomes.</p>
     </section>
   );
 }

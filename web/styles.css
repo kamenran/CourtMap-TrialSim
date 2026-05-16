@@ -780,28 +780,46 @@ button {
   margin-top: 16px;
 }
 
-.docGrid article {
+.docGrid a {
   padding: 14px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.66);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.docGrid a:hover {
+  border-color: rgba(59, 95, 130, 0.28);
+  background: #fff;
+  transform: translateY(-1px);
 }
 
 .docGrid strong,
-.docGrid span {
+.docGrid span,
+.docGrid small {
   display: block;
 }
 
 .docGrid strong {
+  margin-top: 7px;
   color: var(--ink);
   line-height: 1.35;
 }
 
 .docGrid span {
-  margin-top: 8px;
+  color: var(--red);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.docGrid small {
+  margin-top: 10px;
   color: var(--muted);
   font-size: 0.78rem;
-  font-weight: 800;
+  font-weight: 850;
 }
 
 .frameExplanation {
