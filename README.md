@@ -4,6 +4,8 @@ Interactive graph of Supreme Court precedent for Kamran Eisenberg's personal web
 
 CourtMap is a focused law + CS portfolio project. It helps users explore landmark Supreme Court cases, citation relationships, constitutional amendments, doctrine shifts, and overruling chains through a clean React/D3 interface.
 
+Scope: CourtMap is focused on **SCOTUS only**. It starts with landmark Supreme Court cases and major constitutional doctrines, then expands toward a full Supreme Court citation graph.
+
 ## Current Product
 
 - Minimal portfolio homepage for Kamran Eisenberg
@@ -35,6 +37,16 @@ python3 -m http.server 4173
 ```
 
 Open [http://127.0.0.1:4173/web](http://127.0.0.1:4173/web).
+
+## Deployment
+
+The project deploys the `web/` directory to GitHub Pages using `.github/workflows/pages.yml`.
+
+After GitHub Pages finishes building, the live project should be available at:
+
+```text
+https://kamenran.github.io/courtmap-personal-site/
+```
 
 ## Data Architecture
 
@@ -77,7 +89,7 @@ cp .env.example .env
 
 ## Product Direction
 
-CourtMap is intentionally not a universal legal research platform yet. The first version is a polished, finished portfolio demo with a curated case set that shows the concept clearly.
+CourtMap is intentionally not a universal legal research platform. The first version is a polished, finished SCOTUS-focused portfolio demo with a curated case set that shows the concept clearly.
 
 Next upgrades:
 
