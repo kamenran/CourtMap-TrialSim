@@ -1108,6 +1108,92 @@ button {
   line-height: 1.35;
 }
 
+.modelExplanationPanel {
+  margin-bottom: 20px;
+}
+
+.modelExplanationPanel .sectionHeader p:not(.label) {
+  max-width: 720px;
+  margin: 8px 0 0;
+  color: #4f5a68;
+  line-height: 1.55;
+}
+
+.modelFinalScore {
+  min-width: 132px;
+  padding: 14px 16px;
+  border: 1px solid rgba(23, 32, 51, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  text-align: right;
+}
+
+.modelFinalScore strong,
+.modelFinalScore span {
+  display: block;
+}
+
+.modelFinalScore strong {
+  color: var(--ink);
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.modelFinalScore span {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.modelRows {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.modelRow {
+  display: grid;
+  grid-template-columns: minmax(160px, 0.8fr) minmax(0, 1.4fr) 70px;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.66);
+}
+
+.modelRow span {
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.modelRow i {
+  color: #4f5a68;
+  font-style: normal;
+  line-height: 1.4;
+}
+
+.modelRow strong {
+  justify-self: end;
+  font-size: 1.05rem;
+}
+
+.modelRow strong.positive {
+  color: #166534;
+}
+
+.modelRow strong.negative {
+  color: var(--red);
+}
+
+.modelNote {
+  margin: 14px 0 0;
+  color: #3d4654;
+  line-height: 1.55;
+}
+
 .trialComparison {
   margin-bottom: 20px;
 }
@@ -3286,6 +3372,14 @@ h3 {
 
   .scoreRow span {
     grid-column: 1 / -1;
+  }
+
+  .modelRow {
+    grid-template-columns: 1fr;
+  }
+
+  .modelRow strong {
+    justify-self: start;
   }
 
   .personalHero {
