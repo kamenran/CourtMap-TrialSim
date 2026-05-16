@@ -1608,7 +1608,8 @@ h3 {
 }
 
 .infoPills {
-  margin-top: 0;
+  margin-top: 14px;
+  margin-bottom: 16px;
 }
 
 .officialLink {
@@ -1616,6 +1617,7 @@ h3 {
   align-items: center;
   min-height: 40px;
   padding: 0 13px;
+  margin-top: 2px;
   border: 1px solid var(--ink);
   border-radius: 999px;
   background: var(--ink);
