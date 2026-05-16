@@ -542,6 +542,7 @@ function PortfolioHome({ setView }) {
 }
 
 function CourtMapPage({ selectedCase, setSelectedCaseId, query, setQuery, filters, setFilters, sortBy, setSortBy }) {
+  const [brieflyFocus, setBrieflyFocus] = useState(null);
   const filteredCases = useMemo(
     () => sortCases(filterCases(precedentCases, query, filters), sortBy),
     [query, filters, sortBy]
@@ -666,9 +667,19 @@ function CourtMapPage({ selectedCase, setSelectedCaseId, query, setQuery, filter
           <PrecedentTimeline selectedCase={selectedCase} />
         </div>
         <aside className="sideColumn">
-          <BrieflyPanel selectedCase={selectedCase} setQuery={setQuery} />
-          <DoctrinePanel selectedCase={selectedCase} setSelectedCaseId={setSelectedCaseId} />
-          <RelationshipPanel selectedCase={selectedCase} />
+          <BrieflyPanel
+            selectedCase={selectedCase}
+            setQuery={setQuery}
+            setFilters={setFilters}
+            setSortBy={setSortBy}
+            setBrieflyFocus={setBrieflyFocus}
+          />
+          <DoctrinePanel
+            selectedCase={selectedCase}
+            setSelectedCaseId={setSelectedCaseId}
+            brieflyFocus={brieflyFocus}
+          />
+          <RelationshipPanel selectedCase={selectedCase} brieflyFocus={brieflyFocus} />
         </aside>
       </div>
 
@@ -862,7 +873,43 @@ function PrecedentTimeline({ selectedCase }) {
   );
 }
 
-function BrieflyPanel({ selectedCase, setQuery }) {
+function BrieflyPanel({ selectedCase, setQuery, setFilters, setSortBy, setBrieflyFocus }) {
+  function showAnchor() {
+    setQuery("");
+    setFilters({ area: "all", amendment: selectedCase.amendment, status: "all" });
+    setSortBy("influence");
+    setBrieflyFocus({
+      type: "anchor",
+      title: selectedCase.amendment,
+      detail: `Showing cases in the corpus connected to ${selectedCase.amendment}.`
+    });
+    scrollToSelector(".catalogPanel");
+  }
+
+  function showDoctrine() {
+    setQuery(selectedCase.area);
+    setFilters({ area: selectedCase.area, amendment: "all", status: "all" });
+    setSortBy("influence");
+    setBrieflyFocus({
+      type: "doctrine",
+      title: selectedCase.area,
+      detail: `Highlighting nearby doctrine for ${selectedCase.area}.`
+    });
+    scrollToSelector(".aiPolicyTrackerPanel");
+  }
+
+  function traceOverrulings() {
+    setQuery("");
+    setFilters({ area: "all", amendment: "all", status: "all" });
+    setSortBy("influence");
+    setBrieflyFocus({
+      type: "overruling",
+      title: `${selectedCase.name} chain`,
+      detail: getOverrulingGuidance(selectedCase)
+    });
+    scrollToSelector(".networkSection");
+  }
+
   return (
     <article className="panel brieflyPanel">
       <div className="brieflyTop">
@@ -876,22 +923,22 @@ function BrieflyPanel({ selectedCase, setQuery }) {
         {selectedCase.name} is best read as a {selectedCase.area.toLowerCase()} case about {selectedCase.doctrine.toLowerCase()}.
       </p>
       <div className="brieflyActions">
-        <button onClick={() => setQuery(selectedCase.amendment)}>Show this constitutional anchor</button>
-        <button onClick={() => setQuery(selectedCase.area)}>Find related doctrine</button>
-        <button onClick={() => setQuery("overruled")}>Trace overruling chains</button>
+        <button onClick={showAnchor}>Show this constitutional anchor</button>
+        <button onClick={showDoctrine}>Find related doctrine</button>
+        <button onClick={traceOverrulings}>Trace overruling chains</button>
       </div>
     </article>
   );
 }
 
-function DoctrinePanel({ selectedCase, setSelectedCaseId }) {
+function DoctrinePanel({ selectedCase, setSelectedCaseId, brieflyFocus }) {
   const connectedIds = [...selectedCase.cites, ...selectedCase.citedBy, ...selectedCase.overrules];
   const connected = precedentCases.filter((item) => connectedIds.includes(item.id));
   return (
     <article className="panel aiPolicyTrackerPanel">
       <p className="label">Connected Doctrine</p>
       <h2>{selectedCase.related[0]}</h2>
-      <p>Use these nearby cases to follow the doctrine path around the selected precedent.</p>
+      <p>{brieflyFocus?.type === "doctrine" ? brieflyFocus.detail : "Use these nearby cases to follow the doctrine path around the selected precedent."}</p>
       <div className="aiTopicGrid">
         {connected.length ? connected.map((item) => (
           <button key={item.id} onClick={() => setSelectedCaseId(item.id)}>{item.name}</button>
@@ -903,7 +950,7 @@ function DoctrinePanel({ selectedCase, setSelectedCaseId }) {
   );
 }
 
-function RelationshipPanel({ selectedCase }) {
+function RelationshipPanel({ selectedCase, brieflyFocus }) {
   const citedNames = selectedCase.cites.map(caseName).filter(Boolean);
   const citingNames = selectedCase.citedBy.map(caseName).filter(Boolean);
   const overruledNames = selectedCase.overrules.map(caseName).filter(Boolean);
@@ -911,19 +958,19 @@ function RelationshipPanel({ selectedCase }) {
   return (
     <article className="panel relationshipPanel">
       <p className="label">Graph Insight</p>
-      <h2>How this node behaves</h2>
+      <h2>{brieflyFocus?.type === "overruling" ? brieflyFocus.title : "How this node behaves"}</h2>
       <ul className="relationshipList">
         <li><strong>{selectedCase.cites.length}</strong><span>case{selectedCase.cites.length === 1 ? "" : "s"} cited or doctrinally upstream</span></li>
         <li><strong>{selectedCase.citedBy.length}</strong><span>case{selectedCase.citedBy.length === 1 ? "" : "s"} downstream</span></li>
         <li><strong>{selectedCase.overrules.length}</strong><span>overruling edge{selectedCase.overrules.length === 1 ? "" : "s"}</span></li>
       </ul>
       <p>
-        {overruledNames.length
+        {brieflyFocus?.type === "overruling" ? brieflyFocus.detail : overruledNames.length
           ? `${selectedCase.name} directly displaces ${overruledNames.join(", ")}.`
           : citedNames.length
             ? `${selectedCase.name} builds from ${citedNames.slice(0, 2).join(", ")}.`
             : `${selectedCase.name} functions as a foundational source node in this corpus.`}
-        {citingNames.length ? ` Later mapped cases include ${citingNames.slice(0, 2).join(", ")}.` : ""}
+        {brieflyFocus?.type === "overruling" ? "" : citingNames.length ? ` Later mapped cases include ${citingNames.slice(0, 2).join(", ")}.` : ""}
       </p>
     </article>
   );
@@ -1206,6 +1253,28 @@ function buildGraph(selectedCase) {
 
 function caseName(id) {
   return precedentCases.find((item) => item.id === id)?.name || supportingCases.find((item) => item.id === id)?.name || "";
+}
+
+function scrollToSelector(selector) {
+  if (typeof document === "undefined") return;
+  window.setTimeout(() => {
+    document.querySelector(selector)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, 80);
+}
+
+function getOverrulingGuidance(selectedCase) {
+  const overruledNames = selectedCase.overrules.map(caseName).filter(Boolean);
+  const downstreamNames = selectedCase.citedBy.map(caseName).filter(Boolean);
+
+  if (overruledNames.length) {
+    return `${selectedCase.name} has a direct overruling edge to ${overruledNames.join(", ")}. The graph view shows that relationship as a conflict path instead of a normal citation path.`;
+  }
+
+  if (downstreamNames.length) {
+    return `${selectedCase.name} is part of a downstream precedent chain. Later mapped cases include ${downstreamNames.slice(0, 2).join(", ")}, so this button follows how the doctrine moves after the selected case.`;
+  }
+
+  return `${selectedCase.name} does not have a direct overruling edge in this curated corpus yet, so the graph treats it as a stable source node for nearby doctrine.`;
 }
 
 function getControllingRule(selectedCase) {
