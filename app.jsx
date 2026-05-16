@@ -1014,11 +1014,14 @@ function MascotCard() {
       <p className="label">Briefly</p>
       <h2>Legal systems, made readable.</h2>
       <div className="mascotTools">
-        <span>Explain this case</span>
-        <span>Trace doctrine</span>
-        <span>Find overrulings</span>
+        <span>Law + CS</span>
+        <span>AI governance</span>
+        <span>Civic technology</span>
       </div>
-      <p>Briefly is the reading assistant for turning dense legal networks into plain-English explanations.</p>
+      <p>
+        My mission is to build software that makes legal institutions easier to understand:
+        tools that connect constitutional law, public accountability, AI policy, and clear technical design.
+      </p>
     </article>
   );
 }
