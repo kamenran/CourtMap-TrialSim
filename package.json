@@ -1,0 +1,17 @@
+{
+  "name": "court-map",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A React and D3 prototype for exploring Supreme Court precedent, citation relationships, doctrine shifts, and overruling chains.",
+  "scripts": {
+    "dev": "python3 -m http.server 4173",
+    "courtmap:plan": "python3 scripts/import_courtmap_sources.py --dry-run",
+    "courtmap:preview": "python3 scripts/import_courtmap_sources.py --source courtlistener --limit 25"
+  },
+  "dependencies": {
+    "@babel/standalone": "^7.25.0",
+    "d3": "^7.9.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

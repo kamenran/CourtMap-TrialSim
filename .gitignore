@@ -1,0 +1,25 @@
+.DS_Store
+.env
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+node_modules/
+dist/
+build/
+
+# Generated/imported data
+data/*.json
+!data/.gitkeep
+
+# Old congressional prototype code kept locally but not part of CourtMap
+scripts/*
+!scripts/import_courtmap_sources.py
+src/
+
+# Local database volumes/backups
+*.sqlite
+*.db
+neo4j_data/
+neo4j_logs/
+postgres_data/
