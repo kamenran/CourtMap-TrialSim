@@ -389,6 +389,7 @@ function SiteNav({ view, setView }) {
           <strong>Kamran Eisenberg</strong>
         </span>
       </button>
+      <div className="navMotto">God Bless the United States of America</div>
       <div className="navLinks">
         <button className={view === "home" ? "active" : ""} onClick={() => setView("home")}>Profile</button>
         <button className={view === "precedent" ? "active" : ""} onClick={() => setView("precedent")}>CourtMap</button>
