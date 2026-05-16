@@ -696,7 +696,7 @@ function App() {
           setSortBy={setSortBy}
         />
       )}
-      {view === "frameshift" && <FrameShiftPage />}
+      {view === "trialsim" && <TrialSimPage />}
       <SiteFooter />
     </main>
   );
@@ -720,7 +720,7 @@ function SiteNav({ view, setView }) {
       <div className="navLinks">
         <button className={view === "home" ? "active" : ""} onClick={() => setView("home")}>Profile</button>
         <button className={view === "precedent" ? "active" : ""} onClick={() => setView("precedent")}>CourtMap</button>
-        <button className={view === "frameshift" ? "active" : ""} onClick={() => setView("frameshift")}>FrameShift (WIP)</button>
+        <button className={view === "trialsim" ? "active" : ""} onClick={() => setView("trialsim")}>TrialSim (WIP)</button>
         <a href="mailto:kamrane02@gmail.com">Contact</a>
       </div>
     </nav>
@@ -823,7 +823,7 @@ function PortfolioHome({ setView }) {
         <div className="sectionHeader">
           <div>
             <p className="label">Featured Product</p>
-            <h2>CourtMap + FrameShift</h2>
+            <h2>CourtMap + TrialSim</h2>
           </div>
           <button className="primaryAction small" onClick={() => setView("precedent")}>Launch</button>
         </div>
@@ -833,10 +833,10 @@ function PortfolioHome({ setView }) {
             <strong>Interactive graph of Supreme Court precedent</strong>
             <small>Explore landmark cases, citation relationships, doctrine evolution, constitutional amendments, and overruling chains.</small>
           </button>
-          <button className="projectCard" onClick={() => setView("frameshift")}>
-            <span>AI governance project</span>
-            <strong>Institutional framing analysis for AI policy</strong>
-            <small>Compare how governments, courts, companies, civil-liberties groups, and international regulators define AI risks and responsibilities.</small>
+          <button className="projectCard" onClick={() => setView("trialsim")}>
+            <span>Simulation project</span>
+            <strong>Educational courtroom scenario simulator</strong>
+            <small>Adjust evidence, witnesses, constitutional issues, jurisdiction, and strategy to explore how legal variables shift case pressure.</small>
           </button>
           <div className="productStats">
             <Metric label="Corpus" value="SCOTUS cases" />
@@ -871,6 +871,354 @@ function PortfolioHome({ setView }) {
         </article>
       </section>
     </>
+  );
+}
+
+const trialCaseTypes = [
+  {
+    id: "criminal-search",
+    title: "Criminal Fourth Amendment Suppression",
+    forum: "State criminal court",
+    basePressure: 58,
+    summary: "A criminal prosecution depends on contested evidence that may be excluded under search-and-seizure doctrine.",
+    plaintiffLabel: "Prosecution",
+    defenseLabel: "Defense",
+    themes: ["Fourth Amendment", "Exclusionary Rule", "Probable Cause"],
+    bestArguments: {
+      plaintiff: "The search was supported by probable cause, the evidence is reliable, and any error should not defeat the prosecution's case.",
+      defense: "The evidence should be excluded because the search undermined constitutional protections and the remaining proof is too weak."
+    }
+  },
+  {
+    id: "civil-rights",
+    title: "Civil Rights Discrimination Claim",
+    forum: "Federal civil court",
+    basePressure: 54,
+    summary: "A plaintiff challenges an institutional decision as discriminatory, while the defendant argues neutral policy and business justification.",
+    plaintiffLabel: "Plaintiff",
+    defenseLabel: "Defendant",
+    themes: ["Equal Protection", "Civil Rights", "Disparate Impact"],
+    bestArguments: {
+      plaintiff: "The pattern of outcomes and institutional process show unequal treatment that requires accountability.",
+      defense: "The decision was based on neutral criteria, legitimate institutional goals, and insufficient proof of causation."
+    }
+  },
+  {
+    id: "speech-defamation",
+    title: "Speech / Defamation Dispute",
+    forum: "State civil court",
+    basePressure: 48,
+    summary: "A plaintiff claims reputational harm while the defense frames the dispute around protected speech and public-interest commentary.",
+    plaintiffLabel: "Plaintiff",
+    defenseLabel: "Defense",
+    themes: ["First Amendment", "Defamation", "Public Concern"],
+    bestArguments: {
+      plaintiff: "The statement was false, harmful, and made with enough fault to justify liability.",
+      defense: "The challenged expression is protected opinion, public commentary, or insufficiently proven as false."
+    }
+  },
+  {
+    id: "employment-ai",
+    title: "Automated Hiring Tool Challenge",
+    forum: "Administrative / civil rights forum",
+    basePressure: 52,
+    summary: "An applicant challenges an automated screening system for bias, opacity, and lack of meaningful human review.",
+    plaintiffLabel: "Complainant",
+    defenseLabel: "Employer",
+    themes: ["Due Process", "Equal Protection", "Employment Law"],
+    bestArguments: {
+      plaintiff: "The automated tool produced unfair outcomes without adequate explanation, auditability, or meaningful review.",
+      defense: "The system was validated, consistently applied, and used as one factor in a broader employment process."
+    }
+  },
+  {
+    id: "ai-contract",
+    title: "AI Vendor Liability Dispute",
+    forum: "Commercial litigation",
+    basePressure: 50,
+    summary: "A customer alleges harm from an AI system while the vendor points to contract limits, warnings, and implementation choices.",
+    plaintiffLabel: "Customer",
+    defenseLabel: "Vendor",
+    themes: ["Product Liability", "Contract Law", "Consumer Protection"],
+    bestArguments: {
+      plaintiff: "The system failed in a foreseeable way and the vendor's disclosures did not meaningfully allocate the risk.",
+      defense: "The contract limited liability, the user controlled deployment, and the system performed within disclosed constraints."
+    }
+  }
+];
+
+const constitutionalIssues = [
+  "None / ordinary legal dispute",
+  "Fourth Amendment exclusion",
+  "First Amendment speech protection",
+  "Due Process / explainability",
+  "Equal Protection / discrimination",
+  "Copyright / fair use"
+];
+
+const jurisdictions = ["Federal court", "State court", "Administrative agency", "Settlement posture"];
+
+function TrialSimPage() {
+  const [caseTypeId, setCaseTypeId] = useState("criminal-search");
+  const [evidenceStrength, setEvidenceStrength] = useState(68);
+  const [witnessReliability, setWitnessReliability] = useState(62);
+  const [constitutionalIssue, setConstitutionalIssue] = useState("Fourth Amendment exclusion");
+  const [jurisdiction, setJurisdiction] = useState("State court");
+  const [jurySkepticism, setJurySkepticism] = useState(44);
+  const [excludedEvidence, setExcludedEvidence] = useState(false);
+  const [plaintiffStrategy, setPlaintiffStrategy] = useState("Narrative clarity");
+  const [defenseStrategy, setDefenseStrategy] = useState("Constitutional challenge");
+  const caseType = trialCaseTypes.find((item) => item.id === caseTypeId) || trialCaseTypes[0];
+  const scenario = {
+    caseType,
+    evidenceStrength,
+    witnessReliability,
+    constitutionalIssue,
+    jurisdiction,
+    jurySkepticism,
+    excludedEvidence,
+    plaintiffStrategy,
+    defenseStrategy
+  };
+  const result = simulateTrialScenario(scenario);
+  const comparisonResult = simulateTrialScenario({ ...scenario, excludedEvidence: !excludedEvidence, evidenceStrength: excludedEvidence ? Math.min(100, evidenceStrength + 18) : Math.max(0, evidenceStrength - 24) });
+
+  return (
+    <>
+      <TrialSimHero />
+      <section className="insightStrip trialStats">
+        <Metric label="Case models" value={trialCaseTypes.length} />
+        <Metric label="Live variables" value="8" />
+        <Metric label="Output scores" value="4" />
+        <Metric label="Purpose" value="Educational" />
+      </section>
+
+      <section className="trialWorkspace">
+        <TrialControls
+          caseType={caseType}
+          caseTypeId={caseTypeId}
+          setCaseTypeId={setCaseTypeId}
+          evidenceStrength={evidenceStrength}
+          setEvidenceStrength={setEvidenceStrength}
+          witnessReliability={witnessReliability}
+          setWitnessReliability={setWitnessReliability}
+          constitutionalIssue={constitutionalIssue}
+          setConstitutionalIssue={setConstitutionalIssue}
+          jurisdiction={jurisdiction}
+          setJurisdiction={setJurisdiction}
+          jurySkepticism={jurySkepticism}
+          setJurySkepticism={setJurySkepticism}
+          excludedEvidence={excludedEvidence}
+          setExcludedEvidence={setExcludedEvidence}
+          plaintiffStrategy={plaintiffStrategy}
+          setPlaintiffStrategy={setPlaintiffStrategy}
+          defenseStrategy={defenseStrategy}
+          setDefenseStrategy={setDefenseStrategy}
+        />
+        <TrialOutcomePanel caseType={caseType} result={result} />
+      </section>
+
+      <TrialArgumentPanel caseType={caseType} result={result} scenario={scenario} />
+      <TrialComparisonPanel current={result} comparison={comparisonResult} excludedEvidence={excludedEvidence} />
+      <TrialExplanation />
+    </>
+  );
+}
+
+function TrialSimHero() {
+  return (
+    <header className="topbar productHero trialHero">
+      <div>
+        <p className="eyebrow">TrialSim</p>
+        <h1>Educational legal simulation for courtroom strategy and constitutional tradeoffs.</h1>
+        <p className="productLead">
+          TrialSim models how evidence strength, witness reliability, jurisdiction, constitutional issues,
+          and litigation strategy can shift scenario pressure in a legal dispute.
+        </p>
+      </div>
+      <div className="status trialStatus">
+        <span className="statusFlag" aria-hidden="true">
+          <i className="flagCanton" />
+          <i className="flagStripe stripeOne" />
+          <i className="flagStripe stripeTwo" />
+          <i className="flagStripe stripeThree" />
+        </span>
+        <span>WIP model</span>
+        <strong>Not legal advice</strong>
+      </div>
+    </header>
+  );
+}
+
+function TrialControls(props) {
+  return (
+    <section className="panel trialPanel trialControls">
+      <div>
+        <p className="label">Scenario Builder</p>
+        <h2>{props.caseType.title}</h2>
+        <p>{props.caseType.summary}</p>
+      </div>
+      <label className="trialField">
+        <span>Case type</span>
+        <select value={props.caseTypeId} onChange={(event) => props.setCaseTypeId(event.target.value)}>
+          {trialCaseTypes.map((item) => <option key={item.id} value={item.id}>{item.title}</option>)}
+        </select>
+      </label>
+      <div className="trialGridInputs">
+        <TrialSlider label="Evidence strength" value={props.evidenceStrength} setValue={props.setEvidenceStrength} />
+        <TrialSlider label="Witness reliability" value={props.witnessReliability} setValue={props.setWitnessReliability} />
+        <TrialSlider label="Jury skepticism" value={props.jurySkepticism} setValue={props.setJurySkepticism} inverse />
+      </div>
+      <div className="trialGridInputs">
+        <label className="trialField">
+          <span>Constitutional issue</span>
+          <select value={props.constitutionalIssue} onChange={(event) => props.setConstitutionalIssue(event.target.value)}>
+            {constitutionalIssues.map((item) => <option key={item} value={item}>{item}</option>)}
+          </select>
+        </label>
+        <label className="trialField">
+          <span>Jurisdiction / forum</span>
+          <select value={props.jurisdiction} onChange={(event) => props.setJurisdiction(event.target.value)}>
+            {jurisdictions.map((item) => <option key={item} value={item}>{item}</option>)}
+          </select>
+        </label>
+      </div>
+      <div className="strategyGrid">
+        <StrategyPicker label={props.caseType.plaintiffLabel} value={props.plaintiffStrategy} setValue={props.setPlaintiffStrategy} options={["Narrative clarity", "Technical proof", "Rights-based framing", "Institutional harm"]} />
+        <StrategyPicker label={props.caseType.defenseLabel} value={props.defenseStrategy} setValue={props.setDefenseStrategy} options={["Constitutional challenge", "Credibility attack", "Procedural defense", "Alternative explanation"]} />
+      </div>
+      <label className="trialToggle">
+        <input type="checkbox" checked={props.excludedEvidence} onChange={(event) => props.setExcludedEvidence(event.target.checked)} />
+        <span>Key evidence excluded or unavailable</span>
+      </label>
+    </section>
+  );
+}
+
+function TrialSlider({ label, value, setValue, inverse = false }) {
+  return (
+    <label className="trialSlider">
+      <span>{label}</span>
+      <strong>{value}</strong>
+      <input type="range" min="0" max="100" value={value} onChange={(event) => setValue(Number(event.target.value))} />
+      <small>{inverse ? "Higher means more resistance to the moving party" : "Higher means stronger support for the moving party"}</small>
+    </label>
+  );
+}
+
+function StrategyPicker({ label, value, setValue, options }) {
+  return (
+    <div className="strategyPicker">
+      <span>{label} strategy</span>
+      <div>
+        {options.map((option) => <button key={option} className={value === option ? "active" : ""} onClick={() => setValue(option)}>{option}</button>)}
+      </div>
+    </div>
+  );
+}
+
+function TrialOutcomePanel({ caseType, result }) {
+  return (
+    <section className="panel trialPanel trialOutcome">
+      <p className="label">Simulation Output</p>
+      <h2>{result.headline}</h2>
+      <p>{result.summary}</p>
+      <div className="trialMeterGrid">
+        <TrialMeter label="Case viability" value={result.caseViability} />
+        <TrialMeter label={`${caseType.plaintiffLabel} pressure`} value={result.movingPressure} />
+        <TrialMeter label="Settlement / plea pressure" value={result.settlementPressure} />
+        <TrialMeter label="Constitutional risk" value={result.constitutionalRisk} danger />
+      </div>
+      <div className="trialDisclaimer">
+        Educational model only. This does not predict real outcomes or provide legal advice.
+      </div>
+    </section>
+  );
+}
+
+function TrialMeter({ label, value, danger = false }) {
+  return (
+    <div className="trialMeter">
+      <div><span>{label}</span><strong>{value}%</strong></div>
+      <i><b className={danger ? "danger" : ""} style={{ width: `${value}%` }} /></i>
+    </div>
+  );
+}
+
+function TrialArgumentPanel({ caseType, result, scenario }) {
+  return (
+    <section className="panel trialPanel trialArguments">
+      <div className="sectionHeader">
+        <div>
+          <p className="label">Argument Map</p>
+          <h2>Strongest arguments and likely disagreement</h2>
+        </div>
+      </div>
+      <div className="argumentGrid">
+        <article>
+          <span>{caseType.plaintiffLabel}</span>
+          <p>{caseType.bestArguments.plaintiff}</p>
+          <strong>{result.strongestPoint}</strong>
+        </article>
+        <article>
+          <span>{caseType.defenseLabel}</span>
+          <p>{caseType.bestArguments.defense}</p>
+          <strong>{result.weakestPoint}</strong>
+        </article>
+        <article>
+          <span>Likely disagreement</span>
+          <p>{result.disagreement}</p>
+          <strong>{scenario.constitutionalIssue}</strong>
+        </article>
+      </div>
+    </section>
+  );
+}
+
+function TrialComparisonPanel({ current, comparison, excludedEvidence }) {
+  const delta = comparison.caseViability - current.caseViability;
+  return (
+    <section className="panel trialPanel trialComparison">
+      <p className="label">Scenario Comparison</p>
+      <h2>{excludedEvidence ? "If key evidence comes back in" : "If key evidence is excluded"}</h2>
+      <div className="comparisonCards">
+        <Metric label="Current viability" value={`${current.caseViability}%`} />
+        <Metric label="Modified viability" value={`${comparison.caseViability}%`} />
+        <Metric label="Modeled shift" value={`${delta > 0 ? "+" : ""}${delta}%`} />
+      </div>
+      <p>{comparison.summary}</p>
+    </section>
+  );
+}
+
+function TrialExplanation() {
+  return (
+    <section className="projectExplanation trialExplanation">
+      <article>
+        <p className="label">Why This Project</p>
+        <h2>Computational legal scenarios.</h2>
+        <p>
+          TrialSim is an educational legal simulation platform for exploring how evidentiary,
+          constitutional, and strategic variables affect modeled case pressure.
+        </p>
+      </article>
+      <article>
+        <p className="label">Law + CS Connection</p>
+        <h2>State, weights, and legal reasoning.</h2>
+        <p>
+          The project combines frontend state management, weighted scoring, scenario comparison,
+          constitutional issue mapping, and careful legal framing without claiming real-world prediction.
+        </p>
+      </article>
+      <article>
+        <p className="label">Roadmap</p>
+        <h2>Where it goes next.</h2>
+        <p>
+          Add richer scenario templates, backend model configuration, NLP argument extraction,
+          saved comparisons, jurisdiction profiles, and transparent calibration notes.
+        </p>
+      </article>
+    </section>
   );
 }
 
@@ -1986,6 +2334,91 @@ function filterFrameShiftIssues(query, category) {
     const matchesCategory = category === "all" || issue.category === category;
     return matchesQuery && matchesCategory;
   });
+}
+
+function simulateTrialScenario(scenario) {
+  const issueRisk = getConstitutionalRisk(scenario.constitutionalIssue, scenario.excludedEvidence);
+  const strategyBoost = getStrategyBoost(scenario.plaintiffStrategy) - getDefenseDrag(scenario.defenseStrategy);
+  const jurisdictionAdjustment = getJurisdictionAdjustment(scenario.jurisdiction);
+  const evidenceValue = scenario.excludedEvidence ? scenario.evidenceStrength * 0.56 : scenario.evidenceStrength;
+  const caseViability = clampScore(
+    scenario.caseType.basePressure +
+    (evidenceValue - 50) * 0.42 +
+    (scenario.witnessReliability - 50) * 0.26 -
+    (scenario.jurySkepticism - 50) * 0.18 -
+    issueRisk * 0.24 +
+    strategyBoost +
+    jurisdictionAdjustment
+  );
+  const movingPressure = clampScore(caseViability + (scenario.evidenceStrength - scenario.witnessReliability) * 0.08 - (scenario.excludedEvidence ? 8 : 0));
+  const settlementPressure = clampScore(44 + Math.abs(caseViability - 50) * 0.42 + issueRisk * 0.18 + (scenario.jurisdiction === "Settlement posture" ? 16 : 0));
+  const constitutionalRisk = clampScore(issueRisk + (scenario.defenseStrategy === "Constitutional challenge" ? 14 : 0) + (scenario.excludedEvidence ? 10 : 0));
+  const headline = caseViability >= 70 ? "Strong modeled case pressure" : caseViability >= 52 ? "Contested but viable scenario" : "Fragile scenario with major vulnerabilities";
+  const summary = buildTrialSummary(caseViability, constitutionalRisk, scenario);
+
+  return {
+    caseViability,
+    movingPressure,
+    settlementPressure,
+    constitutionalRisk,
+    headline,
+    summary,
+    strongestPoint: caseViability >= 58 ? "The moving side benefits from coherent facts and enough proof to sustain pressure." : "The moving side needs a clearer evidentiary path before the case feels durable.",
+    weakestPoint: constitutionalRisk >= 65 ? "The constitutional issue is the largest vulnerability in the scenario." : "The defense pressure likely centers on credibility, causation, or alternative explanations.",
+    disagreement: constitutionalRisk >= 60
+      ? "The central fight is whether constitutional doctrine changes what evidence or procedure the factfinder can rely on."
+      : "The central fight is how much weight to give the evidence and whether the story is reliable enough."
+  };
+}
+
+function getConstitutionalRisk(issue, excludedEvidence) {
+  const scores = {
+    "None / ordinary legal dispute": 20,
+    "Fourth Amendment exclusion": 78,
+    "First Amendment speech protection": 70,
+    "Due Process / explainability": 64,
+    "Equal Protection / discrimination": 68,
+    "Copyright / fair use": 58
+  };
+  return clampScore((scores[issue] || 30) + (excludedEvidence ? 8 : 0));
+}
+
+function getStrategyBoost(strategy) {
+  const boosts = {
+    "Narrative clarity": 6,
+    "Technical proof": 5,
+    "Rights-based framing": 4,
+    "Institutional harm": 5
+  };
+  return boosts[strategy] || 0;
+}
+
+function getDefenseDrag(strategy) {
+  const drags = {
+    "Constitutional challenge": 7,
+    "Credibility attack": 5,
+    "Procedural defense": 4,
+    "Alternative explanation": 5
+  };
+  return drags[strategy] || 0;
+}
+
+function getJurisdictionAdjustment(jurisdiction) {
+  if (jurisdiction === "Federal court") return 2;
+  if (jurisdiction === "Administrative agency") return -2;
+  if (jurisdiction === "Settlement posture") return -4;
+  return 0;
+}
+
+function buildTrialSummary(caseViability, constitutionalRisk, scenario) {
+  const evidencePhrase = scenario.excludedEvidence ? "key evidence excluded or unavailable" : "the main evidence available";
+  const pressure = caseViability >= 70 ? "high" : caseViability >= 52 ? "moderate" : "low";
+  const risk = constitutionalRisk >= 65 ? "a significant constitutional constraint" : "a manageable constitutional constraint";
+  return `With ${evidencePhrase}, the model shows ${pressure} case pressure and ${risk}. The output is a teaching model for comparing legal variables, not a prediction.`;
+}
+
+function clampScore(value) {
+  return Math.max(0, Math.min(100, Math.round(value)));
 }
 
 function sortCases(cases, sortBy) {
