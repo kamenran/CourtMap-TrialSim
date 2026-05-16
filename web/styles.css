@@ -46,7 +46,14 @@ button {
   grid-template-columns: max-content minmax(160px, 1fr) auto;
   align-items: center;
   gap: 18px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
   margin-bottom: 42px;
+  padding: 10px 0;
+  background: rgba(251, 250, 248, 0.86);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(232, 226, 220, 0.72);
 }
 
 .wordmark,
