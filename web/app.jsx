@@ -964,16 +964,13 @@ function JusticeBloc({ title, justices, tone, emptyLabel = "None" }) {
 function PathFinder({ setSelectedCaseId }) {
   const [startId, setStartId] = useState("plessy");
   const [endId, setEndId] = useState("brown");
-  const [pathAnchor, setPathAnchor] = useState("start");
-  const endOptions = useMemo(() => pathAnchor === "start" ? filterReachableNodes(startId) : pathFinderNodes, [pathAnchor, startId]);
-  const startOptions = useMemo(() => pathAnchor === "end" ? filterReachableNodes(endId) : pathFinderNodes, [pathAnchor, endId]);
+  const endOptions = useMemo(() => filterReachableNodes(startId), [startId]);
   const path = useMemo(() => findShortestPath(startId, endId), [startId, endId]);
   const pathNames = path.map((item) => getPathNode(item.id)?.name || item.id);
   const canOpenEnd = precedentCases.some((item) => item.id === endId);
 
   function updateStart(nextStartId) {
     const reachableEndIds = getReachableNodeIds(nextStartId);
-    setPathAnchor("start");
     setStartId(nextStartId);
     if (!reachableEndIds.includes(endId)) {
       setEndId(pickNearestNode(nextStartId, reachableEndIds));
@@ -981,12 +978,7 @@ function PathFinder({ setSelectedCaseId }) {
   }
 
   function updateEnd(nextEndId) {
-    const reachableStartIds = getReachableNodeIds(nextEndId);
-    setPathAnchor("end");
     setEndId(nextEndId);
-    if (!reachableStartIds.includes(startId)) {
-      setStartId(pickNearestNode(nextEndId, reachableStartIds));
-    }
   }
 
   return (
@@ -1010,7 +1002,7 @@ function PathFinder({ setSelectedCaseId }) {
         <label>
           <span>Start</span>
           <select value={startId} onChange={(event) => updateStart(event.target.value)}>
-            {startOptions.map((node) => (
+            {pathFinderNodes.map((node) => (
               <option key={`start-${node.id}`} value={node.id}>{node.name}</option>
             ))}
           </select>
@@ -1024,9 +1016,9 @@ function PathFinder({ setSelectedCaseId }) {
           </select>
         </label>
         <div className="pathPresets">
-          <button onClick={() => { setPathAnchor("start"); setStartId("plessy"); setEndId("brown"); }}>Plessy to Brown</button>
-          <button onClick={() => { setPathAnchor("start"); setStartId("roe"); setEndId("dobbs"); }}>Roe to Dobbs</button>
-          <button onClick={() => { setPathAnchor("start"); setStartId("katz"); setEndId("carpenter"); }}>Katz to Carpenter</button>
+          <button onClick={() => { setStartId("plessy"); setEndId("brown"); }}>Plessy to Brown</button>
+          <button onClick={() => { setStartId("roe"); setEndId("dobbs"); }}>Roe to Dobbs</button>
+          <button onClick={() => { setStartId("katz"); setEndId("carpenter"); }}>Katz to Carpenter</button>
         </div>
       </div>
 
