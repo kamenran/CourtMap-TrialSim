@@ -1588,6 +1588,182 @@ h3 {
   line-height: 1.55;
 }
 
+.pathFinderPanel {
+  margin-bottom: 20px;
+  border-color: rgba(201, 54, 54, 0.16);
+  background:
+    linear-gradient(135deg, rgba(201, 54, 54, 0.045), transparent 34%),
+    var(--paper);
+}
+
+.pathHeader {
+  align-items: flex-start;
+}
+
+.pathHeader p:not(.label) {
+  max-width: 720px;
+  margin: 8px 0 0;
+  color: #4f5a68;
+  line-height: 1.55;
+}
+
+.pathBadge {
+  min-width: 110px;
+  padding: 14px 16px;
+  border: 1px solid rgba(23, 32, 51, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  text-align: right;
+}
+
+.pathBadge strong,
+.pathBadge span {
+  display: block;
+}
+
+.pathBadge strong {
+  color: var(--red);
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.pathBadge span {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.pathControls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.pathControls label {
+  display: grid;
+  gap: 6px;
+}
+
+.pathControls label span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.pathControls select {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.76);
+  color: var(--ink);
+  font: inherit;
+}
+
+.pathPresets {
+  display: flex;
+  flex-wrap: wrap;
+  grid-column: 1 / -1;
+  gap: 8px;
+}
+
+.pathPresets button {
+  min-height: 34px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--navy);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.pathRail {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: 18px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.pathNode {
+  display: grid;
+  align-content: center;
+  gap: 5px;
+  min-width: 190px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.78);
+  text-align: left;
+}
+
+.pathNode.clickable {
+  cursor: pointer;
+}
+
+.pathNode:disabled {
+  cursor: default;
+}
+
+.pathNode strong {
+  color: var(--ink);
+  font-size: 0.96rem;
+  line-height: 1.25;
+}
+
+.pathNode span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.pathConnector {
+  align-self: center;
+  flex: 0 0 auto;
+  min-width: 84px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.pathConnector.citation {
+  background: var(--navy);
+}
+
+.pathConnector.downstream {
+  background: var(--blue);
+}
+
+.pathConnector.overruling {
+  background: var(--red);
+}
+
+.pathConnector.same {
+  background: var(--muted);
+}
+
+.pathExplanation {
+  margin: 14px 0 0;
+  color: #3d4654;
+  line-height: 1.55;
+}
+
+.pathOpenButton {
+  margin-top: 12px;
+}
+
 .briefGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2362,11 +2538,16 @@ h3 {
 
   .lawmakerStats,
   .topLawmakers,
-  .diffReadyActions {
+  .diffReadyActions,
+  .pathControls {
     grid-template-columns: 1fr;
   }
 
   .voteCountBadge {
+    text-align: left;
+  }
+
+  .pathBadge {
     text-align: left;
   }
 

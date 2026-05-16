@@ -425,6 +425,21 @@ const supportingCases = [
   ["smith", "Smith v. Maryland", "1979", "Third-party doctrine"]
 ].map(([id, name, year, note]) => ({ id, name, year, note }));
 
+const pathFinderNodes = [
+  ...precedentCases.map((item) => ({
+    id: item.id,
+    name: item.name,
+    meta: `${item.citation} · ${item.year}`,
+    type: "landmark"
+  })),
+  ...supportingCases.map((item) => ({
+    id: item.id,
+    name: item.name,
+    meta: `${item.year} · ${item.note}`,
+    type: "supporting"
+  }))
+].sort((a, b) => a.name.localeCompare(b.name));
+
 function App() {
   const [view, setView] = useState("home");
   const [selectedCaseId, setSelectedCaseId] = useState("brown");
@@ -741,6 +756,7 @@ function CourtMapPage({ selectedCase, setSelectedCaseId, query, setQuery, filter
       <CaseInfoGrid selectedCase={selectedCase} />
       <CaseBriefPanel selectedCase={selectedCase} />
       <JusticeAlignment selectedCase={selectedCase} />
+      <PathFinder setSelectedCaseId={setSelectedCaseId} />
 
       <div className="layout">
         <div className="mainColumn">
@@ -942,6 +958,96 @@ function JusticeBloc({ title, justices, tone, emptyLabel = "None" }) {
         {justices.length ? justices.map((justice) => <li key={`${title}-${justice}`}>{justice}</li>) : <li>{emptyLabel}</li>}
       </ul>
     </article>
+  );
+}
+
+function PathFinder({ setSelectedCaseId }) {
+  const [startId, setStartId] = useState("plessy");
+  const [endId, setEndId] = useState("brown");
+  const path = useMemo(() => findShortestPath(startId, endId), [startId, endId]);
+  const pathNames = path.map((item) => getPathNode(item.id)?.name || item.id);
+  const canOpenEnd = precedentCases.some((item) => item.id === endId);
+
+  return (
+    <section className="panel pathFinderPanel">
+      <div className="sectionHeader pathHeader">
+        <div>
+          <p className="label">Doctrine Path Finder</p>
+          <h2>Trace the shortest route between precedents</h2>
+          <p>
+            A graph-search feature that follows citation, downstream, and overruling relationships
+            across the curated SCOTUS network.
+          </p>
+        </div>
+        <div className="pathBadge">
+          <strong>{Math.max(path.length - 1, 0)}</strong>
+          <span>edge{path.length - 1 === 1 ? "" : "s"}</span>
+        </div>
+      </div>
+
+      <div className="pathControls">
+        <label>
+          <span>Start</span>
+          <select value={startId} onChange={(event) => setStartId(event.target.value)}>
+            {pathFinderNodes.map((node) => (
+              <option key={`start-${node.id}`} value={node.id}>{node.name}</option>
+            ))}
+          </select>
+        </label>
+        <label>
+          <span>End</span>
+          <select value={endId} onChange={(event) => setEndId(event.target.value)}>
+            {pathFinderNodes.map((node) => (
+              <option key={`end-${node.id}`} value={node.id}>{node.name}</option>
+            ))}
+          </select>
+        </label>
+        <div className="pathPresets">
+          <button onClick={() => { setStartId("plessy"); setEndId("brown"); }}>Plessy to Brown</button>
+          <button onClick={() => { setStartId("roe"); setEndId("dobbs"); }}>Roe to Dobbs</button>
+          <button onClick={() => { setStartId("katz"); setEndId("carpenter"); }}>Katz to Carpenter</button>
+        </div>
+      </div>
+
+      {path.length ? (
+        <>
+          <div className="pathRail" aria-label={`Path from ${pathNames[0]} to ${pathNames[pathNames.length - 1]}`}>
+            {path.map((step, index) => {
+              const node = getPathNode(step.id);
+              const knownCase = precedentCases.find((item) => item.id === step.id);
+              return (
+                <React.Fragment key={`${step.id}-${index}`}>
+                  <button
+                    className={`pathNode ${knownCase ? "clickable" : ""}`}
+                    onClick={() => knownCase && setSelectedCaseId(knownCase.id)}
+                    disabled={!knownCase}
+                  >
+                    <strong>{node?.name || step.id}</strong>
+                    <span>{node?.meta || "Mapped relationship"}</span>
+                  </button>
+                  {index < path.length - 1 && (
+                    <span className={`pathConnector ${path[index + 1].tone}`}>
+                      {path[index + 1].via}
+                    </span>
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </div>
+          <p className="pathExplanation">{explainPath(path)}</p>
+          {canOpenEnd && (
+            <button className="quietAction compact pathOpenButton" onClick={() => setSelectedCaseId(endId)}>
+              Open endpoint case
+            </button>
+          )}
+        </>
+      ) : (
+        <div className="emptyState">
+          <strong>No mapped path yet.</strong>
+          <p>These nodes are not connected in the current curated corpus. Adding more SCOTUS citation data will make this graph denser over time.</p>
+        </div>
+      )}
+    </section>
   );
 }
 
@@ -1387,6 +1493,72 @@ function buildGraph(selectedCase) {
 
 function caseName(id) {
   return precedentCases.find((item) => item.id === id)?.name || supportingCases.find((item) => item.id === id)?.name || "";
+}
+
+function getPathNode(id) {
+  return pathFinderNodes.find((item) => item.id === id);
+}
+
+function buildPathGraph() {
+  const adjacency = new Map(pathFinderNodes.map((node) => [node.id, []]));
+
+  function connect(source, target, label, tone) {
+    if (!adjacency.has(source)) adjacency.set(source, []);
+    if (!adjacency.has(target)) adjacency.set(target, []);
+    adjacency.get(source).push({ id: target, via: label, tone });
+    adjacency.get(target).push({ id: source, via: reversePathLabel(label), tone });
+  }
+
+  precedentCases.forEach((item) => {
+    item.cites.forEach((id) => connect(item.id, id, "cites", "citation"));
+    item.citedBy.forEach((id) => connect(item.id, id, "cited by", "downstream"));
+    item.overrules.forEach((id) => connect(item.id, id, "overrules", "overruling"));
+  });
+
+  return adjacency;
+}
+
+function reversePathLabel(label) {
+  if (label === "cites") return "cited by";
+  if (label === "cited by") return "cites";
+  if (label === "overrules") return "overruled by";
+  if (label === "overruled by") return "overrules";
+  return label;
+}
+
+function findShortestPath(startId, endId) {
+  if (startId === endId) return [{ id: startId, via: "selected", tone: "same" }];
+  const graph = buildPathGraph();
+  const queue = [[{ id: startId, via: "start", tone: "same" }]];
+  const visited = new Set([startId]);
+
+  while (queue.length) {
+    const path = queue.shift();
+    const current = path[path.length - 1];
+    const neighbors = graph.get(current.id) || [];
+
+    for (const neighbor of neighbors) {
+      if (visited.has(neighbor.id)) continue;
+      const nextPath = [...path, neighbor];
+      if (neighbor.id === endId) return nextPath;
+      visited.add(neighbor.id);
+      queue.push(nextPath);
+    }
+  }
+
+  return [];
+}
+
+function explainPath(path) {
+  if (path.length <= 1) {
+    const node = getPathNode(path[0]?.id);
+    return node ? `${node.name} is selected as both the start and endpoint.` : "Select two different nodes to trace a route.";
+  }
+
+  const start = getPathNode(path[0].id)?.name || path[0].id;
+  const end = getPathNode(path[path.length - 1].id)?.name || path[path.length - 1].id;
+  const relationshipTypes = uniqueOptions(path.slice(1).map((step) => step.via));
+  return `${start} reaches ${end} through ${path.length - 1} mapped relationship${path.length - 1 === 1 ? "" : "s"}: ${relationshipTypes.join(", ")}.`;
 }
 
 function scrollToSelector(selector) {
