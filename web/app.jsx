@@ -742,7 +742,7 @@ function PortfolioHome({ setView }) {
       <header className="personalHero">
         <div className="heroCopy">
           <p className="eyebrow">Computer Science · Law · Public Institutions</p>
-          <h1>Building software that maps precedent and models legal reasoning.</h1>
+          <h1>Mapping law through software.</h1>
           <p className="heroLead">
             Computer Science student at Towson University focused on the intersection of technology and law.
           </p>
