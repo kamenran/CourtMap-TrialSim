@@ -2251,8 +2251,7 @@ function MascotCard() {
         <span>Civic technology</span>
       </div>
       <p>
-        My mission is to build software that makes legal institutions easier to understand:
-        tools that connect constitutional law, public accountability, AI policy, and clear technical design.
+        My work explores how software can make legal reasoning more accessible, interactive, and understandable.
       </p>
     </article>
   );
