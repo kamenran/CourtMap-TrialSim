@@ -33,6 +33,16 @@ const precedentCases = [
     citedBy: ["cooper", "green", "swann", "parents"],
     overrules: ["plessy"],
     related: ["Fourteenth Amendment", "Equal Protection", "Civil Rights"],
+    vote: {
+      count: "9-0",
+      result: "Unanimous judgment",
+      alignment: "Full Court consensus",
+      majority: ["Warren", "Black", "Reed", "Frankfurter", "Douglas", "Jackson", "Burton", "Clark", "Minton"],
+      concurrence: [],
+      dissent: [],
+      notParticipating: [],
+      note: "Brown is useful as a graph anchor because the doctrinal shift is dramatic while the vote alignment is unanimous."
+    },
     timeline: [
       { year: 1896, title: "Plessy v. Ferguson", detail: "Separate-but-equal doctrine is accepted." },
       { year: 1950, title: "Sweatt and McLaurin", detail: "The Court narrows segregation in graduate education." },
@@ -73,6 +83,16 @@ const precedentCases = [
     citedBy: ["dickerson", "berghuis", "newyorkquarles"],
     overrules: [],
     related: ["Fifth Amendment", "Sixth Amendment", "Criminal Procedure"],
+    vote: {
+      count: "5-4",
+      result: "Closely divided judgment",
+      alignment: "Rights-expanding criminal procedure majority",
+      majority: ["Warren", "Black", "Douglas", "Brennan", "Fortas"],
+      concurrence: [],
+      dissent: ["Harlan", "Stewart", "White", "Clark"],
+      notParticipating: [],
+      note: "The split shows why Miranda remains a strong example of constitutional procedure becoming an operational rule for institutions."
+    },
     timeline: [
       { year: 1963, title: "Gideon", detail: "Right to counsel is incorporated against the states." },
       { year: 1964, title: "Escobedo", detail: "Counsel rights are applied in police interrogation." },
@@ -113,6 +133,16 @@ const precedentCases = [
     citedBy: ["casey", "dobbs"],
     overrules: [],
     related: ["Fourteenth Amendment", "Privacy", "Stare Decisis"],
+    vote: {
+      count: "7-2",
+      result: "Broad majority",
+      alignment: "Substantive due process and privacy coalition",
+      majority: ["Blackmun", "Burger", "Douglas", "Brennan", "Stewart", "Marshall", "Powell"],
+      concurrence: [],
+      dissent: ["White", "Rehnquist"],
+      notParticipating: [],
+      note: "Roe's large formal majority contrasts with the long-term instability of the doctrine in later precedent."
+    },
     timeline: [
       { year: 1965, title: "Griswold", detail: "Privacy right recognized in contraception context." },
       { year: 1973, title: "Roe", detail: "Abortion right recognized under due process." },
@@ -152,6 +182,16 @@ const precedentCases = [
     citedBy: [],
     overrules: ["roe", "casey"],
     related: ["Fourteenth Amendment", "Stare Decisis", "Federalism"],
+    vote: {
+      count: "6-3",
+      result: "Judgment for Mississippi",
+      alignment: "Five-justice overruling coalition plus concurrence in judgment",
+      majority: ["Thomas", "Alito", "Gorsuch", "Kavanaugh", "Barrett"],
+      concurrence: ["Roberts"],
+      dissent: ["Breyer", "Sotomayor", "Kagan"],
+      notParticipating: [],
+      note: "The judgment was 6-3, while the controlling overruling rationale was carried by five justices."
+    },
     timeline: [
       { year: 1973, title: "Roe", detail: "Abortion right recognized." },
       { year: 1992, title: "Casey", detail: "Roe is partly reaffirmed." },
@@ -190,6 +230,16 @@ const precedentCases = [
     citedBy: ["miranda", "argersinger"],
     overrules: ["betts"],
     related: ["Sixth Amendment", "Incorporation", "Due Process"],
+    vote: {
+      count: "9-0",
+      result: "Unanimous judgment",
+      alignment: "Access-to-counsel consensus",
+      majority: ["Black", "Warren", "Douglas", "Clark", "Harlan", "Brennan", "Stewart", "White", "Goldberg"],
+      concurrence: [],
+      dissent: [],
+      notParticipating: [],
+      note: "Gideon pairs a unanimous vote with a major institutional consequence: states must provide counsel in serious criminal cases."
+    },
     timeline: [
       { year: 1932, title: "Powell", detail: "Counsel required in capital cases with special circumstances." },
       { year: 1942, title: "Betts", detail: "No general right to appointed counsel in state felony cases." },
@@ -228,6 +278,16 @@ const precedentCases = [
     citedBy: [],
     overrules: [],
     related: ["Fourth Amendment", "Digital Privacy", "Surveillance"],
+    vote: {
+      count: "5-4",
+      result: "Warrant requirement recognized",
+      alignment: "Cross-ideological digital privacy majority",
+      majority: ["Roberts", "Ginsburg", "Breyer", "Sotomayor", "Kagan"],
+      concurrence: [],
+      dissent: ["Kennedy", "Thomas", "Alito", "Gorsuch"],
+      notParticipating: [],
+      note: "Carpenter is a strong technology-law example because the vote alignment does not map cleanly onto a simple partisan story."
+    },
     timeline: [
       { year: 1967, title: "Katz", detail: "Reasonable expectation of privacy test emerges." },
       { year: 1979, title: "Smith", detail: "Third-party doctrine limits privacy in phone metadata." },
@@ -267,6 +327,16 @@ const precedentCases = [
     citedBy: ["smith", "jones", "carpenter"],
     overrules: [],
     related: ["Fourth Amendment", "Privacy", "Surveillance"],
+    vote: {
+      count: "7-1",
+      result: "Fourth Amendment protection recognized",
+      alignment: "Privacy expectation majority",
+      majority: ["Stewart", "Warren", "Douglas", "Brennan", "White", "Fortas"],
+      concurrence: ["Harlan"],
+      dissent: ["Black"],
+      notParticipating: ["Marshall"],
+      note: "Katz is a clean example of doctrine changing form: search analysis moves beyond physical trespass."
+    },
     timeline: [
       { year: 1928, title: "Olmstead", detail: "Wiretapping without trespass is outside Fourth Amendment protection." },
       { year: 1967, title: "Katz", detail: "Privacy expectation test changes search doctrine." },
@@ -305,6 +375,16 @@ const precedentCases = [
     citedBy: ["cooper", "dobbs"],
     overrules: [],
     related: ["Article III", "Judicial Review", "Separation of Powers"],
+    vote: {
+      count: "4-0",
+      result: "Unanimous participating judgment",
+      alignment: "Institutional authority consensus",
+      majority: ["Marshall", "Paterson", "Washington", "Moore"],
+      concurrence: [],
+      dissent: [],
+      notParticipating: ["Chase", "Cushing"],
+      note: "Marbury's participating Court was unanimous, which helps frame judicial review as an institutional foundation node."
+    },
     timeline: [
       { year: 1803, title: "Marbury", detail: "Judicial review is announced." },
       { year: 1958, title: "Cooper", detail: "Supreme Court constitutional interpretation binds state officials." },
@@ -660,6 +740,7 @@ function CourtMapPage({ selectedCase, setSelectedCaseId, query, setQuery, filter
       <CaseSummary selectedCase={selectedCase} />
       <CaseInfoGrid selectedCase={selectedCase} />
       <CaseBriefPanel selectedCase={selectedCase} />
+      <JusticeAlignment selectedCase={selectedCase} />
 
       <div className="layout">
         <div className="mainColumn">
@@ -808,6 +889,59 @@ function CaseBriefPanel({ selectedCase }) {
         </article>
       </div>
     </section>
+  );
+}
+
+function JusticeAlignment({ selectedCase }) {
+  const vote = selectedCase.vote;
+  const total = vote.majority.length + vote.concurrence.length + vote.dissent.length;
+  const majorityShare = total ? (vote.majority.length / total) * 100 : 0;
+  const concurrenceShare = total ? (vote.concurrence.length / total) * 100 : 0;
+  const dissentShare = total ? (vote.dissent.length / total) * 100 : 0;
+
+  return (
+    <section className="panel justicePanel">
+      <div className="sectionHeader justiceHeader">
+        <div>
+          <p className="label">Justice Voting Alignment</p>
+          <h2>{vote.count} · {vote.result}</h2>
+          <p>{vote.alignment}</p>
+        </div>
+        <div className="voteCountBadge">
+          <strong>{vote.count}</strong>
+          <span>decision split</span>
+        </div>
+      </div>
+
+      <div className="voteSplitBar" aria-label={`${vote.count} voting alignment`}>
+        <span className="voteSegment majoritySegment" style={{ width: `${majorityShare}%` }} />
+        {vote.concurrence.length > 0 && <span className="voteSegment concurrenceSegment" style={{ width: `${concurrenceShare}%` }} />}
+        {vote.dissent.length > 0 && <span className="voteSegment dissentSegment" style={{ width: `${dissentShare}%` }} />}
+      </div>
+
+      <div className="justiceGrid">
+        <JusticeBloc title="Majority" justices={vote.majority} tone="majority" />
+        {vote.concurrence.length > 0 && <JusticeBloc title="Concurrence" justices={vote.concurrence} tone="concurrence" />}
+        <JusticeBloc title="Dissent" justices={vote.dissent} tone="dissent" emptyLabel="No dissenting justices" />
+        {vote.notParticipating.length > 0 && <JusticeBloc title="Not Participating" justices={vote.notParticipating} tone="neutral" />}
+      </div>
+
+      <p className="alignmentNote">{vote.note}</p>
+    </section>
+  );
+}
+
+function JusticeBloc({ title, justices, tone, emptyLabel = "None" }) {
+  return (
+    <article className={`justiceBloc ${tone}`}>
+      <div>
+        <span>{title}</span>
+        <strong>{justices.length}</strong>
+      </div>
+      <ul>
+        {justices.length ? justices.map((justice) => <li key={`${title}-${justice}`}>{justice}</li>) : <li>{emptyLabel}</li>}
+      </ul>
+    </article>
   );
 }
 

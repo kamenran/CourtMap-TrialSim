@@ -1418,6 +1418,176 @@ h3 {
   margin-bottom: 20px;
 }
 
+.justicePanel {
+  overflow: hidden;
+  margin-bottom: 20px;
+  border-color: rgba(59, 95, 130, 0.18);
+  background:
+    linear-gradient(135deg, rgba(59, 95, 130, 0.055), transparent 36%),
+    var(--paper);
+}
+
+.justiceHeader {
+  align-items: flex-start;
+}
+
+.justiceHeader p:not(.label) {
+  max-width: 680px;
+  margin: 8px 0 0;
+  color: #4f5a68;
+  line-height: 1.55;
+}
+
+.voteCountBadge {
+  min-width: 132px;
+  padding: 14px 16px;
+  border: 1px solid rgba(23, 32, 51, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  text-align: right;
+}
+
+.voteCountBadge strong,
+.voteCountBadge span {
+  display: block;
+}
+
+.voteCountBadge strong {
+  color: var(--ink);
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.voteCountBadge span {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.voteSplitBar {
+  display: flex;
+  width: 100%;
+  height: 12px;
+  margin: 18px 0;
+  overflow: hidden;
+  border: 1px solid rgba(23, 32, 51, 0.08);
+  border-radius: 999px;
+  background: #eef1f4;
+}
+
+.voteSegment {
+  min-width: 2px;
+}
+
+.majoritySegment {
+  background: var(--navy);
+}
+
+.concurrenceSegment {
+  background: var(--blue);
+}
+
+.dissentSegment {
+  background: var(--red);
+}
+
+.justiceGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.justiceBloc {
+  min-height: 168px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.66);
+}
+
+.justiceBloc > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.justiceBloc span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.justiceBloc strong {
+  color: var(--ink);
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
+.justiceBloc ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.justiceBloc li {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 9px;
+  border: 1px solid rgba(23, 32, 51, 0.08);
+  border-radius: 999px;
+  background: #fff;
+  color: #3d4654;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.justiceBloc.majority {
+  border-color: rgba(23, 32, 51, 0.16);
+}
+
+.justiceBloc.majority strong {
+  color: var(--navy);
+}
+
+.justiceBloc.concurrence {
+  border-color: rgba(59, 95, 130, 0.2);
+}
+
+.justiceBloc.concurrence strong {
+  color: var(--blue);
+}
+
+.justiceBloc.dissent {
+  border-color: rgba(201, 54, 54, 0.2);
+}
+
+.justiceBloc.dissent strong {
+  color: var(--red);
+}
+
+.justiceBloc.neutral strong {
+  color: var(--muted);
+}
+
+.alignmentNote {
+  margin: 16px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  color: #3d4654;
+  line-height: 1.55;
+}
+
 .briefGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2145,6 +2315,7 @@ h3 {
   .summaryPanel,
   .billInfoGrid,
   .briefGrid,
+  .justiceGrid,
   .focusCorpusNote,
   .projectExplanation,
   .aiHomeFeature,
@@ -2193,6 +2364,10 @@ h3 {
   .topLawmakers,
   .diffReadyActions {
     grid-template-columns: 1fr;
+  }
+
+  .voteCountBadge {
+    text-align: left;
   }
 
   .infoPanel dl div {
