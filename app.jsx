@@ -964,9 +964,30 @@ function JusticeBloc({ title, justices, tone, emptyLabel = "None" }) {
 function PathFinder({ setSelectedCaseId }) {
   const [startId, setStartId] = useState("plessy");
   const [endId, setEndId] = useState("brown");
+  const [pathAnchor, setPathAnchor] = useState("start");
+  const endOptions = useMemo(() => pathAnchor === "start" ? filterReachableNodes(startId) : pathFinderNodes, [pathAnchor, startId]);
+  const startOptions = useMemo(() => pathAnchor === "end" ? filterReachableNodes(endId) : pathFinderNodes, [pathAnchor, endId]);
   const path = useMemo(() => findShortestPath(startId, endId), [startId, endId]);
   const pathNames = path.map((item) => getPathNode(item.id)?.name || item.id);
   const canOpenEnd = precedentCases.some((item) => item.id === endId);
+
+  function updateStart(nextStartId) {
+    const reachableEndIds = getReachableNodeIds(nextStartId);
+    setPathAnchor("start");
+    setStartId(nextStartId);
+    if (!reachableEndIds.includes(endId)) {
+      setEndId(pickNearestNode(nextStartId, reachableEndIds));
+    }
+  }
+
+  function updateEnd(nextEndId) {
+    const reachableStartIds = getReachableNodeIds(nextEndId);
+    setPathAnchor("end");
+    setEndId(nextEndId);
+    if (!reachableStartIds.includes(startId)) {
+      setStartId(pickNearestNode(nextEndId, reachableStartIds));
+    }
+  }
 
   return (
     <section className="panel pathFinderPanel">
@@ -988,24 +1009,24 @@ function PathFinder({ setSelectedCaseId }) {
       <div className="pathControls">
         <label>
           <span>Start</span>
-          <select value={startId} onChange={(event) => setStartId(event.target.value)}>
-            {pathFinderNodes.map((node) => (
+          <select value={startId} onChange={(event) => updateStart(event.target.value)}>
+            {startOptions.map((node) => (
               <option key={`start-${node.id}`} value={node.id}>{node.name}</option>
             ))}
           </select>
         </label>
         <label>
           <span>End</span>
-          <select value={endId} onChange={(event) => setEndId(event.target.value)}>
-            {pathFinderNodes.map((node) => (
+          <select value={endId} onChange={(event) => updateEnd(event.target.value)}>
+            {endOptions.map((node) => (
               <option key={`end-${node.id}`} value={node.id}>{node.name}</option>
             ))}
           </select>
         </label>
         <div className="pathPresets">
-          <button onClick={() => { setStartId("plessy"); setEndId("brown"); }}>Plessy to Brown</button>
-          <button onClick={() => { setStartId("roe"); setEndId("dobbs"); }}>Roe to Dobbs</button>
-          <button onClick={() => { setStartId("katz"); setEndId("carpenter"); }}>Katz to Carpenter</button>
+          <button onClick={() => { setPathAnchor("start"); setStartId("plessy"); setEndId("brown"); }}>Plessy to Brown</button>
+          <button onClick={() => { setPathAnchor("start"); setStartId("roe"); setEndId("dobbs"); }}>Roe to Dobbs</button>
+          <button onClick={() => { setPathAnchor("start"); setStartId("katz"); setEndId("carpenter"); }}>Katz to Carpenter</button>
         </div>
       </div>
 
@@ -1516,6 +1537,34 @@ function buildPathGraph() {
   });
 
   return adjacency;
+}
+
+function getReachableNodeIds(startId) {
+  const graph = buildPathGraph();
+  const visited = new Set([startId]);
+  const queue = [startId];
+
+  while (queue.length) {
+    const current = queue.shift();
+    const neighbors = graph.get(current) || [];
+    neighbors.forEach((neighbor) => {
+      if (visited.has(neighbor.id)) return;
+      visited.add(neighbor.id);
+      queue.push(neighbor.id);
+    });
+  }
+
+  return [...visited];
+}
+
+function filterReachableNodes(startId) {
+  const reachable = new Set(getReachableNodeIds(startId));
+  return pathFinderNodes.filter((node) => reachable.has(node.id));
+}
+
+function pickNearestNode(sourceId, candidateIds) {
+  const firstOther = candidateIds.find((id) => id !== sourceId);
+  return firstOther || candidateIds[0] || sourceId;
 }
 
 function reversePathLabel(label) {
