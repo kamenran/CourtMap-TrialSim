@@ -208,6 +208,8 @@ button {
 .heroCopy,
 .mascotCard,
 .profilePanel,
+.contactHero,
+.contactCard,
 .featuredProduct {
   background: var(--paper);
   border: 1px solid var(--line);
@@ -301,6 +303,75 @@ button {
   margin-bottom: 0;
   color: #4f5a68;
   line-height: 1.65;
+}
+
+.contactPage {
+  display: grid;
+  gap: 18px;
+}
+
+.contactHero {
+  position: relative;
+  padding: clamp(28px, 5vw, 54px);
+  overflow: hidden;
+}
+
+.contactHero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 168px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--navy) 0 34%, transparent 34% 42%, var(--red) 42%);
+}
+
+.contactHero h1 {
+  margin-bottom: 0;
+  font-size: clamp(2.4rem, 5vw, 4.75rem);
+  line-height: 0.98;
+}
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 0.9fr;
+  gap: 18px;
+}
+
+.contactCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 260px;
+  padding: 24px;
+}
+
+.contactCard h2 {
+  margin: 0 0 10px;
+  font-size: clamp(1.25rem, 2vw, 1.85rem);
+  line-height: 1.08;
+}
+
+.contactCard p:not(.label) {
+  margin: 0 0 22px;
+  color: #4f5a68;
+  line-height: 1.65;
+}
+
+.contactCard .primaryAction,
+.contactCard .quietAction {
+  margin-top: auto;
+}
+
+.primaryContactCard {
+  background:
+    linear-gradient(135deg, rgba(59, 95, 130, 0.08), rgba(201, 54, 54, 0.045)),
+    var(--paper);
+}
+
+.resumeCard {
+  background: rgba(246, 243, 239, 0.72);
 }
 
 .mascotTools {
@@ -3202,6 +3273,7 @@ h3 {
   .personalHero,
   .portfolioGrid,
   .productShowcase,
+  .contactGrid,
   .summaryPanel,
   .billInfoGrid,
   .briefGrid,
@@ -3389,6 +3461,8 @@ h3 {
   .heroCopy,
   .profilePanel,
   .featuredProduct,
+  .contactHero,
+  .contactCard,
   .mascotCard {
     padding: 16px;
   }
@@ -3418,6 +3492,8 @@ body {
 .mascotCard,
 .profilePanel,
 .featuredProduct,
+.contactHero,
+.contactCard,
 .status,
 .metric,
 .panel,

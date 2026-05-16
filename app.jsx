@@ -697,6 +697,7 @@ function App() {
         />
       )}
       {view === "trialsim" && <TrialSimPage />}
+      {view === "contact" && <ContactPage />}
       <SiteFooter />
     </main>
   );
@@ -721,9 +722,53 @@ function SiteNav({ view, setView }) {
         <button className={view === "home" ? "active" : ""} onClick={() => setView("home")}>Profile</button>
         <button className={view === "precedent" ? "active" : ""} onClick={() => setView("precedent")}>CourtMap</button>
         <button className={view === "trialsim" ? "active" : ""} onClick={() => setView("trialsim")}>TrialSim (WIP)</button>
-        <a href="mailto:kamrane02@gmail.com">Contact</a>
+        <button className={view === "contact" ? "active" : ""} onClick={() => setView("contact")}>Contact</button>
       </div>
     </nav>
+  );
+}
+
+function ContactPage() {
+  return (
+    <section className="contactPage">
+      <div className="contactHero">
+        <p className="eyebrow">Contact</p>
+        <h1>Let’s connect.</h1>
+        <p className="heroLead">
+          I’m always open to conversations about computer science, law, civic technology,
+          AI governance, and projects that make complex legal systems easier to understand.
+        </p>
+      </div>
+
+      <div className="contactGrid">
+        <article className="contactCard primaryContactCard">
+          <p className="label">Email</p>
+          <h2>kamrane02@gmail.com</h2>
+          <p>Best place to reach me for projects, opportunities, collaborations, or questions.</p>
+          <a className="primaryAction" href="mailto:kamrane02@gmail.com">Send email</a>
+        </article>
+
+        <article className="contactCard">
+          <p className="label">LinkedIn</p>
+          <h2>Kamran Eisenberg</h2>
+          <p>Connect with me professionally and follow the development of CourtMap and TrialSim.</p>
+          <a
+            className="quietAction"
+            href="https://www.linkedin.com/in/kamraneisenberg/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open LinkedIn
+          </a>
+        </article>
+
+        <article className="contactCard resumeCard">
+          <p className="label">Resume</p>
+          <h2>Coming soon</h2>
+          <p>I’ll add a polished resume link here once the final version is ready.</p>
+        </article>
+      </div>
+    </section>
   );
 }
 
@@ -753,7 +798,7 @@ function PortfolioHome({ setView }) {
           </div>
           <div className="heroActions">
             <button className="primaryAction" onClick={() => setView("precedent")}>Open CourtMap</button>
-            <a className="quietAction" href="mailto:kamrane02@gmail.com">Contact</a>
+            <button className="quietAction" onClick={() => setView("contact")}>Contact</button>
           </div>
         </div>
         <MascotCard />
