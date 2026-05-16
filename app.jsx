@@ -764,8 +764,9 @@ function ContactPage() {
 
         <article className="contactCard resumeCard">
           <p className="label">Resume</p>
-          <h2>Coming soon</h2>
-          <p>I’ll add a polished resume link here once the final version is ready.</p>
+          <h2>Kamran Eisenberg Resume</h2>
+          <p>View my current resume with coursework, experience, technical work, and project background.</p>
+          <a className="quietAction" href="./resume.pdf" target="_blank" rel="noreferrer">Open resume</a>
         </article>
       </div>
     </section>
