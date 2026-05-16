@@ -488,6 +488,326 @@ button {
   background: #fff;
 }
 
+.frameHero {
+  border-color: rgba(59, 95, 130, 0.18);
+}
+
+.frameHero h1 {
+  max-width: 820px;
+}
+
+.frameStatus strong {
+  font-size: 1.05rem;
+}
+
+.frameStats {
+  margin-bottom: 20px;
+}
+
+.frameWorkspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+  gap: 20px;
+  align-items: stretch;
+  margin-bottom: 20px;
+}
+
+.framePanel {
+  border-color: rgba(59, 95, 130, 0.15);
+  background:
+    linear-gradient(135deg, rgba(59, 95, 130, 0.04), transparent 42%),
+    var(--paper);
+}
+
+.frameCatalogHeader {
+  align-items: start;
+}
+
+.frameControls {
+  grid-template-columns: minmax(220px, 340px);
+  margin-top: 14px;
+}
+
+.frameIssueGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.frameIssueCard {
+  display: grid;
+  gap: 7px;
+  min-height: 132px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.66);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.frameIssueCard.active {
+  border-color: rgba(201, 54, 54, 0.34);
+  background: #fff8f7;
+  box-shadow: inset 3px 0 0 var(--red);
+}
+
+.frameIssueCard span,
+.frameDetailBlock span,
+.frameQuickPick > span {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.frameIssueCard strong {
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.frameIssueCard small {
+  color: var(--muted);
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.issueDetailPanel h2 {
+  margin-bottom: 12px;
+}
+
+.issueDetailPanel > p:not(.label) {
+  color: #3d4654;
+  font-size: 1.04rem;
+  line-height: 1.6;
+}
+
+.frameDetailBlock {
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.frameDetailBlock p {
+  margin: 7px 0 0;
+  color: #3d4654;
+  line-height: 1.55;
+}
+
+.frameDetailBlock.conflict {
+  border-color: rgba(201, 54, 54, 0.18);
+  background: rgba(255, 241, 239, 0.55);
+}
+
+.comparisonFramePanel {
+  margin-bottom: 20px;
+}
+
+.institutionSelectRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.institutionSelectRow label {
+  display: grid;
+  gap: 6px;
+}
+
+.institutionSelectRow label span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.institutionSelectRow select,
+.frameControls select {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.76);
+  color: var(--ink);
+  font: inherit;
+}
+
+.institutionCards,
+.frameTwoColumn {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.institutionFrameCard {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.68);
+}
+
+.institutionFrameCard.relevant {
+  border-color: rgba(59, 95, 130, 0.24);
+  box-shadow: inset 3px 0 0 var(--navy);
+}
+
+.institutionFrameCard > span {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.institutionFrameCard h3 {
+  margin: 7px 0 9px;
+}
+
+.institutionFrameCard p,
+.institutionFrameCard dd {
+  color: #3d4654;
+  line-height: 1.55;
+}
+
+.institutionFrameCard dl {
+  display: grid;
+  gap: 12px;
+  margin: 14px 0 0;
+}
+
+.institutionFrameCard dt {
+  margin-bottom: 3px;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.institutionFrameCard dd {
+  margin: 0;
+}
+
+.frameQuickPick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+  align-items: center;
+}
+
+.frameQuickPick button,
+.issueMap button {
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--navy);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.framingMatrix {
+  margin-bottom: 20px;
+}
+
+.scoreGrid {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.scoreRow {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) 42px;
+  gap: 12px;
+  align-items: center;
+}
+
+.scoreRow span {
+  color: #3d4654;
+  font-weight: 850;
+}
+
+.scoreRow div {
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #eef1f4;
+}
+
+.scoreRow i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--navy), var(--red));
+}
+
+.scoreRow strong {
+  color: var(--ink);
+  font-size: 0.92rem;
+  text-align: right;
+}
+
+.frameTimelineItem {
+  background: rgba(255, 255, 255, 0.66);
+}
+
+.issueMap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 16px;
+}
+
+.issueMap button:first-child {
+  border-color: rgba(201, 54, 54, 0.25);
+  background: var(--red-soft);
+  color: var(--red);
+}
+
+.docGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.docGrid article {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.66);
+}
+
+.docGrid strong,
+.docGrid span {
+  display: block;
+}
+
+.docGrid strong {
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.docGrid span {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.frameExplanation {
+  margin-top: 20px;
+}
+
 .blueBar {
   top: 76px;
   background: var(--navy);
@@ -2501,6 +2821,13 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  .frameWorkspace,
+  .institutionCards,
+  .frameTwoColumn,
+  .docGrid {
+    grid-template-columns: 1fr;
+  }
+
   .sideColumn {
     flex-basis: auto;
   }
@@ -2525,6 +2852,11 @@ h3 {
 
   .catalogControls.precedentControls {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .frameIssueGrid,
+  .institutionSelectRow {
+    grid-template-columns: 1fr;
   }
 
   .lawmakerHeader {
@@ -2633,6 +2965,14 @@ h3 {
 
   .timelineItem {
     grid-template-columns: 1fr;
+  }
+
+  .scoreRow {
+    grid-template-columns: 1fr 42px;
+  }
+
+  .scoreRow span {
+    grid-column: 1 / -1;
   }
 
   .personalHero {

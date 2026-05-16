@@ -440,6 +440,196 @@ const pathFinderNodes = [
   }))
 ].sort((a, b) => a.name.localeCompare(b.name));
 
+const framingDimensions = ["Innovation", "Safety", "Privacy", "Accountability", "Free Speech", "Copyright", "National Security"];
+
+const frameShiftInstitutions = [
+  {
+    id: "government",
+    name: "Government",
+    institutionType: "Public regulator",
+    primaryFrame: "Safety, accountability, election integrity, national security, and administrative capacity.",
+    secondaryFrames: ["Consumer protection", "Critical infrastructure", "Public-sector procurement"],
+    coreArgument: "AI creates public risks that require standards, reporting duties, and institution-level oversight.",
+    concerns: ["Deepfake elections", "Cyber risk", "Agency capacity", "Public trust"],
+    policyPreference: "Risk-based rules, executive guidance, agency enforcement, and sector-specific obligations.",
+    sampleLanguage: "AI systems should be safe, secure, trustworthy, and accountable before widespread public deployment.",
+    relatedIssues: ["deepfakes", "safety", "surveillance", "employment"]
+  },
+  {
+    id: "courts",
+    name: "Courts",
+    institutionType: "Legal interpreter",
+    primaryFrame: "Rights, liability, statutory interpretation, copyright, fair use, and constitutional limits.",
+    secondaryFrames: ["Precedent", "Remedies", "Causation"],
+    coreArgument: "AI disputes become legal questions when existing statutes, constitutional protections, and liability rules are applied to new systems.",
+    concerns: ["Copyright boundaries", "Due process", "Evidentiary reliability", "Liability allocation"],
+    policyPreference: "Case-by-case adjudication using statutory text, precedent, constitutional doctrine, and remedies.",
+    sampleLanguage: "The legal question is not whether AI is good or bad, but how existing rights and duties apply to the system at issue.",
+    relatedIssues: ["copyright", "liability", "bias", "surveillance"]
+  },
+  {
+    id: "companies",
+    name: "Technology Companies",
+    institutionType: "Private platform builder",
+    primaryFrame: "Innovation, competitiveness, flexible governance, product safety, and avoiding premature overregulation.",
+    secondaryFrames: ["Open development", "Market leadership", "Internal safety testing"],
+    coreArgument: "AI development needs room to iterate while firms build technical safeguards and compete globally.",
+    concerns: ["Compliance burden", "Trade secrets", "Model access", "Global competition"],
+    policyPreference: "Flexible standards, voluntary commitments, safe harbors, and interoperable compliance regimes.",
+    sampleLanguage: "Policy should preserve innovation while encouraging responsible deployment and practical safety evaluation.",
+    relatedIssues: ["copyright", "safety", "liability", "misinformation"]
+  },
+  {
+    id: "civil-liberties",
+    name: "Civil Liberties Groups",
+    institutionType: "Rights advocate",
+    primaryFrame: "Privacy, surveillance, bias, due process, democratic accountability, and civil rights.",
+    secondaryFrames: ["Transparency", "Human review", "Community harm"],
+    coreArgument: "AI systems can scale discrimination, surveillance, and speech harms unless enforceable rights and accountability rules are built in.",
+    concerns: ["Facial recognition", "Automated denial of benefits", "Disparate impact", "Chilling effects"],
+    policyPreference: "Audits, bans for high-risk uses, transparency rights, contestability, and strong enforcement.",
+    sampleLanguage: "AI governance should protect people from opaque systems that affect rights, opportunities, and democratic participation.",
+    relatedIssues: ["surveillance", "bias", "employment", "deepfakes"]
+  },
+  {
+    id: "international",
+    name: "International Regulators",
+    institutionType: "Cross-border regulator",
+    primaryFrame: "Risk classification, fundamental rights, compliance, transparency, and cross-border governance.",
+    secondaryFrames: ["Harmonization", "Market access", "Human oversight"],
+    coreArgument: "AI systems should be governed by risk level, with stronger obligations for systems affecting rights and safety.",
+    concerns: ["Regulatory arbitrage", "High-risk deployments", "Transparency", "Global interoperability"],
+    policyPreference: "Risk tiers, conformity assessments, documentation duties, and rights-centered compliance.",
+    sampleLanguage: "High-risk AI should meet transparency, oversight, and accountability requirements before deployment.",
+    relatedIssues: ["safety", "bias", "surveillance", "employment"]
+  },
+  {
+    id: "researchers",
+    name: "Researchers/Academics",
+    institutionType: "Knowledge producer",
+    primaryFrame: "Measurement, evidence, model evaluation, social impact, and long-term governance design.",
+    secondaryFrames: ["Benchmarking", "Interpretability", "Public-interest research"],
+    coreArgument: "AI policy needs empirical evaluation, independent access, and rigorous methods for identifying social and technical risk.",
+    concerns: ["Research access", "Benchmark gaming", "Unmeasured harms", "Opacity"],
+    policyPreference: "Auditable systems, independent research access, technical standards, and transparent evaluation methods.",
+    sampleLanguage: "Governance should be grounded in measurable system behavior, not only public promises or abstract principles.",
+    relatedIssues: ["safety", "bias", "copyright", "liability"]
+  }
+];
+
+const frameShiftIssues = [
+  {
+    id: "copyright",
+    title: "AI Copyright and Training Data",
+    category: "Intellectual Property",
+    plainEnglishSummary: "How should law treat copyrighted works used to train or generate AI outputs?",
+    whyItMatters: "Copyright disputes will shape who can build frontier models, how creators are compensated, and how fair use adapts to machine learning.",
+    legalThemes: ["Copyright / Fair Use", "Licensing", "Transformative Use"],
+    constitutionalAnchors: ["Copyright / Fair Use", "First Amendment"],
+    relatedInstitutions: ["courts", "companies", "researchers", "government"],
+    relatedEvents: ["nytimes-openai", "getty-stability", "copyright-office"],
+    relatedDocuments: ["NYT v. OpenAI complaint", "Getty Images v. Stability AI", "U.S. Copyright Office AI guidance"],
+    framingScores: { Innovation: 82, Safety: 38, Privacy: 42, Accountability: 66, "Free Speech": 64, Copyright: 96, "National Security": 20 },
+    conflict: "The core conflict is between model development at scale and creator control over copyrighted works."
+  },
+  {
+    id: "deepfakes",
+    title: "Deepfakes and Election Integrity",
+    category: "Democracy",
+    plainEnglishSummary: "How should institutions respond to synthetic political media, impersonation, and election misinformation?",
+    whyItMatters: "Deepfakes test the boundary between speech protection, fraud prevention, platform responsibility, and election administration.",
+    legalThemes: ["Election Law", "Platform Governance", "Speech Regulation"],
+    constitutionalAnchors: ["First Amendment", "Election Law", "Consumer Protection"],
+    relatedInstitutions: ["government", "civil-liberties", "companies", "international"],
+    relatedEvents: ["deepfake-elections", "congress-ai-hearings", "white-house-eo"],
+    relatedDocuments: ["State deepfake election laws", "Congressional AI hearing records", "Platform synthetic-media policies"],
+    framingScores: { Innovation: 44, Safety: 78, Privacy: 48, Accountability: 84, "Free Speech": 90, Copyright: 18, "National Security": 72 },
+    conflict: "The core conflict is between election integrity rules and avoiding overbroad restrictions on political speech."
+  },
+  {
+    id: "surveillance",
+    title: "AI Surveillance and Privacy",
+    category: "Civil Liberties",
+    plainEnglishSummary: "How should AI-driven identification, tracking, and prediction be limited in public and private systems?",
+    whyItMatters: "AI surveillance can change the scale of government and corporate monitoring, raising constitutional and democratic accountability concerns.",
+    legalThemes: ["Privacy Law", "Search and Seizure", "Civil Rights"],
+    constitutionalAnchors: ["Fourth Amendment", "Due Process", "Privacy Law"],
+    relatedInstitutions: ["civil-liberties", "government", "courts", "international"],
+    relatedEvents: ["facial-recognition", "eu-ai-act", "white-house-eo"],
+    relatedDocuments: ["Facial recognition policy debates", "EU AI Act high-risk provisions", "Agency AI procurement guidance"],
+    framingScores: { Innovation: 36, Safety: 74, Privacy: 98, Accountability: 86, "Free Speech": 56, Copyright: 10, "National Security": 84 },
+    conflict: "The core conflict is between security and administrative efficiency on one side and privacy/civil-liberties protections on the other."
+  },
+  {
+    id: "bias",
+    title: "Algorithmic Bias and Discrimination",
+    category: "Civil Rights",
+    plainEnglishSummary: "How should law address AI systems that produce unequal outcomes across race, gender, disability, or class?",
+    whyItMatters: "Automated decisions increasingly affect housing, credit, hiring, policing, education, and public benefits.",
+    legalThemes: ["Civil Rights", "Auditing", "Administrative Law"],
+    constitutionalAnchors: ["Equal Protection", "Due Process", "Consumer Protection"],
+    relatedInstitutions: ["civil-liberties", "international", "government", "researchers"],
+    relatedEvents: ["hiring-bias", "white-house-eo", "eu-ai-act"],
+    relatedDocuments: ["Algorithmic hiring rules", "NIST AI Risk Management Framework", "Civil rights agency guidance"],
+    framingScores: { Innovation: 45, Safety: 76, Privacy: 66, Accountability: 96, "Free Speech": 24, Copyright: 8, "National Security": 30 },
+    conflict: "The core conflict is between automation efficiency and enforceable rights against discriminatory outcomes."
+  },
+  {
+    id: "safety",
+    title: "AI Safety and National Security",
+    category: "Security",
+    plainEnglishSummary: "How should governments and companies manage frontier AI risks, cyber capabilities, and national-security concerns?",
+    whyItMatters: "Safety rules may define how frontier models are evaluated, disclosed, restricted, and deployed across critical sectors.",
+    legalThemes: ["National Security", "Administrative Law", "Critical Infrastructure"],
+    constitutionalAnchors: ["Administrative Law", "National Security", "Consumer Protection"],
+    relatedInstitutions: ["government", "companies", "researchers", "international"],
+    relatedEvents: ["white-house-eo", "congress-ai-hearings", "eu-ai-act"],
+    relatedDocuments: ["White House AI Executive Order", "NIST AI RMF", "Frontier model safety commitments"],
+    framingScores: { Innovation: 70, Safety: 98, Privacy: 44, Accountability: 82, "Free Speech": 28, Copyright: 12, "National Security": 96 },
+    conflict: "The core conflict is between rapid frontier-model development and state capacity to manage systemic risk."
+  },
+  {
+    id: "misinformation",
+    title: "Platform Liability and Misinformation",
+    category: "Platforms",
+    plainEnglishSummary: "How should responsibility be allocated when AI systems generate, recommend, or amplify harmful content?",
+    whyItMatters: "AI-generated media complicates platform governance, speech doctrine, content moderation, and liability rules.",
+    legalThemes: ["Platform Liability", "Content Moderation", "Consumer Protection"],
+    constitutionalAnchors: ["First Amendment", "Consumer Protection", "Administrative Law"],
+    relatedInstitutions: ["companies", "courts", "government", "civil-liberties"],
+    relatedEvents: ["deepfake-elections", "congress-ai-hearings"],
+    relatedDocuments: ["Platform policy updates", "AI-generated content disclosures", "Consumer protection enforcement theories"],
+    framingScores: { Innovation: 62, Safety: 70, Privacy: 40, Accountability: 88, "Free Speech": 92, Copyright: 26, "National Security": 58 },
+    conflict: "The core conflict is between platform speech flexibility and accountability for scaled AI-generated harm."
+  },
+  {
+    id: "employment",
+    title: "Employment and Automated Decision Systems",
+    category: "Labor",
+    plainEnglishSummary: "How should employers use AI in hiring, monitoring, promotion, and workplace evaluation?",
+    whyItMatters: "Employment AI affects economic opportunity, discrimination enforcement, worker privacy, and human review rights.",
+    legalThemes: ["Employment Law", "Civil Rights", "Audits"],
+    constitutionalAnchors: ["Equal Protection", "Due Process", "Privacy Law"],
+    relatedInstitutions: ["government", "civil-liberties", "international", "companies"],
+    relatedEvents: ["hiring-bias", "white-house-eo"],
+    relatedDocuments: ["NYC automated employment decision tool law", "EEOC technical assistance", "Workplace surveillance reports"],
+    framingScores: { Innovation: 58, Safety: 60, Privacy: 78, Accountability: 94, "Free Speech": 14, Copyright: 6, "National Security": 18 },
+    conflict: "The core conflict is between efficiency in labor markets and rights-based protections against opaque automated decisions."
+  }
+];
+
+const governanceEvents = [
+  { id: "white-house-eo", year: "2023", title: "White House AI Executive Order", detail: "Federal AI governance framed around safety, security, civil rights, procurement, and agency capacity." },
+  { id: "eu-ai-act", year: "2024", title: "EU AI Act", detail: "Risk-classification model for AI obligations, transparency, and high-risk system compliance." },
+  { id: "nytimes-openai", year: "2023", title: "New York Times v. OpenAI", detail: "Copyright litigation over training data and generated outputs." },
+  { id: "getty-stability", year: "2023", title: "Getty Images v. Stability AI", detail: "Image-generation dispute about copyrighted visual works and model training." },
+  { id: "deepfake-elections", year: "2024", title: "AI Deepfakes in Election Policy Debates", detail: "Federal and state attention to synthetic political media, impersonation, and disclosure rules." },
+  { id: "hiring-bias", year: "2023", title: "Algorithmic Bias in Hiring Tools", detail: "Employment AI policy debates focus on audits, disparate impact, and worker transparency." },
+  { id: "facial-recognition", year: "2020s", title: "Facial Recognition and Surveillance Debates", detail: "Cities, agencies, and courts confront AI-enabled identification and public-sector surveillance." },
+  { id: "copyright-office", year: "2023", title: "Copyright Office AI Guidance", detail: "Agency guidance addresses human authorship and AI-generated material." },
+  { id: "congress-ai-hearings", year: "2023-2024", title: "Congressional AI Hearings", detail: "Lawmakers evaluate model safety, platform power, election risk, and regulatory capacity." }
+];
+
 function App() {
   const [view, setView] = useState("home");
   const [selectedCaseId, setSelectedCaseId] = useState("brown");
@@ -451,9 +641,8 @@ function App() {
   return (
     <main className="shell portfolioShell">
       <SiteNav view={view} setView={setView} />
-      {view === "home" ? (
-        <PortfolioHome setView={setView} />
-      ) : (
+      {view === "home" && <PortfolioHome setView={setView} />}
+      {view === "precedent" && (
         <CourtMapPage
           selectedCase={selectedCase}
           setSelectedCaseId={setSelectedCaseId}
@@ -465,6 +654,7 @@ function App() {
           setSortBy={setSortBy}
         />
       )}
+      {view === "frameshift" && <FrameShiftPage />}
       <SiteFooter />
     </main>
   );
@@ -488,6 +678,7 @@ function SiteNav({ view, setView }) {
       <div className="navLinks">
         <button className={view === "home" ? "active" : ""} onClick={() => setView("home")}>Profile</button>
         <button className={view === "precedent" ? "active" : ""} onClick={() => setView("precedent")}>CourtMap</button>
+        <button className={view === "frameshift" ? "active" : ""} onClick={() => setView("frameshift")}>FrameShift</button>
         <a href="mailto:kamrane02@gmail.com">Contact</a>
       </div>
     </nav>
@@ -590,7 +781,7 @@ function PortfolioHome({ setView }) {
         <div className="sectionHeader">
           <div>
             <p className="label">Featured Product</p>
-            <h2>CourtMap</h2>
+            <h2>CourtMap + FrameShift</h2>
           </div>
           <button className="primaryAction small" onClick={() => setView("precedent")}>Launch</button>
         </div>
@@ -599,6 +790,11 @@ function PortfolioHome({ setView }) {
             <span>Flagship product</span>
             <strong>Interactive graph of Supreme Court precedent</strong>
             <small>Explore landmark cases, citation relationships, doctrine evolution, constitutional amendments, and overruling chains.</small>
+          </button>
+          <button className="projectCard" onClick={() => setView("frameshift")}>
+            <span>AI governance project</span>
+            <strong>Institutional framing analysis for AI policy</strong>
+            <small>Compare how governments, courts, companies, civil-liberties groups, and international regulators define AI risks and responsibilities.</small>
           </button>
           <div className="productStats">
             <Metric label="Corpus" value="SCOTUS cases" />
@@ -633,6 +829,310 @@ function PortfolioHome({ setView }) {
         </article>
       </section>
     </>
+  );
+}
+
+function FrameShiftPage() {
+  const [issueQuery, setIssueQuery] = useState("");
+  const [category, setCategory] = useState("all");
+  const [selectedIssueId, setSelectedIssueId] = useState("copyright");
+  const [leftInstitutionId, setLeftInstitutionId] = useState("government");
+  const [rightInstitutionId, setRightInstitutionId] = useState("civil-liberties");
+  const categories = uniqueOptions(frameShiftIssues.map((item) => item.category));
+  const filteredIssues = useMemo(() => filterFrameShiftIssues(issueQuery, category), [issueQuery, category]);
+  const selectedIssue = frameShiftIssues.find((item) => item.id === selectedIssueId) || frameShiftIssues[0];
+  const leftInstitution = frameShiftInstitutions.find((item) => item.id === leftInstitutionId) || frameShiftInstitutions[0];
+  const rightInstitution = frameShiftInstitutions.find((item) => item.id === rightInstitutionId) || frameShiftInstitutions[1];
+
+  return (
+    <>
+      <FrameShiftHero />
+      <section className="insightStrip frameStats">
+        <Metric label="AI policy issues" value={frameShiftIssues.length} />
+        <Metric label="Institutions" value={frameShiftInstitutions.length} />
+        <Metric label="Framing dimensions" value={framingDimensions.length} />
+        <Metric label="Curated events" value={governanceEvents.length} />
+      </section>
+
+      <section className="frameWorkspace">
+        <IssueExplorer
+          issues={filteredIssues}
+          selectedIssue={selectedIssue}
+          issueQuery={issueQuery}
+          setIssueQuery={setIssueQuery}
+          category={category}
+          setCategory={setCategory}
+          categories={categories}
+          setSelectedIssueId={setSelectedIssueId}
+        />
+        <IssueDetailPanel selectedIssue={selectedIssue} />
+      </section>
+
+      <InstitutionComparison
+        selectedIssue={selectedIssue}
+        leftInstitution={leftInstitution}
+        rightInstitution={rightInstitution}
+        setLeftInstitutionId={setLeftInstitutionId}
+        setRightInstitutionId={setRightInstitutionId}
+      />
+
+      <FramingMatrix selectedIssue={selectedIssue} />
+
+      <section className="frameTwoColumn">
+        <GovernanceTimeline selectedIssue={selectedIssue} />
+        <ConstitutionalIssueMap selectedIssue={selectedIssue} setLeftInstitutionId={setLeftInstitutionId} />
+      </section>
+
+      <RelatedDocuments selectedIssue={selectedIssue} />
+      <FrameShiftExplanation />
+    </>
+  );
+}
+
+function FrameShiftHero() {
+  return (
+    <header className="topbar productHero frameHero">
+      <div>
+        <p className="eyebrow">FrameShift</p>
+        <h1>AI governance through the lens of institutional framing.</h1>
+        <p className="productLead">
+          FrameShift explores how courts, governments, companies, and civil liberties groups define
+          the risks and responsibilities of artificial intelligence.
+        </p>
+      </div>
+      <div className="status frameStatus">
+        <span className="statusFlag" aria-hidden="true">
+          <i className="flagCanton" />
+          <i className="flagStripe stripeOne" />
+          <i className="flagStripe stripeTwo" />
+          <i className="flagStripe stripeThree" />
+        </span>
+        <span>Curated MVP</span>
+        <strong>AI policy framing lab</strong>
+      </div>
+    </header>
+  );
+}
+
+function IssueExplorer({ issues, selectedIssue, issueQuery, setIssueQuery, category, setCategory, categories, setSelectedIssueId }) {
+  return (
+    <section className="panel framePanel issueExplorer">
+      <div className="catalogHeader frameCatalogHeader">
+        <div>
+          <p className="label">Issue Explorer</p>
+          <h2>Search AI policy debates by risk, right, institution, or legal theme</h2>
+        </div>
+        <label className="searchBox">
+          <span>Search</span>
+          <input value={issueQuery} onChange={(event) => setIssueQuery(event.target.value)} placeholder="Try copyright, elections, surveillance..." />
+        </label>
+      </div>
+      <div className="catalogControls frameControls">
+        <label>
+          <span>Category</span>
+          <select value={category} onChange={(event) => setCategory(event.target.value)}>
+            <option value="all">All categories</option>
+            {categories.map((item) => <option key={item} value={item}>{item}</option>)}
+          </select>
+        </label>
+      </div>
+      <div className="frameIssueGrid">
+        {issues.map((issue) => <IssueCard key={issue.id} issue={issue} active={issue.id === selectedIssue.id} onClick={() => setSelectedIssueId(issue.id)} />)}
+      </div>
+    </section>
+  );
+}
+
+function IssueCard({ issue, active, onClick }) {
+  return (
+    <button className={`frameIssueCard ${active ? "active" : ""}`} onClick={onClick}>
+      <span>{issue.category}</span>
+      <strong>{issue.title}</strong>
+      <small>{issue.legalThemes.slice(0, 2).join(" · ")}</small>
+    </button>
+  );
+}
+
+function IssueDetailPanel({ selectedIssue }) {
+  return (
+    <section className="panel framePanel issueDetailPanel">
+      <p className="label">Selected Issue</p>
+      <h2>{selectedIssue.title}</h2>
+      <p>{selectedIssue.plainEnglishSummary}</p>
+      <div className="frameDetailBlock">
+        <span>Why it matters</span>
+        <p>{selectedIssue.whyItMatters}</p>
+      </div>
+      <div className="frameDetailBlock conflict">
+        <span>Institutional conflict</span>
+        <p>{selectedIssue.conflict}</p>
+      </div>
+      <div className="metadataPills framePills">
+        {selectedIssue.constitutionalAnchors.map((item) => <span key={item}>{item}</span>)}
+      </div>
+    </section>
+  );
+}
+
+function InstitutionComparison({ selectedIssue, leftInstitution, rightInstitution, setLeftInstitutionId, setRightInstitutionId }) {
+  const relevantInstitutions = frameShiftInstitutions.filter((item) => selectedIssue.relatedInstitutions.includes(item.id));
+  return (
+    <section className="panel framePanel comparisonFramePanel">
+      <div className="sectionHeader">
+        <div>
+          <p className="label">Institution Comparison</p>
+          <h2>Compare how institutions frame {selectedIssue.title.toLowerCase()}</h2>
+        </div>
+      </div>
+      <div className="institutionSelectRow">
+        <label>
+          <span>Left institution</span>
+          <select value={leftInstitution.id} onChange={(event) => setLeftInstitutionId(event.target.value)}>
+            {frameShiftInstitutions.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
+          </select>
+        </label>
+        <label>
+          <span>Right institution</span>
+          <select value={rightInstitution.id} onChange={(event) => setRightInstitutionId(event.target.value)}>
+            {frameShiftInstitutions.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
+          </select>
+        </label>
+      </div>
+      <div className="institutionCards">
+        <InstitutionFrameCard institution={leftInstitution} selectedIssue={selectedIssue} />
+        <InstitutionFrameCard institution={rightInstitution} selectedIssue={selectedIssue} />
+      </div>
+      <div className="frameQuickPick">
+        <span>Most relevant to this issue</span>
+        {relevantInstitutions.map((item) => <button key={item.id} onClick={() => setLeftInstitutionId(item.id)}>{item.name}</button>)}
+      </div>
+    </section>
+  );
+}
+
+function InstitutionFrameCard({ institution, selectedIssue }) {
+  const isRelevant = selectedIssue.relatedInstitutions.includes(institution.id);
+  return (
+    <article className={`institutionFrameCard ${isRelevant ? "relevant" : ""}`}>
+      <span>{institution.institutionType}</span>
+      <h3>{institution.name}</h3>
+      <p>{institution.primaryFrame}</p>
+      <dl>
+        <div><dt>Core argument</dt><dd>{institution.coreArgument}</dd></div>
+        <div><dt>Policy preference</dt><dd>{institution.policyPreference}</dd></div>
+        <div><dt>Sample language</dt><dd>{institution.sampleLanguage}</dd></div>
+      </dl>
+    </article>
+  );
+}
+
+function FramingMatrix({ selectedIssue }) {
+  return (
+    <section className="panel framePanel framingMatrix">
+      <div>
+        <p className="label">Framing Matrix</p>
+        <h2>Which values dominate this issue?</h2>
+      </div>
+      <div className="scoreGrid">
+        {framingDimensions.map((dimension) => (
+          <div key={dimension} className="scoreRow">
+            <span>{dimension}</span>
+            <div><i style={{ width: `${selectedIssue.framingScores[dimension]}%` }} /></div>
+            <strong>{selectedIssue.framingScores[dimension]}</strong>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function GovernanceTimeline({ selectedIssue }) {
+  const events = governanceEvents.filter((event) => selectedIssue.relatedEvents.includes(event.id));
+  return (
+    <section className="panel framePanel">
+      <p className="label">Governance Timeline</p>
+      <h2>Major related events</h2>
+      <div className="timelineList">
+        {events.map((event) => (
+          <article key={event.id} className="timelineItem frameTimelineItem">
+            <strong>{event.year}</strong>
+            <div>
+              <h3>{event.title}</h3>
+              <p>{event.detail}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function ConstitutionalIssueMap({ selectedIssue, setLeftInstitutionId }) {
+  const institutions = frameShiftInstitutions.filter((item) => selectedIssue.relatedInstitutions.includes(item.id));
+  return (
+    <section className="panel framePanel issueMapPanel">
+      <p className="label">Legal / Constitutional Issue Map</p>
+      <h2>{selectedIssue.category}</h2>
+      <div className="issueMap">
+        <button>{selectedIssue.title}</button>
+        {selectedIssue.legalThemes.map((theme) => <button key={theme}>{theme}</button>)}
+        {selectedIssue.constitutionalAnchors.map((anchor) => <button key={anchor}>{anchor}</button>)}
+        {institutions.map((institution) => <button key={institution.id} onClick={() => setLeftInstitutionId(institution.id)}>{institution.name}</button>)}
+      </div>
+    </section>
+  );
+}
+
+function RelatedDocuments({ selectedIssue }) {
+  return (
+    <section className="panel framePanel relatedDocs">
+      <p className="label">Related Documents</p>
+      <h2>Policies, cases, and source material to add next</h2>
+      <div className="docGrid">
+        {selectedIssue.relatedDocuments.map((document) => (
+          <article key={document}>
+            <strong>{document}</strong>
+            <span>Curated source placeholder</span>
+          </article>
+        ))}
+      </div>
+      <p className="sourceNote">FrameShift is a structured MVP. It does not provide legal advice or predict legal outcomes.</p>
+    </section>
+  );
+}
+
+function FrameShiftExplanation() {
+  return (
+    <section className="projectExplanation frameExplanation">
+      <article>
+        <p className="label">Why This Project</p>
+        <h2>AI policy is not one debate.</h2>
+        <p>
+          FrameShift was built to explore how AI governance debates are shaped by institutional perspective.
+          Rather than treating AI policy as a single debate, the project compares how courts, governments,
+          companies, civil liberties groups, and international regulators define the risks, rights, and
+          responsibilities of artificial intelligence.
+        </p>
+      </article>
+      <article>
+        <p className="label">Law + CS Connection</p>
+        <h2>Computational policy analysis.</h2>
+        <p>
+          This project reflects my interest in applying computer science to legal and policy systems. It
+          combines structured data modeling, interface design, comparison logic, and policy analysis to make
+          complex AI governance debates easier to explore.
+        </p>
+      </article>
+      <article>
+        <p className="label">Technical Stack</p>
+        <h2>Frontend-first MVP.</h2>
+        <p>
+          React, local structured data, filtering/search logic, comparison interfaces, and lightweight data
+          visualization components. Roadmap: policy ingestion, NLP theme extraction, embeddings, citation
+          relationships, optional backend/database, and live AI governance updates.
+        </p>
+      </article>
+    </section>
   );
 }
 
@@ -1423,6 +1923,25 @@ function filterCases(cases, query, filters) {
     const matchesAmendment = filters.amendment === "all" || item.amendment === filters.amendment;
     const matchesStatus = filters.status === "all" || item.status === filters.status;
     return matchesQuery && matchesArea && matchesAmendment && matchesStatus;
+  });
+}
+
+function filterFrameShiftIssues(query, category) {
+  const needle = query.trim().toLowerCase();
+  return frameShiftIssues.filter((issue) => {
+    const haystack = [
+      issue.title,
+      issue.category,
+      issue.plainEnglishSummary,
+      issue.whyItMatters,
+      issue.conflict,
+      ...issue.legalThemes,
+      ...issue.constitutionalAnchors,
+      ...issue.relatedDocuments
+    ].join(" ").toLowerCase();
+    const matchesQuery = !needle || haystack.includes(needle);
+    const matchesCategory = category === "all" || issue.category === category;
+    return matchesQuery && matchesCategory;
   });
 }
 
