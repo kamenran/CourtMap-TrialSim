@@ -866,6 +866,256 @@ button {
   margin-top: 20px;
 }
 
+.trialHero {
+  border-color: rgba(201, 54, 54, 0.16);
+}
+
+.trialHero h1 {
+  max-width: 860px;
+}
+
+.trialStatus strong {
+  font-size: 1.08rem;
+}
+
+.trialStats {
+  margin-bottom: 20px;
+}
+
+.trialWorkspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+  gap: 20px;
+  align-items: stretch;
+  margin-bottom: 20px;
+}
+
+.trialPanel {
+  border-color: rgba(201, 54, 54, 0.15);
+  background:
+    linear-gradient(135deg, rgba(201, 54, 54, 0.04), transparent 34%),
+    var(--paper);
+}
+
+.trialControls > div:first-child p {
+  margin: 8px 0 0;
+  color: #4f5a68;
+  line-height: 1.55;
+}
+
+.trialField,
+.trialSlider {
+  display: grid;
+  gap: 7px;
+  margin-top: 16px;
+}
+
+.trialField span,
+.trialSlider span,
+.strategyPicker > span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.trialField select {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.76);
+  color: var(--ink);
+  font: inherit;
+}
+
+.trialGridInputs,
+.strategyGrid,
+.argumentGrid,
+.comparisonCards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.strategyGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.trialSlider {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.trialSlider strong {
+  color: var(--ink);
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.trialSlider input {
+  width: 100%;
+  accent-color: var(--red);
+}
+
+.trialSlider small {
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.strategyPicker {
+  display: grid;
+  gap: 8px;
+}
+
+.strategyPicker div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.strategyPicker button {
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--navy);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.strategyPicker button.active {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #fff;
+}
+
+.trialToggle {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 18px;
+  padding: 13px 14px;
+  border: 1px solid rgba(201, 54, 54, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 241, 239, 0.5);
+  color: #3d4654;
+  font-weight: 850;
+}
+
+.trialToggle input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--red);
+}
+
+.trialOutcome > p:not(.label),
+.trialComparison > p {
+  color: #3d4654;
+  line-height: 1.58;
+}
+
+.trialMeterGrid {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.trialMeter {
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.66);
+}
+
+.trialMeter div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.trialMeter span {
+  color: #3d4654;
+  font-weight: 850;
+}
+
+.trialMeter strong {
+  color: var(--ink);
+}
+
+.trialMeter i {
+  display: block;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #eef1f4;
+}
+
+.trialMeter b {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--navy), var(--red));
+}
+
+.trialMeter b.danger {
+  background: linear-gradient(90deg, #d6b06c, var(--red));
+}
+
+.trialDisclaimer {
+  margin-top: 16px;
+  padding: 12px;
+  border: 1px solid rgba(59, 95, 130, 0.18);
+  border-radius: 8px;
+  background: rgba(237, 243, 248, 0.72);
+  color: var(--navy);
+  font-size: 0.86rem;
+  font-weight: 850;
+  line-height: 1.45;
+}
+
+.argumentGrid article {
+  min-height: 180px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.66);
+}
+
+.argumentGrid span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.argumentGrid p {
+  color: #3d4654;
+  line-height: 1.55;
+}
+
+.argumentGrid strong {
+  display: block;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.trialComparison {
+  margin-bottom: 20px;
+}
+
+.trialExplanation {
+  margin-top: 20px;
+}
+
 .blueBar {
   top: 76px;
   background: var(--navy);
@@ -2880,6 +3130,7 @@ h3 {
   }
 
   .frameWorkspace,
+  .trialWorkspace,
   .institutionCards,
   .frameTwoColumn,
   .docGrid {
@@ -2913,7 +3164,11 @@ h3 {
   }
 
   .frameIssueGrid,
-  .institutionSelectRow {
+  .institutionSelectRow,
+  .trialGridInputs,
+  .strategyGrid,
+  .argumentGrid,
+  .comparisonCards {
     grid-template-columns: 1fr;
   }
 
