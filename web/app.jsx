@@ -794,7 +794,7 @@ function PortfolioHome({ setView }) {
           </p>
           <div className="credentialStrip">
             <span>Towson University</span>
-            <span>Computer Science</span>
+            <span>Legal Technology</span>
             <span>Law School Track</span>
           </div>
           <div className="heroActions">
