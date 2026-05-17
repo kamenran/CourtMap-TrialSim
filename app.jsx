@@ -793,8 +793,8 @@ function PortfolioHome({ setView }) {
             Computer Science student at Towson University focused on the intersection of technology and law.
           </p>
           <div className="credentialStrip">
-            <span>Towson University CS</span>
-            <span>AI Governance</span>
+            <span>Towson University</span>
+            <span>Computer Science</span>
             <span>Law School Track</span>
           </div>
           <div className="heroActions">
@@ -2456,9 +2456,9 @@ function MascotCard() {
       <p className="label">Briefly</p>
       <h2>Legal systems, made readable.</h2>
       <div className="mascotTools">
-        <span>Law + CS</span>
-        <span>AI governance</span>
-        <span>Civic technology</span>
+        <span>Plain-English explanations</span>
+        <span>Precedent maps</span>
+        <span>Scenario modeling</span>
       </div>
       <p>
         My work explores how software can make legal reasoning more accessible, interactive, and understandable.
