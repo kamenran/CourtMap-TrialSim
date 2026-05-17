@@ -871,6 +871,14 @@ function PortfolioHome({ setView }) {
             Explore how landmark cases connect through citations, overrulings,
             constitutional anchors, and doctrine shifts.
           </p>
+          <div className="builtForBlock">
+            <span>Built for</span>
+            <ul>
+              <li>Students and researchers</li>
+              <li>Following doctrine changes</li>
+              <li>Tracing overruling chains</li>
+            </ul>
+          </div>
         </article>
         <article className="profilePanel compactPanel">
           <p className="label">Core Product</p>
