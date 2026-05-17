@@ -919,7 +919,7 @@ function PortfolioHome({ setView }) {
           </div>
           <div className="productStats">
             <Metric label="Corpus" value="Educational legal scenarios" />
-            <Metric label="Stack" value="React · TypeScript · simulation logic" />
+            <Metric label="Stack" value="React · TypeScript · Simulation logic" />
             <Metric label="Focus" value="Evidence + constitutional reasoning" />
           </div>
         </div>
