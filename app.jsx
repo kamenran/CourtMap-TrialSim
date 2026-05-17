@@ -837,14 +837,14 @@ function PortfolioHome({ setView }) {
             <p>U.S. House of Representatives · Congressman Johnny Olszewski</p>
           </article>
           <article>
-            <span>Experience</span>
-            <strong>AI Infrastructure Intern</strong>
-            <p>SolutionsInfra · IT at Fort LP Hedge Fund</p>
-          </article>
-          <article>
             <span>Research</span>
             <strong>Undergraduate AI Researcher</strong>
             <p>Towson University</p>
+          </article>
+          <article>
+            <span>Experience</span>
+            <strong>AI Infrastructure Intern</strong>
+            <p>SolutionsInfra · IT at Fort LP Hedge Fund</p>
           </article>
         </div>
       </section>
