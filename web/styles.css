@@ -2373,7 +2373,7 @@ h3 {
 }
 
 .concurrenceSegment {
-  background: var(--blue);
+  background: #6f7d8e;
 }
 
 .dissentSegment {
@@ -2452,7 +2452,7 @@ h3 {
 }
 
 .justiceBloc.concurrence strong {
-  color: var(--blue);
+  color: #3b5f82;
 }
 
 .justiceBloc.dissent {
