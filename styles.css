@@ -1637,20 +1637,7 @@ button {
 }
 
 .productIdentity {
-  align-items: start;
   margin-bottom: 20px;
-}
-
-.productThesisPanel {
-  min-height: auto;
-}
-
-.productThesisPanel h2 {
-  max-width: 680px;
-}
-
-.productThesisPanel p:not(.label) {
-  max-width: 760px;
 }
 
 .identityLaunch {
