@@ -2617,6 +2617,7 @@ h3 {
   flex: 0 0 auto;
   min-width: 84px;
   padding: 7px 10px;
+  border: 1px solid transparent;
   border-radius: 999px;
   color: #fff;
   font-size: 0.74rem;
@@ -2630,7 +2631,9 @@ h3 {
 }
 
 .pathConnector.downstream {
-  background: var(--blue);
+  border-color: rgba(59, 95, 130, 0.22);
+  background: var(--navy-soft);
+  color: var(--navy);
 }
 
 .pathConnector.overruling {
