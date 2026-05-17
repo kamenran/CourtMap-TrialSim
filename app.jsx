@@ -911,11 +911,6 @@ function PortfolioHome({ setView }) {
             <span>Simulation project</span>
             <strong>Educational courtroom scenario simulator</strong>
             <small>Adjust evidence, witnesses, constitutional issues, jurisdiction, and strategy to explore how legal variables shift case pressure.</small>
-            <span className="projectMeta">
-              <span><b>Educational legal scenarios</b><em>Corpus</em></span>
-              <span><b>React · TypeScript · simulation logic</b><em>Stack</em></span>
-              <span><b>Evidence + constitutional reasoning</b><em>Focus</em></span>
-            </span>
           </button>
           <div className="productStats">
             <Metric label="Corpus" value="SCOTUS cases" />
