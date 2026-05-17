@@ -1637,13 +1637,12 @@ button {
 }
 
 .productIdentity {
-  align-items: stretch;
+  align-items: start;
   margin-bottom: 20px;
 }
 
 .productThesisPanel {
-  display: flex;
-  flex-direction: column;
+  min-height: auto;
 }
 
 .productThesisPanel h2 {
@@ -1655,9 +1654,29 @@ button {
 }
 
 .builtForBlock {
-  margin-top: auto;
+  margin-top: 22px;
   padding-top: 18px;
   border-top: 1px solid var(--line);
+}
+
+.productIdentity .compactPanel {
+  padding-bottom: 18px;
+}
+
+.productIdentity .compactPanel .cleanList {
+  gap: 0;
+  margin-top: 12px;
+}
+
+.productIdentity .compactPanel .cleanList li {
+  padding-bottom: 8px;
+  font-size: 0.9rem;
+  line-height: 1.25;
+}
+
+.productIdentity .identityLaunch {
+  min-height: 34px;
+  margin-top: 12px;
 }
 
 .builtForBlock span {
