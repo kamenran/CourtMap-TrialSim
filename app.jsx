@@ -2467,11 +2467,6 @@ function MascotCard() {
       <Mascot />
       <p className="label">Briefly</p>
       <h2>Legal systems, made readable.</h2>
-      <div className="mascotTools">
-        <span>Plain-English explanations</span>
-        <span>Precedent maps</span>
-        <span>Scenario modeling</span>
-      </div>
       <p>
         My work explores how software can make legal reasoning more accessible, interactive, and understandable.
       </p>
