@@ -397,6 +397,10 @@ button {
   margin: 10px auto 34px;
 }
 
+.mascotCard > .mascot {
+  margin-bottom: 42px;
+}
+
 .compactMascot {
   width: 76px;
   height: 84px;
