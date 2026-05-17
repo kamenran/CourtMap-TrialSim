@@ -883,11 +883,11 @@ function PortfolioHome({ setView }) {
         <article className="profilePanel compactPanel">
           <p className="label">Core Product</p>
           <ul className="cleanList">
-            <li>Supreme Court case search</li>
-            <li>Interactive precedent graph</li>
-            <li>Overruling and citation chains</li>
-            <li>Plain-English case explanations</li>
-            <li>Doctrine evolution view</li>
+            <li>Case search</li>
+            <li>Precedent graph</li>
+            <li>Citation chains</li>
+            <li>Plain-English explainers</li>
+            <li>Doctrine view</li>
           </ul>
           <button className="quietAction compact identityLaunch" onClick={() => setView("precedent")}>Open project</button>
         </article>
