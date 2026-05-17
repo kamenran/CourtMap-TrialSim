@@ -1667,7 +1667,8 @@ button {
 .productIdentity .compactPanel .cleanList {
   display: grid;
   gap: 0;
-  margin-top: 10px;
+  margin-top: 4px;
+  margin-bottom: 14px;
 }
 
 .productIdentity .compactPanel .cleanList li {
@@ -1694,7 +1695,7 @@ button {
 .productIdentity .identityLaunch {
   min-height: 34px;
   align-self: flex-start;
-  margin-top: auto;
+  margin-top: 0;
 }
 
 .builtForBlock span {
