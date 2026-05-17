@@ -864,12 +864,12 @@ function PortfolioHome({ setView }) {
       </section>
 
       <section className="portfolioGrid productIdentity">
-        <article className="profilePanel">
-          <p className="label">Product Thesis</p>
-          <h2>CourtMap explores how Supreme Court cases shape constitutional doctrine over time.</h2>
+        <article className="profilePanel productThesisPanel">
+          <p className="label">CourtMap Overview</p>
+          <h2>Supreme Court precedent, mapped clearly.</h2>
           <p>
-            It turns landmark cases into an interactive precedent network, showing citation relationships,
-            overruling chains, constitutional anchors, and plain-English explanations.
+            Explore how landmark cases connect through citations, overrulings,
+            constitutional anchors, and doctrine shifts.
           </p>
         </article>
         <article className="profilePanel compactPanel">
