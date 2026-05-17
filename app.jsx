@@ -76,7 +76,7 @@ const precedentCases = [
     plainEnglish:
       "Miranda created the warning framework people now associate with arrests and police questioning. It connects constitutional text, police practice, and procedural safeguards.",
     whyItMatters:
-      "This is a strong CS-law case because it can be represented as a rule system: custody plus interrogation triggers warnings, and later cases modify exceptions and remedies.",
+      "Miranda is useful for understanding how constitutional doctrine becomes a practical rule: custody plus interrogation triggers warnings, and later cases refine exceptions and remedies.",
     officialLink: "https://supreme.justia.com/cases/federal/us/384/436/",
     tags: ["Criminal Procedure", "Police", "Due Process"],
     cites: ["escobedo", "gideon"],
@@ -1790,7 +1790,7 @@ function CourtMapPage({ selectedCase, setSelectedCaseId, query, setQuery, filter
           <h1>Interactive graph of Supreme Court precedent.</h1>
           <p className="productLead">
             Explore landmark cases, citation relationships, constitutional amendments, overruling chains,
-            and doctrine shifts through a focused law + CS interface.
+            and doctrine shifts through a clear, interactive precedent map.
           </p>
         </div>
         <div className="status">
@@ -2519,11 +2519,11 @@ function ProjectExplanation() {
         </p>
       </article>
       <article>
-        <p className="label">Law + CS Connection</p>
-        <h2>Computational legal analysis.</h2>
+        <p className="label">Use Case</p>
+        <h2>Designed for exploring precedent.</h2>
         <p>
-          The project connects constitutional law, NLP, graph analysis, and civic technology in a way that is
-          easy to explain in interviews and law-school applications.
+          CourtMap is built for readers who want to move from a single case to the broader doctrine around it:
+          what it cites, what later cases do with it, and where the constitutional thread leads.
         </p>
       </article>
     </section>
