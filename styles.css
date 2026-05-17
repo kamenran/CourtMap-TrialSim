@@ -220,7 +220,6 @@ button {
 .heroCopy {
   position: relative;
   padding: clamp(26px, 5vw, 52px);
-  padding-bottom: clamp(24px, 3.4vw, 38px);
   overflow: hidden;
 }
 
@@ -292,7 +291,7 @@ button {
   display: grid;
   align-content: end;
   padding: 24px;
-  min-height: 370px;
+  min-height: 430px;
 }
 
 .mascotCard h2 {
@@ -393,9 +392,9 @@ button {
 
 .mascot {
   position: relative;
-  width: 154px;
-  height: 170px;
-  margin: 0 auto 20px;
+  width: 190px;
+  height: 210px;
+  margin: 10px auto 34px;
 }
 
 .compactMascot {
