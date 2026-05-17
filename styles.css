@@ -1666,31 +1666,29 @@ button {
 
 .productIdentity .compactPanel .cleanList {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-  margin-top: 12px;
+  gap: 0;
+  margin-top: 10px;
 }
 
 .productIdentity .compactPanel .cleanList li {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 34px;
-  padding: 0 11px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.66);
-  color: var(--navy);
-  font-size: 0.82rem;
-  font-weight: 850;
+  display: block;
+  min-height: 0;
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  color: #3d4654;
+  font-size: 0.9rem;
+  font-weight: 750;
   line-height: 1.2;
-  text-align: center;
-  white-space: nowrap;
+  text-align: left;
+  white-space: normal;
 }
 
 .productIdentity .compactPanel .cleanList li:last-child {
   padding-bottom: 0;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 0;
 }
 
 .productIdentity .identityLaunch {
