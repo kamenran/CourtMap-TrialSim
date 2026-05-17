@@ -912,12 +912,12 @@ function PortfolioHome({ setView }) {
             <strong>Educational courtroom scenario simulator</strong>
             <small>Adjust evidence, witnesses, constitutional issues, jurisdiction, and strategy to explore how legal variables shift case pressure.</small>
           </button>
-          <div className="productStats">
+          <div className="productStats courtmapStats">
             <Metric label="Corpus" value="SCOTUS cases" />
             <Metric label="Stack" value="React · D3 · Neo4j-ready" />
             <Metric label="Theme" value="Law + CS" />
           </div>
-          <div className="productStats">
+          <div className="productStats trialsimStats">
             <Metric label="Corpus" value="Educational legal scenarios" />
             <Metric label="Stack" value="React · TypeScript · Simulation logic" />
             <Metric label="Focus" value="Evidence + constitutional reasoning" />
