@@ -790,11 +790,11 @@ function PortfolioHome({ setView }) {
           <p className="eyebrow">Computer Science · Law · Public Institutions</p>
           <h1>Mapping law through software.</h1>
           <p className="heroLead">
-            Computer Science student at Towson University focused on the intersection of technology and law.
+            Computer Science student focused on the intersection of technology and law.
           </p>
           <div className="credentialStrip">
             <span>Towson University</span>
-            <span>Computer Science</span>
+            <span>Legal Technology</span>
             <span>Law School Track</span>
           </div>
           <div className="heroActions">
