@@ -874,7 +874,7 @@ function PortfolioHome({ setView }) {
           <div className="builtForBlock">
             <span>Built for</span>
             <ul>
-              <li>Students and researchers</li>
+              <li>Students and curious readers</li>
               <li>Following doctrine changes</li>
               <li>Tracing overruling chains</li>
             </ul>
