@@ -866,11 +866,10 @@ function PortfolioHome({ setView }) {
       <section className="portfolioGrid productIdentity">
         <article className="profilePanel">
           <p className="label">Product Thesis</p>
-          <h2>CourtMap is GitHub graph analysis for Supreme Court doctrine.</h2>
+          <h2>CourtMap explores how Supreme Court cases shape constitutional doctrine over time.</h2>
           <p>
-            The project treats cases as connected legal objects: searchable, explainable, citeable,
-            and linked to the doctrines they shape. It is designed to show how software engineering
-            can make complex legal systems easier to explore.
+            It turns landmark cases into an interactive precedent network, showing citation relationships,
+            overruling chains, constitutional anchors, and plain-English explanations.
           </p>
         </article>
         <article className="profilePanel compactPanel">
