@@ -3569,22 +3569,6 @@ h3 {
     min-height: auto;
   }
 
-  .activeProject {
-    order: 1;
-  }
-
-  .courtmapStats {
-    order: 2;
-  }
-
-  .projectCard:not(.activeProject) {
-    order: 3;
-  }
-
-  .trialsimStats {
-    order: 4;
-  }
-
 }
 
 @media (max-width: 620px) {
