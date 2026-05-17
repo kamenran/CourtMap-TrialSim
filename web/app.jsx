@@ -834,7 +834,7 @@ function PortfolioHome({ setView }) {
           <article>
             <span>Current</span>
             <strong>Congressional Intern</strong>
-            <p>U.S. House of Representatives · Congressman Johnny Olszewski</p>
+            <p>U.S. House of Representatives<br />Congressman Johnny Olszewski</p>
           </article>
           <article>
             <span>Research</span>
