@@ -916,9 +916,6 @@ function PortfolioHome({ setView }) {
             <Metric label="Corpus" value="SCOTUS cases" />
             <Metric label="Stack" value="React · D3 · Neo4j-ready" />
             <Metric label="Theme" value="Law + CS" />
-            <Metric label="Corpus" value="Educational legal scenarios" />
-            <Metric label="Stack" value="React · TypeScript · simulation logic" />
-            <Metric label="Focus" value="Evidence + constitutional reasoning" />
           </div>
         </div>
       </section>
