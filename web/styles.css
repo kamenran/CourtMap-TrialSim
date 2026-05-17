@@ -1664,14 +1664,30 @@ button {
 }
 
 .productIdentity .compactPanel .cleanList {
-  gap: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-top: 12px;
 }
 
 .productIdentity .compactPanel .cleanList li {
-  padding-bottom: 8px;
-  font-size: 0.9rem;
-  line-height: 1.25;
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.66);
+  color: var(--navy);
+  font-size: 0.84rem;
+  font-weight: 850;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.productIdentity .compactPanel .cleanList li:last-child {
+  padding-bottom: 0;
+  border-bottom: 1px solid var(--line);
 }
 
 .productIdentity .identityLaunch {
