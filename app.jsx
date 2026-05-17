@@ -1003,6 +1003,84 @@ const constitutionalIssues = [
 
 const jurisdictions = ["Federal court", "State court", "Administrative agency", "Settlement posture"];
 
+const trialScenarioPresets = [
+  {
+    id: "fourth-suppression",
+    title: "Fourth Amendment suppression",
+    category: "Criminal procedure",
+    description: "A prosecution relies on evidence challenged as the product of an unconstitutional search.",
+    caseTypeId: "criminal-search",
+    evidenceStrength: 72,
+    witnessReliability: 64,
+    constitutionalIssue: "Fourth Amendment exclusion",
+    jurisdiction: "State court",
+    jurySkepticism: 46,
+    excludedEvidence: false,
+    plaintiffStrategy: "Narrative clarity",
+    defenseStrategy: "Constitutional challenge"
+  },
+  {
+    id: "student-speech",
+    title: "First Amendment school speech",
+    category: "Constitutional speech",
+    description: "A student challenges discipline for expressive conduct while the institution argues disruption.",
+    caseTypeId: "speech-defamation",
+    evidenceStrength: 58,
+    witnessReliability: 56,
+    constitutionalIssue: "First Amendment speech protection",
+    jurisdiction: "Federal court",
+    jurySkepticism: 42,
+    excludedEvidence: false,
+    plaintiffStrategy: "Rights-based framing",
+    defenseStrategy: "Alternative explanation"
+  },
+  {
+    id: "employment-discrimination",
+    title: "Employment discrimination",
+    category: "Civil rights",
+    description: "An applicant argues discriminatory treatment; the employer points to neutral criteria.",
+    caseTypeId: "civil-rights",
+    evidenceStrength: 63,
+    witnessReliability: 60,
+    constitutionalIssue: "Equal Protection / discrimination",
+    jurisdiction: "Federal court",
+    jurySkepticism: 50,
+    excludedEvidence: false,
+    plaintiffStrategy: "Institutional harm",
+    defenseStrategy: "Procedural defense"
+  },
+  {
+    id: "ai-hiring-bias",
+    title: "AI hiring bias challenge",
+    category: "AI governance",
+    description: "A rejected applicant challenges an automated screening tool for opacity and disparate impact.",
+    caseTypeId: "employment-ai",
+    evidenceStrength: 61,
+    witnessReliability: 54,
+    constitutionalIssue: "Due Process / explainability",
+    jurisdiction: "Administrative agency",
+    jurySkepticism: 48,
+    excludedEvidence: false,
+    plaintiffStrategy: "Technical proof",
+    defenseStrategy: "Alternative explanation"
+  },
+  {
+    id: "ai-fair-use",
+    title: "AI training fair use",
+    category: "Copyright",
+    description: "A creator challenges AI training practices while the company argues fair use and transformation.",
+    caseTypeId: "ai-contract",
+    evidenceStrength: 57,
+    witnessReliability: 58,
+    constitutionalIssue: "Copyright / fair use",
+    jurisdiction: "Federal court",
+    jurySkepticism: 52,
+    excludedEvidence: false,
+    plaintiffStrategy: "Rights-based framing",
+    defenseStrategy: "Procedural defense"
+  }
+];
+
 function TrialSimPage() {
   const [caseTypeId, setCaseTypeId] = useState("criminal-search");
   const [evidenceStrength, setEvidenceStrength] = useState(68);
@@ -1013,7 +1091,20 @@ function TrialSimPage() {
   const [excludedEvidence, setExcludedEvidence] = useState(false);
   const [plaintiffStrategy, setPlaintiffStrategy] = useState("Narrative clarity");
   const [defenseStrategy, setDefenseStrategy] = useState("Constitutional challenge");
+  const [activePresetId, setActivePresetId] = useState("custom");
   const caseType = trialCaseTypes.find((item) => item.id === caseTypeId) || trialCaseTypes[0];
+  const applyPreset = (preset) => {
+    setActivePresetId(preset.id);
+    setCaseTypeId(preset.caseTypeId);
+    setEvidenceStrength(preset.evidenceStrength);
+    setWitnessReliability(preset.witnessReliability);
+    setConstitutionalIssue(preset.constitutionalIssue);
+    setJurisdiction(preset.jurisdiction);
+    setJurySkepticism(preset.jurySkepticism);
+    setExcludedEvidence(preset.excludedEvidence);
+    setPlaintiffStrategy(preset.plaintiffStrategy);
+    setDefenseStrategy(preset.defenseStrategy);
+  };
   const scenario = {
     caseType,
     evidenceStrength,
@@ -1033,32 +1124,61 @@ function TrialSimPage() {
       <TrialSimHero />
       <section className="insightStrip trialStats">
         <Metric label="Case models" value={trialCaseTypes.length} />
+        <Metric label="Scenario presets" value={trialScenarioPresets.length} />
         <Metric label="Live variables" value="8" />
         <Metric label="Output scores" value="4" />
-        <Metric label="Purpose" value="Educational" />
       </section>
+
+      <TrialPresetLibrary activePresetId={activePresetId} applyPreset={applyPreset} />
 
       <section className="trialWorkspace">
         <TrialControls
           caseType={caseType}
           caseTypeId={caseTypeId}
-          setCaseTypeId={setCaseTypeId}
+          setCaseTypeId={(value) => {
+            setActivePresetId("custom");
+            setCaseTypeId(value);
+          }}
           evidenceStrength={evidenceStrength}
-          setEvidenceStrength={setEvidenceStrength}
+          setEvidenceStrength={(value) => {
+            setActivePresetId("custom");
+            setEvidenceStrength(value);
+          }}
           witnessReliability={witnessReliability}
-          setWitnessReliability={setWitnessReliability}
+          setWitnessReliability={(value) => {
+            setActivePresetId("custom");
+            setWitnessReliability(value);
+          }}
           constitutionalIssue={constitutionalIssue}
-          setConstitutionalIssue={setConstitutionalIssue}
+          setConstitutionalIssue={(value) => {
+            setActivePresetId("custom");
+            setConstitutionalIssue(value);
+          }}
           jurisdiction={jurisdiction}
-          setJurisdiction={setJurisdiction}
+          setJurisdiction={(value) => {
+            setActivePresetId("custom");
+            setJurisdiction(value);
+          }}
           jurySkepticism={jurySkepticism}
-          setJurySkepticism={setJurySkepticism}
+          setJurySkepticism={(value) => {
+            setActivePresetId("custom");
+            setJurySkepticism(value);
+          }}
           excludedEvidence={excludedEvidence}
-          setExcludedEvidence={setExcludedEvidence}
+          setExcludedEvidence={(value) => {
+            setActivePresetId("custom");
+            setExcludedEvidence(value);
+          }}
           plaintiffStrategy={plaintiffStrategy}
-          setPlaintiffStrategy={setPlaintiffStrategy}
+          setPlaintiffStrategy={(value) => {
+            setActivePresetId("custom");
+            setPlaintiffStrategy(value);
+          }}
           defenseStrategy={defenseStrategy}
-          setDefenseStrategy={setDefenseStrategy}
+          setDefenseStrategy={(value) => {
+            setActivePresetId("custom");
+            setDefenseStrategy(value);
+          }}
         />
         <TrialOutcomePanel caseType={caseType} result={result} />
       </section>
@@ -1068,6 +1188,33 @@ function TrialSimPage() {
       <TrialComparisonPanel current={result} comparison={comparisonResult} excludedEvidence={excludedEvidence} />
       <TrialExplanation />
     </>
+  );
+}
+
+function TrialPresetLibrary({ activePresetId, applyPreset }) {
+  return (
+    <section className="panel trialPanel trialPresetLibrary">
+      <div className="sectionHeader">
+        <div>
+          <p className="label">Scenario Library</p>
+          <h2>Start with a realistic legal setup.</h2>
+          <p>Presets fill the simulator with coherent facts, forum, doctrine, and strategy choices.</p>
+        </div>
+      </div>
+      <div className="presetGrid">
+        {trialScenarioPresets.map((preset) => (
+          <button
+            key={preset.id}
+            className={activePresetId === preset.id ? "presetCard active" : "presetCard"}
+            onClick={() => applyPreset(preset)}
+          >
+            <span>{preset.category}</span>
+            <strong>{preset.title}</strong>
+            <p>{preset.description}</p>
+          </button>
+        ))}
+      </div>
+    </section>
   );
 }
 

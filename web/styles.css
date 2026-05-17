@@ -953,6 +953,66 @@ button {
   margin-bottom: 20px;
 }
 
+.trialPresetLibrary {
+  margin-bottom: 20px;
+}
+
+.trialPresetLibrary .sectionHeader p:not(.label) {
+  max-width: 620px;
+  margin: 6px 0 0;
+  color: #4f5a68;
+  line-height: 1.55;
+}
+
+.presetGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.presetCard {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-height: 170px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 253, 251, 0.78);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.presetCard span {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.presetCard strong {
+  font-size: 0.98rem;
+  line-height: 1.15;
+}
+
+.presetCard p {
+  margin: 0;
+  color: #4f5a68;
+  font-size: 0.84rem;
+  line-height: 1.42;
+}
+
+.presetCard.active {
+  border-color: rgba(23, 32, 51, 0.72);
+  background:
+    linear-gradient(135deg, rgba(59, 95, 130, 0.12), rgba(201, 54, 54, 0.05)),
+    var(--paper);
+  box-shadow: inset 0 0 0 1px rgba(23, 32, 51, 0.08);
+}
+
 .trialWorkspace {
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
@@ -3289,6 +3349,7 @@ h3 {
 
   .frameWorkspace,
   .trialWorkspace,
+  .presetGrid,
   .institutionCards,
   .frameTwoColumn,
   .docGrid {
