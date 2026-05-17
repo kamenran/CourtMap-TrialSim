@@ -1820,7 +1820,7 @@ button {
   cursor: pointer;
 }
 
-.projectCard span {
+.projectCard > span:first-child {
   color: var(--navy);
   font-size: 0.82rem;
   font-weight: 900;
@@ -1840,6 +1840,40 @@ button {
   color: var(--muted);
   font-size: 0.94rem;
   line-height: 1.45;
+}
+
+.projectMeta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 7px;
+  margin-top: 14px;
+}
+
+.projectMeta span {
+  display: grid;
+  gap: 2px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.projectMeta b,
+.projectMeta em {
+  display: block;
+  font-style: normal;
+}
+
+.projectMeta b {
+  color: #3d4654;
+  font-size: 0.88rem;
+  line-height: 1.25;
+}
+
+.projectMeta em {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .activeProject {
