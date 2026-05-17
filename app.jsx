@@ -888,6 +888,7 @@ function PortfolioHome({ setView }) {
             <li>Citation chains</li>
             <li>Plain-English explainers</li>
             <li>Doctrine view</li>
+            <li>Source links</li>
           </ul>
           <button className="quietAction compact identityLaunch" onClick={() => setView("precedent")}>Open project</button>
         </article>
