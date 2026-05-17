@@ -3569,6 +3569,22 @@ h3 {
     min-height: auto;
   }
 
+  .activeProject {
+    order: 1;
+  }
+
+  .courtmapStats {
+    order: 2;
+  }
+
+  .projectCard:not(.activeProject) {
+    order: 3;
+  }
+
+  .trialsimStats {
+    order: 4;
+  }
+
 }
 
 @media (max-width: 620px) {
@@ -3584,36 +3600,48 @@ h3 {
   .siteNav {
     grid-template-columns: 1fr;
     align-items: flex-start;
-    gap: 12px;
+    gap: 10px;
+    margin-bottom: 18px;
   }
 
   .navMotto {
     grid-column: 1;
     justify-self: stretch;
     max-width: none;
-    padding: 8px 0 2px;
-    text-align: left;
+    padding: 2px 0 0;
+    font-size: 1rem;
+    text-align: center;
   }
 
   .navLinks {
     grid-column: 1;
     justify-self: stretch;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 3px;
     padding: 3px;
     width: 100%;
-    overflow-x: auto;
+    overflow: visible;
+    border-radius: 16px;
   }
 
   .navLinks button {
-    flex: 0 0 auto;
-    padding: 0 8px;
-    font-size: 0.86rem;
+    width: 100%;
+    min-height: 36px;
+    padding: 0 6px;
+    font-size: 0.76rem;
   }
 
   .navLinks a {
-    flex: 0 0 auto;
-    padding: 0 8px;
-    font-size: 0.86rem;
+    width: 100%;
+    min-height: 36px;
+    padding: 0 6px;
+    font-size: 0.76rem;
+  }
+
+  .wordmark {
+    justify-content: center;
+    width: 100%;
   }
 
   .wordmarkText small {
@@ -3658,6 +3686,63 @@ h3 {
 
   .personalHero {
     gap: 14px;
+  }
+
+  .heroCopy h1 {
+    font-size: clamp(3rem, 15vw, 4.2rem);
+  }
+
+  .heroLead {
+    margin-top: 18px;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .heroActions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 22px;
+  }
+
+  .heroActions .primaryAction,
+  .heroActions .quietAction {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .productShowcase {
+    gap: 12px;
+  }
+
+  .projectCard {
+    min-height: auto;
+    padding: 16px;
+  }
+
+  .projectCard strong {
+    margin: 42px 0;
+    font-size: clamp(2.25rem, 12vw, 3.55rem);
+  }
+
+  .projectCard small {
+    align-self: auto;
+  }
+
+  .activeProject {
+    order: 1;
+  }
+
+  .courtmapStats {
+    order: 2;
+  }
+
+  .projectCard:not(.activeProject) {
+    order: 3;
+  }
+
+  .trialsimStats {
+    order: 4;
   }
 
   .heroCopy,
