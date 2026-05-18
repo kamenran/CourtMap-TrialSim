@@ -854,7 +854,7 @@ function PortfolioHome({ setView }) {
       <section className="aiHomeFeature">
         <div>
           <p className="label">CourtMap Focus</p>
-          <h2>Computational constitutional law</h2>
+          <h2>Interactive constitutional law</h2>
           <p>
             CourtMap turns Supreme Court cases into an interactive map of precedent, showing how decisions cite,
             narrow, expand, and overrule one another over time.
