@@ -223,7 +223,7 @@ const precedentCases = [
     plainEnglish:
       "Gideon made the right to a lawyer meaningful for people who cannot afford one. It is central to criminal procedure and access-to-justice doctrine.",
     whyItMatters:
-      "Gideon is a clean access-to-justice node: it connects constitutional rights to institutional capacity, public defense systems, and later procedural cases.",
+      "Gideon connects constitutional rights to the practical obligation to provide defense counsel in criminal cases.",
     officialLink: "https://supreme.justia.com/cases/federal/us/372/335/",
     tags: ["Criminal Procedure", "Access to Justice", "Counsel"],
     cites: ["powell"],
@@ -383,7 +383,7 @@ const precedentCases = [
       concurrence: [],
       dissent: [],
       notParticipating: ["Chase", "Cushing"],
-      note: "Marbury's participating Court was unanimous, which helps frame judicial review as an institutional foundation node."
+      note: "Marbury's participating Court was unanimous, helping establish judicial review as a lasting constitutional principle."
     },
     timeline: [
       { year: 1803, title: "Marbury", detail: "Judicial review is announced." },
@@ -470,7 +470,7 @@ const frameShiftInstitutions = [
   {
     id: "companies",
     name: "Technology Companies",
-    institutionType: "Private platform builder",
+    institutionType: "Technology company",
     primaryFrame: "Innovation, competitiveness, flexible governance, product safety, and avoiding premature overregulation.",
     secondaryFrames: ["Open development", "Market leadership", "Internal safety testing"],
     coreArgument: "AI development needs room to iterate while firms build technical safeguards and compete globally.",
@@ -506,7 +506,7 @@ const frameShiftInstitutions = [
   {
     id: "researchers",
     name: "Researchers/Academics",
-    institutionType: "Knowledge producer",
+    institutionType: "Research institution",
     primaryFrame: "Measurement, evidence, model evaluation, social impact, and long-term governance design.",
     secondaryFrames: ["Benchmarking", "Interpretability", "Public-interest research"],
     coreArgument: "AI policy needs empirical evaluation, independent access, and rigorous methods for identifying social and technical risk.",
@@ -851,15 +851,15 @@ function PortfolioHome({ setView }) {
 
       <section className="aiHomeFeature">
         <div>
-          <p className="label">Strategic Focus</p>
+          <p className="label">CourtMap Focus</p>
           <h2>Computational constitutional law</h2>
           <p>
-            A graph-first project direction for understanding how Supreme Court precedent evolves:
-            citations, overruling chains, constitutional amendments, doctrine shifts, and judicial influence.
+            CourtMap turns Supreme Court cases into an interactive map of precedent, showing how decisions cite,
+            narrow, expand, and overrule one another over time.
           </p>
         </div>
         <div className="aiHomeStats">
-          <Metric label="Identity" value="CS + Law" />
+          <Metric label="Focus" value="Legal technology" />
         </div>
       </section>
 
@@ -889,7 +889,7 @@ function PortfolioHome({ setView }) {
             <li>Plain-English case explanations</li>
             <li>Doctrine evolution view</li>
           </ul>
-          <button className="quietAction compact identityLaunch" onClick={() => setView("precedent")}>Open project</button>
+          <button className="quietAction compact identityLaunch" onClick={() => setView("precedent")}>Open CourtMap</button>
         </article>
       </section>
 
@@ -908,17 +908,17 @@ function PortfolioHome({ setView }) {
             <small>Explore landmark cases, citation relationships, doctrine evolution, constitutional amendments, and overruling chains.</small>
           </button>
           <button className="projectCard" onClick={() => setView("trialsim")}>
-            <span>Simulation project</span>
+            <span>Simulation tool</span>
             <strong>Educational courtroom scenario simulator</strong>
             <small>Adjust evidence, witnesses, constitutional issues, jurisdiction, and strategy to explore how legal variables shift case pressure.</small>
           </button>
           <div className="productStats courtmapStats">
-            <Metric label="Corpus" value="SCOTUS cases" />
+            <Metric label="Collection" value="SCOTUS cases" />
             <Metric label="Stack" value="React · D3 · Neo4j-ready" />
-            <Metric label="Theme" value="Law + CS" />
+            <Metric label="Focus" value="Precedent mapping" />
           </div>
           <div className="productStats trialsimStats">
-            <Metric label="Corpus" value="Educational legal scenarios" />
+            <Metric label="Collection" value="Legal scenarios" />
             <Metric label="Stack" value="React · TypeScript · Simulation logic" />
             <Metric label="Focus" value="Evidence + constitutional reasoning" />
           </div>
@@ -932,7 +932,7 @@ function PortfolioHome({ setView }) {
           <p className="label">Project Roadmap</p>
           <h2>Where the platform goes next</h2>
           <ul className="roadmapList">
-            <li>Full Supreme Court citation corpus</li>
+            <li>Full Supreme Court citation collection</li>
             <li>Legal citation parser</li>
             <li>Neo4j precedent graph</li>
             <li>Justice voting blocs</li>
@@ -1452,7 +1452,7 @@ function TrialExplanation() {
   return (
     <section className="projectExplanation trialExplanation">
       <article>
-        <p className="label">Why This Project</p>
+        <p className="label">Why TrialSim</p>
         <h2>Computational legal scenarios.</h2>
         <p>
           TrialSim is an educational legal simulation platform for exploring how evidentiary,
@@ -1463,8 +1463,8 @@ function TrialExplanation() {
         <p className="label">Technical Model</p>
         <h2>State, weights, and legal reasoning.</h2>
         <p>
-          The project combines frontend state management, weighted scoring, scenario comparison,
-          constitutional issue mapping, and careful legal framing without claiming real-world prediction.
+          TrialSim combines weighted scoring, scenario comparison, constitutional issue mapping,
+          and careful legal framing without claiming real-world prediction.
         </p>
       </article>
       <article>
@@ -1554,7 +1554,7 @@ function FrameShiftHero() {
           <i className="flagStripe stripeTwo" />
           <i className="flagStripe stripeThree" />
         </span>
-        <span>Curated MVP</span>
+        <span>Curated guide</span>
         <strong>AI policy framing lab</strong>
       </div>
     </header>
@@ -1744,7 +1744,7 @@ function RelatedDocuments({ selectedIssue }) {
           </a>
         ))}
       </div>
-      <p className="sourceNote">FrameShift is a structured civic-tech MVP. These links provide attribution and research context; the project does not provide legal advice or predict legal outcomes.</p>
+      <p className="sourceNote">These links provide attribution and research context. FrameShift does not provide legal advice or predict legal outcomes.</p>
     </section>
   );
 }
@@ -1753,11 +1753,11 @@ function FrameShiftExplanation() {
   return (
     <section className="projectExplanation frameExplanation">
       <article>
-        <p className="label">Why This Project</p>
+        <p className="label">Why FrameShift</p>
         <h2>AI policy is not one debate.</h2>
         <p>
-          FrameShift was built to explore how AI governance debates are shaped by institutional perspective.
-          Rather than treating AI policy as a single debate, the project compares how courts, governments,
+          FrameShift explores how AI governance debates are shaped by institutional perspective.
+          Rather than treating AI policy as a single debate, it compares how courts, governments,
           companies, civil liberties groups, and international regulators define the risks, rights, and
           responsibilities of artificial intelligence.
         </p>
@@ -1766,17 +1766,16 @@ function FrameShiftExplanation() {
         <p className="label">Technical Model</p>
         <h2>Computational policy analysis.</h2>
         <p>
-          FrameShift combines structured data modeling, interface design, comparison logic, and policy analysis to make
+          FrameShift combines structured data, comparison logic, and policy analysis to make
           complex AI governance debates easier to explore.
         </p>
       </article>
       <article>
-        <p className="label">Technical Stack</p>
-        <h2>Frontend-first MVP.</h2>
+        <p className="label">How It Works</p>
+        <h2>Interactive policy comparison.</h2>
         <p>
-          React, local structured data, filtering/search logic, comparison interfaces, and lightweight data
-          visualization components. Roadmap: policy ingestion, NLP theme extraction, embeddings, citation
-          relationships, optional backend/database, and live AI governance updates.
+          Users can filter AI policy issues, compare institutional framings, review legal themes,
+          and open source links for the underlying documents.
         </p>
       </article>
     </section>
@@ -1812,13 +1811,13 @@ function CourtMapPage({ selectedCase, setSelectedCaseId, query, setQuery, filter
             <i className="flagStripe stripeTwo" />
             <i className="flagStripe stripeThree" />
           </span>
-          <span>Curated corpus</span>
+          <span>Curated case set</span>
           <strong>{precedentCases.length} landmark cases</strong>
         </div>
       </header>
 
       <section className="insightStrip">
-        <Metric label="Citation edges" value={stats.edgeCount} />
+        <Metric label="Citation relationships" value={stats.edgeCount} />
         <Metric label="Overruling chains" value={stats.overrulingCount} />
         <Metric label="Doctrine areas" value={stats.areaCount} />
         <Metric label="Complete briefs" value={precedentCases.length} />
@@ -1829,7 +1828,7 @@ function CourtMapPage({ selectedCase, setSelectedCaseId, query, setQuery, filter
           <div>
             <p className="label">Case Explorer</p>
             <h2>Search precedent by case, doctrine, amendment, or legal theme</h2>
-            <p className="sourceNote">Curated Supreme Court corpus with complete case cards, source links, doctrine timelines, and graph-ready citation relationships.</p>
+            <p className="sourceNote">Curated Supreme Court case set with complete case cards, source links, doctrine timelines, and mapped citation relationships.</p>
           </div>
           <label className="searchBox">
             <span>Search</span>
@@ -2135,12 +2134,12 @@ function PathFinder({ setSelectedCaseId }) {
           <p className="label">Doctrine Path Finder</p>
           <h2>Trace the shortest route between precedents</h2>
           <p>
-            Follow citation, downstream, and overruling relationships across the curated SCOTUS network.
+            Follow citation, downstream, and overruling relationships across the selected Supreme Court cases.
           </p>
         </div>
         <div className="pathBadge">
           <strong>{Math.max(path.length - 1, 0)}</strong>
-          <span>edge{path.length - 1 === 1 ? "" : "s"}</span>
+          <span>relationship{path.length - 1 === 1 ? "" : "s"}</span>
         </div>
       </div>
 
@@ -2203,7 +2202,7 @@ function PathFinder({ setSelectedCaseId }) {
       ) : (
         <div className="emptyState">
           <strong>No mapped path yet.</strong>
-          <p>These nodes are not connected in the current curated corpus. Adding more SCOTUS citation data will make this graph denser over time.</p>
+          <p>These cases are not connected in the current case set. Adding more Supreme Court citation data will make more paths available over time.</p>
         </div>
       )}
     </section>
@@ -2280,7 +2279,7 @@ function BrieflyPanel({ selectedCase, setQuery, setFilters, setSortBy, setBriefl
     setBrieflyFocus({
       type: "anchor",
       title: selectedCase.amendment,
-      detail: `Showing cases in the corpus connected to ${selectedCase.amendment}.`
+      detail: `Showing cases connected to ${selectedCase.amendment}.`
     });
     scrollToSelector(".catalogPanel");
   }
@@ -2359,7 +2358,7 @@ function RelationshipPanel({ selectedCase, brieflyFocus }) {
 
   return (
     <article className="panel relationshipPanel">
-      <p className="label">Graph Insight</p>
+      <p className="label">Relationship Summary</p>
       <h2>{brieflyFocus?.type === "overruling" ? brieflyFocus.title : "Relationship summary"}</h2>
       <ul className="relationshipList">
         <li><strong>{selectedCase.cites.length}</strong><span>case{selectedCase.cites.length === 1 ? "" : "s"} cited or doctrinally upstream</span></li>
@@ -2373,7 +2372,7 @@ function RelationshipPanel({ selectedCase, brieflyFocus }) {
             ? `${selectedCase.name} is directly overruled by ${incomingOverrulerNames.join(", ")}.`
           : citedNames.length
             ? `${selectedCase.name} builds from ${citedNames.slice(0, 2).join(", ")}.`
-            : `${selectedCase.name} functions as a foundational source node in this corpus.`}
+            : `${selectedCase.name} functions as a foundational precedent in this case set.`}
         {brieflyFocus?.type === "overruling" ? "" : citingNames.length ? ` Later mapped cases include ${citingNames.slice(0, 2).join(", ")}.` : ""}
       </p>
     </article>
@@ -2501,8 +2500,8 @@ function CredibilityMarkers() {
   const stats = getCorpusStats();
   return (
     <section className="credibilityStrip">
-      <Metric label="Cases modeled" value={precedentCases.length} />
-      <Metric label="Graph edges" value={stats.edgeCount} />
+      <Metric label="Cases included" value={precedentCases.length} />
+      <Metric label="Relationships" value={stats.edgeCount} />
       <Metric label="Doctrines" value={stats.areaCount} />
       <Metric label="Graph engine" value="D3" />
       <Metric label="Backend path" value="Neo4j" />
@@ -2514,7 +2513,7 @@ function ProjectExplanation() {
   return (
     <section className="projectExplanation">
       <article>
-        <p className="label">Why This Project</p>
+        <p className="label">Why CourtMap</p>
         <h2>Legal reasoning is networked.</h2>
         <p>
           CourtMap turns Supreme Court doctrine into an interactive graph so users can see how cases cite,
@@ -2522,18 +2521,18 @@ function ProjectExplanation() {
         </p>
       </article>
       <article>
-        <p className="label">Technical Stack</p>
-        <h2>Graph-first architecture.</h2>
+        <p className="label">How It Works</p>
+        <h2>Cases become relationships.</h2>
         <p>
-          React for the interface, D3 for visualization, graph-modeled case data, source links for every case,
-          and a Neo4j-ready backend path for larger citation ingestion.
+          CourtMap uses structured case data and D3 visualization to show citations, overrulings,
+          constitutional anchors, and doctrine links in one place.
         </p>
       </article>
       <article>
         <p className="label">Use Case</p>
         <h2>Designed for exploring precedent.</h2>
         <p>
-          CourtMap is built for readers who want to move from a single case to the broader doctrine around it:
+          CourtMap helps readers move from a single case to the broader doctrine around it:
           what it cites, what later cases do with it, and where the constitutional thread leads.
         </p>
       </article>
@@ -2905,7 +2904,7 @@ function findShortestPath(startId, endId) {
 function explainPath(path) {
   if (path.length <= 1) {
     const node = getPathNode(path[0]?.id);
-    return node ? `${node.name} is selected as both the start and endpoint.` : "Select two different nodes to trace a route.";
+    return node ? `${node.name} is selected as both the start and endpoint.` : "Select two different cases to trace a route.";
   }
 
   const start = getPathNode(path[0].id)?.name || path[0].id;
@@ -2938,7 +2937,7 @@ function getOverrulingGuidance(selectedCase) {
     return `${selectedCase.name} is part of a downstream precedent chain. Later cases in this map include ${downstreamNames.slice(0, 2).join(", ")}, showing how the doctrine developed after this decision.`;
   }
 
-  return `${selectedCase.name} does not have a direct overruling relationship in this curated corpus. It currently functions as a source for nearby doctrine rather than as part of an overruling chain.`;
+  return `${selectedCase.name} does not have a direct overruling relationship in this case set. It currently serves as a reference point for nearby doctrine rather than as part of an overruling chain.`;
 }
 
 function getControllingRule(selectedCase) {
