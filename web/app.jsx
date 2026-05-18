@@ -5,6 +5,8 @@ const colors = {
   doctrine: "#3b5f82",
   amendment: "#c93636",
   cited: "#6f7d8e",
+  upstream: "#6f7d8e",
+  downstream: "#4b6f96",
   overruling: "#8a332f",
   current: "#166534"
 };
@@ -409,7 +411,7 @@ const supportingCases = [
   ["cooper", "Cooper v. Aaron", "1958", "Enforced Brown"],
   ["green", "Green v. County School Board", "1968", "Remedies after Brown"],
   ["swann", "Swann v. Charlotte-Mecklenburg", "1971", "Desegregation remedies"],
-  ["parents", "Parents Involved", "2007", "Race-conscious school assignment"],
+  ["parents", "Parents Involved v. Seattle School District No. 1", "551 U.S. 701 · 2007", "Race-conscious school assignment"],
   ["escobedo", "Escobedo v. Illinois", "1964", "Interrogation and counsel"],
   ["dickerson", "Dickerson v. United States", "2000", "Reaffirmed Miranda"],
   ["berghuis", "Berghuis v. Thompkins", "2010", "Miranda waiver"],
@@ -1934,7 +1936,8 @@ function CourtMapPage({ selectedCase, setSelectedCaseId, query, setQuery, filter
           </div>
           <div className="legend">
             <span><i style={{ background: colors.case }} /> Selected case</span>
-            <span><i style={{ background: colors.cited }} /> Cited case</span>
+            <span><i style={{ background: colors.upstream }} /> Case this decision cites</span>
+            <span><i style={{ background: colors.downstream }} /> Later case citing this decision</span>
             <span><i style={{ background: colors.doctrine }} /> Doctrine</span>
             <span><i style={{ background: colors.amendment }} /> Amendment</span>
             <span><i style={{ background: colors.overruling }} /> Overruling relationship</span>
@@ -1964,7 +1967,7 @@ function CaseHeader({ selectedCase }) {
       </div>
       <div className="metrics">
         <Metric label="Cites" value={selectedCase.cites.length} />
-        <Metric label="Cited By" value={selectedCase.citedBy.length} />
+        <Metric label="Later Cites" value={selectedCase.citedBy.length} />
         <Metric label="Overruling" value={getOverrulingIds(selectedCase).length} />
       </div>
     </section>
@@ -2361,8 +2364,8 @@ function RelationshipPanel({ selectedCase, brieflyFocus }) {
       <p className="label">Relationship Summary</p>
       <h2>{brieflyFocus?.type === "overruling" ? brieflyFocus.title : "Relationship summary"}</h2>
       <ul className="relationshipList">
-        <li><strong>{selectedCase.cites.length}</strong><span>case{selectedCase.cites.length === 1 ? "" : "s"} cited or doctrinally upstream</span></li>
-        <li><strong>{selectedCase.citedBy.length}</strong><span>case{selectedCase.citedBy.length === 1 ? "" : "s"} downstream</span></li>
+        <li><strong>{selectedCase.cites.length}</strong><span>case{selectedCase.cites.length === 1 ? "" : "s"} this decision cites</span></li>
+        <li><strong>{selectedCase.citedBy.length}</strong><span>later case{selectedCase.citedBy.length === 1 ? "" : "s"} citing this decision</span></li>
         <li><strong>{overrulingCount}</strong><span>overruling relationship{overrulingCount === 1 ? "" : "s"}</span></li>
       </ul>
       <p>
@@ -2770,9 +2773,10 @@ function buildGraph(selectedCase) {
     ids.forEach((id) => {
       const known = knownById[id];
       const support = supportById[id];
+      const nodeType = type === "OVERRULES" ? "overruling" : type === "CITED_BY" ? "downstream" : "upstream";
       const node = known
-        ? { id, label: known.name, type: type === "OVERRULES" ? "overruling" : "cited", caseId: id }
-        : { id, label: support?.name || id, type: type === "OVERRULES" ? "overruling" : "cited" };
+        ? { id, label: known.name, type: nodeType, caseId: id }
+        : { id, label: support?.name || id, type: nodeType };
       nodes.push(node);
       links.push({ source: selectedCase.id, target: id, type });
     });
