@@ -2713,7 +2713,7 @@ function influenceScore(item) {
 
 function getCorpusStats() {
   return {
-    edgeCount: precedentCases.reduce((total, item) => total + item.cites.length + item.citedBy.length + item.overrules.length + item.related.length, 0),
+    edgeCount: precedentCases.reduce((total, item) => total + item.cites.length + item.citedBy.length + item.overrules.length + getGraphRelatedConcepts(item).length, 0),
     overrulingCount: precedentCases.reduce((total, item) => total + item.overrules.length, 0),
     areaCount: uniqueOptions(precedentCases.map((item) => item.area)).length
   };
@@ -2760,7 +2760,7 @@ function buildGraph(selectedCase) {
   addConnected("OVERRULES", selectedCase.overrules);
   addIncomingOverrulers(incomingOverrulers);
 
-  selectedCase.related.slice(0, 3).forEach((item) => {
+  getGraphRelatedConcepts(selectedCase).forEach((item) => {
     const id = `related:${item}`;
     nodes.push({ id, label: item, type: "doctrine" });
     links.push({ source: selectedCase.id, target: id, type: "RELATED_TO" });
@@ -2795,6 +2795,26 @@ function getIncomingOverrulers(caseId) {
 
 function getOverrulingIds(selectedCase) {
   return [...new Set([...selectedCase.overrules, ...getIncomingOverrulers(selectedCase.id)])];
+}
+
+function getGraphRelatedConcepts(selectedCase) {
+  const existingConcepts = new Set([
+    normalizeConceptLabel(selectedCase.doctrine),
+    normalizeConceptLabel(selectedCase.amendment)
+  ]);
+
+  return selectedCase.related
+    .filter((item) => {
+      const key = normalizeConceptLabel(item);
+      if (existingConcepts.has(key)) return false;
+      existingConcepts.add(key);
+      return true;
+    })
+    .slice(0, 3);
+}
+
+function normalizeConceptLabel(label) {
+  return label.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 }
 
 function caseName(id) {
