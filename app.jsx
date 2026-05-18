@@ -269,9 +269,9 @@ const precedentCases = [
     holding:
       "Accessing historical cell-site location records is a search under the Fourth Amendment and usually requires a warrant.",
     plainEnglish:
-      "Carpenter updates Fourth Amendment doctrine for digital tracking. It is one of the best cases for showing your technology-law and AI-governance interests.",
+      "Carpenter updates Fourth Amendment doctrine for digital tracking by treating long-term cell-site location records as a search that usually requires a warrant.",
     whyItMatters:
-      "This is the signature tech-law node. It links constitutional privacy, data trails, surveillance, platform records, and the legal problem of old doctrine meeting new computation.",
+      "The case connects constitutional privacy, data trails, surveillance, platform records, and the legal problem of applying older doctrine to modern digital systems.",
     officialLink: "https://supreme.justia.com/cases/federal/us/585/16-402/",
     tags: ["Digital Privacy", "Surveillance", "Fourth Amendment"],
     cites: ["katz", "jones", "smith"],
@@ -1460,7 +1460,7 @@ function TrialExplanation() {
         </p>
       </article>
       <article>
-        <p className="label">Law + CS Connection</p>
+        <p className="label">Technical Model</p>
         <h2>State, weights, and legal reasoning.</h2>
         <p>
           The project combines frontend state management, weighted scoring, scenario comparison,
@@ -1763,11 +1763,10 @@ function FrameShiftExplanation() {
         </p>
       </article>
       <article>
-        <p className="label">Law + CS Connection</p>
+        <p className="label">Technical Model</p>
         <h2>Computational policy analysis.</h2>
         <p>
-          This project reflects my interest in applying computer science to legal and policy systems. It
-          combines structured data modeling, interface design, comparison logic, and policy analysis to make
+          FrameShift combines structured data modeling, interface design, comparison logic, and policy analysis to make
           complex AI governance debates easier to explore.
         </p>
       </article>
