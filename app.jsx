@@ -1938,7 +1938,7 @@ function CourtMapPage({ selectedCase, setSelectedCaseId, query, setQuery, filter
             <span><i style={{ background: colors.cited }} /> Cited case</span>
             <span><i style={{ background: colors.doctrine }} /> Doctrine</span>
             <span><i style={{ background: colors.amendment }} /> Amendment</span>
-            <span><i style={{ background: colors.overruling }} /> Overruled</span>
+            <span><i style={{ background: colors.overruling }} /> Overruling relationship</span>
           </div>
         </div>
         <PrecedentGraph selectedCase={selectedCase} setSelectedCaseId={setSelectedCaseId} />
@@ -1966,7 +1966,7 @@ function CaseHeader({ selectedCase }) {
       <div className="metrics">
         <Metric label="Cites" value={selectedCase.cites.length} />
         <Metric label="Cited By" value={selectedCase.citedBy.length} />
-        <Metric label="Overrules" value={selectedCase.overrules.length} />
+        <Metric label="Overruling" value={getOverrulingIds(selectedCase).length} />
       </div>
     </section>
   );
@@ -2332,7 +2332,7 @@ function BrieflyPanel({ selectedCase, setQuery, setFilters, setSortBy, setBriefl
 }
 
 function DoctrinePanel({ selectedCase, setSelectedCaseId, brieflyFocus }) {
-  const connectedIds = [...selectedCase.cites, ...selectedCase.citedBy, ...selectedCase.overrules];
+  const connectedIds = [...selectedCase.cites, ...selectedCase.citedBy, ...selectedCase.overrules, ...getIncomingOverrulers(selectedCase.id)];
   const connected = precedentCases.filter((item) => connectedIds.includes(item.id));
   return (
     <article className="panel aiPolicyTrackerPanel">
@@ -2352,8 +2352,11 @@ function DoctrinePanel({ selectedCase, setSelectedCaseId, brieflyFocus }) {
 
 function RelationshipPanel({ selectedCase, brieflyFocus }) {
   const citedNames = selectedCase.cites.map(caseName).filter(Boolean);
-  const citingNames = selectedCase.citedBy.map(caseName).filter(Boolean);
+  const incomingOverrulerIds = getIncomingOverrulers(selectedCase.id);
+  const incomingOverrulerNames = incomingOverrulerIds.map(caseName).filter(Boolean);
+  const citingNames = selectedCase.citedBy.filter((id) => !incomingOverrulerIds.includes(id)).map(caseName).filter(Boolean);
   const overruledNames = selectedCase.overrules.map(caseName).filter(Boolean);
+  const overrulingCount = selectedCase.overrules.length + incomingOverrulerIds.length;
 
   return (
     <article className="panel relationshipPanel">
@@ -2362,11 +2365,13 @@ function RelationshipPanel({ selectedCase, brieflyFocus }) {
       <ul className="relationshipList">
         <li><strong>{selectedCase.cites.length}</strong><span>case{selectedCase.cites.length === 1 ? "" : "s"} cited or doctrinally upstream</span></li>
         <li><strong>{selectedCase.citedBy.length}</strong><span>case{selectedCase.citedBy.length === 1 ? "" : "s"} downstream</span></li>
-        <li><strong>{selectedCase.overrules.length}</strong><span>overruling edge{selectedCase.overrules.length === 1 ? "" : "s"}</span></li>
+        <li><strong>{overrulingCount}</strong><span>overruling edge{overrulingCount === 1 ? "" : "s"}</span></li>
       </ul>
       <p>
         {brieflyFocus?.type === "overruling" ? brieflyFocus.detail : overruledNames.length
           ? `${selectedCase.name} directly displaces ${overruledNames.join(", ")}.`
+          : incomingOverrulerNames.length
+            ? `${selectedCase.name} is directly overruled by ${incomingOverrulerNames.join(", ")}.`
           : citedNames.length
             ? `${selectedCase.name} builds from ${citedNames.slice(0, 2).join(", ")}.`
             : `${selectedCase.name} functions as a foundational source node in this corpus.`}
@@ -2746,9 +2751,14 @@ function buildGraph(selectedCase) {
   const knownById = Object.fromEntries(precedentCases.map((item) => [item.id, item]));
   const supportById = Object.fromEntries(supportingCases.map((item) => [item.id, item]));
 
-  addConnected("CITES", selectedCase.cites);
-  addConnected("CITED_BY", selectedCase.citedBy);
+  const incomingOverrulers = getIncomingOverrulers(selectedCase.id);
+  const cites = selectedCase.cites.filter((id) => !selectedCase.overrules.includes(id));
+  const citedBy = selectedCase.citedBy.filter((id) => !incomingOverrulers.includes(id));
+
+  addConnected("CITES", cites);
+  addConnected("CITED_BY", citedBy);
   addConnected("OVERRULES", selectedCase.overrules);
+  addIncomingOverrulers(incomingOverrulers);
 
   selectedCase.related.slice(0, 3).forEach((item) => {
     const id = `related:${item}`;
@@ -2763,12 +2773,28 @@ function buildGraph(selectedCase) {
       const known = knownById[id];
       const support = supportById[id];
       const node = known
-        ? { id, label: known.name, type: "cited", caseId: id }
+        ? { id, label: known.name, type: type === "OVERRULES" ? "overruling" : "cited", caseId: id }
         : { id, label: support?.name || id, type: type === "OVERRULES" ? "overruling" : "cited" };
       nodes.push(node);
       links.push({ source: selectedCase.id, target: id, type });
     });
   }
+
+  function addIncomingOverrulers(ids) {
+    ids.forEach((id) => {
+      const known = knownById[id];
+      nodes.push({ id, label: known?.name || id, type: "overruling", caseId: known ? id : undefined });
+      links.push({ source: id, target: selectedCase.id, type: "OVERRULES" });
+    });
+  }
+}
+
+function getIncomingOverrulers(caseId) {
+  return precedentCases.filter((item) => item.overrules.includes(caseId)).map((item) => item.id);
+}
+
+function getOverrulingIds(selectedCase) {
+  return [...new Set([...selectedCase.overrules, ...getIncomingOverrulers(selectedCase.id)])];
 }
 
 function caseName(id) {
@@ -2878,10 +2904,15 @@ function scrollToSelector(selector) {
 
 function getOverrulingGuidance(selectedCase) {
   const overruledNames = selectedCase.overrules.map(caseName).filter(Boolean);
+  const incomingOverrulerNames = getIncomingOverrulers(selectedCase.id).map(caseName).filter(Boolean);
   const downstreamNames = selectedCase.citedBy.map(caseName).filter(Boolean);
 
   if (overruledNames.length) {
     return `${selectedCase.name} has a direct overruling edge to ${overruledNames.join(", ")}. The graph view shows that relationship as a conflict path instead of a normal citation path.`;
+  }
+
+  if (incomingOverrulerNames.length) {
+    return `${selectedCase.name} is directly overruled by ${incomingOverrulerNames.join(", ")}. The graph view shows that relationship as an overruling path instead of a normal downstream citation path.`;
   }
 
   if (downstreamNames.length) {
@@ -2898,6 +2929,9 @@ function getControllingRule(selectedCase) {
 function getGraphUse(selectedCase) {
   if (selectedCase.overrules.length) {
     return "Use this case to show how overruling chains alter doctrine across time.";
+  }
+  if (getIncomingOverrulers(selectedCase.id).length) {
+    return "Use this case to show how later decisions can overrule and replace earlier doctrine.";
   }
   if (selectedCase.citedBy.length > selectedCase.cites.length) {
     return "Use this case as an influence node: later cases depend on it to develop the doctrine.";
