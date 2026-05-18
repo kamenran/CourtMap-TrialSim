@@ -766,7 +766,7 @@ function ContactPage() {
           <p className="label">Resume</p>
           <h2>Kamran Eisenberg Resume</h2>
           <p>View my current resume with coursework, experience, technical work, and project background.</p>
-          <a className="quietAction" href="./resume.pdf" target="_blank" rel="noreferrer">Open resume</a>
+          <a className="quietAction" href="./kamranresume.pdf" target="_blank" rel="noreferrer">Open resume</a>
         </article>
       </div>
     </section>
