@@ -2029,7 +2029,7 @@ function CaseBriefPanel({ selectedCase }) {
       <div className="sectionHeader">
         <div>
           <p className="label">Case Brief</p>
-          <h2>Interview-ready summary</h2>
+          <h2>Case Brief</h2>
         </div>
         <button className="quietAction compact" onClick={copyBrief}>{copied ? "Copied" : "Copy brief"}</button>
       </div>

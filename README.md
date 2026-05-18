@@ -18,7 +18,7 @@ Scope: CourtMap is focused on **SCOTUS only**. It starts with landmark Supreme C
 - Plain-English case summaries
 - Doctrine timeline for each selected case
 - GitHub-style before/after doctrine shift view for every displayed case
-- Interview-ready case brief panel
+- Case brief panel
 - Quick doctrine lenses and sorting
 - Interactive D3 precedent graph
 - Briefly mascot as a precedent-reading assistant
