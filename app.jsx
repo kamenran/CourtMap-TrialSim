@@ -126,7 +126,7 @@ const precedentCases = [
     plainEnglish:
       "Roe recognized abortion as part of constitutional privacy doctrine. It was later modified by Casey and overruled by Dobbs.",
     whyItMatters:
-      "Roe is ideal for precedent mapping because its chain is explicit: recognition, modification, viability standard, then overruling. It teaches how precedent can evolve and collapse.",
+      "Roe shows how a constitutional rule can be recognized, modified, narrowed, and eventually overruled through later Supreme Court decisions.",
     officialLink: "https://supreme.justia.com/cases/federal/us/410/113/",
     tags: ["Privacy", "Due Process", "Reproductive Rights"],
     cites: ["griswold", "eisenstadt"],
@@ -175,7 +175,7 @@ const precedentCases = [
     plainEnglish:
       "Dobbs is the modern endpoint of the abortion-precedent chain. It is a high-signal example of overruling, stare decisis analysis, and constitutional interpretation shifting over time.",
     whyItMatters:
-      "The case makes the graph product feel serious because it shows not only citations, but conflict: which precedents survive, which are narrowed, and which are overruled.",
+      "Dobbs shows how stare decisis works when the Court rejects earlier constitutional doctrine and replaces the governing rule.",
     officialLink: "https://supreme.justia.com/cases/federal/us/597/19-1392/",
     tags: ["Stare Decisis", "Due Process", "Federalism"],
     cites: ["roe", "casey", "washington"],
@@ -368,7 +368,7 @@ const precedentCases = [
     plainEnglish:
       "Marbury is the institutional foundation for Supreme Court power. It explains why precedent mapping matters: courts do not just resolve disputes; they structure constitutional governance.",
     whyItMatters:
-      "Marbury gives the product a constitutional-law anchor. It connects legal reasoning to institutional design, separation of powers, and judicial legitimacy.",
+      "Marbury anchors judicial review: the power of courts to interpret the Constitution and invalidate government action that conflicts with it.",
     officialLink: "https://supreme.justia.com/cases/federal/us/5/137/",
     tags: ["Judicial Review", "Separation of Powers", "Article III"],
     cites: [],
@@ -2361,11 +2361,11 @@ function RelationshipPanel({ selectedCase, brieflyFocus }) {
   return (
     <article className="panel relationshipPanel">
       <p className="label">Graph Insight</p>
-      <h2>{brieflyFocus?.type === "overruling" ? brieflyFocus.title : "How this node behaves"}</h2>
+      <h2>{brieflyFocus?.type === "overruling" ? brieflyFocus.title : "Relationship summary"}</h2>
       <ul className="relationshipList">
         <li><strong>{selectedCase.cites.length}</strong><span>case{selectedCase.cites.length === 1 ? "" : "s"} cited or doctrinally upstream</span></li>
         <li><strong>{selectedCase.citedBy.length}</strong><span>case{selectedCase.citedBy.length === 1 ? "" : "s"} downstream</span></li>
-        <li><strong>{overrulingCount}</strong><span>overruling edge{overrulingCount === 1 ? "" : "s"}</span></li>
+        <li><strong>{overrulingCount}</strong><span>overruling relationship{overrulingCount === 1 ? "" : "s"}</span></li>
       </ul>
       <p>
         {brieflyFocus?.type === "overruling" ? brieflyFocus.detail : overruledNames.length
@@ -2908,18 +2908,18 @@ function getOverrulingGuidance(selectedCase) {
   const downstreamNames = selectedCase.citedBy.map(caseName).filter(Boolean);
 
   if (overruledNames.length) {
-    return `${selectedCase.name} has a direct overruling edge to ${overruledNames.join(", ")}. The graph view shows that relationship as a conflict path instead of a normal citation path.`;
+    return `${selectedCase.name} directly overrules ${overruledNames.join(", ")}. This marks a stronger relationship than ordinary citation because the later decision rejects the earlier rule.`;
   }
 
   if (incomingOverrulerNames.length) {
-    return `${selectedCase.name} is directly overruled by ${incomingOverrulerNames.join(", ")}. The graph view shows that relationship as an overruling path instead of a normal downstream citation path.`;
+    return `${selectedCase.name} is directly overruled by ${incomingOverrulerNames.join(", ")}. The later decision replaces the earlier rule rather than simply citing it.`;
   }
 
   if (downstreamNames.length) {
-    return `${selectedCase.name} is part of a downstream precedent chain. Later mapped cases include ${downstreamNames.slice(0, 2).join(", ")}, so this button follows how the doctrine moves after the selected case.`;
+    return `${selectedCase.name} is part of a downstream precedent chain. Later cases in this map include ${downstreamNames.slice(0, 2).join(", ")}, showing how the doctrine developed after this decision.`;
   }
 
-  return `${selectedCase.name} does not have a direct overruling edge in this curated corpus yet, so the graph treats it as a stable source node for nearby doctrine.`;
+  return `${selectedCase.name} does not have a direct overruling relationship in this curated corpus. It currently functions as a source for nearby doctrine rather than as part of an overruling chain.`;
 }
 
 function getControllingRule(selectedCase) {
@@ -2928,18 +2928,18 @@ function getControllingRule(selectedCase) {
 
 function getGraphUse(selectedCase) {
   if (selectedCase.overrules.length) {
-    return "Use this case to show how overruling chains alter doctrine across time.";
+    return "This case shows how overruling can change constitutional doctrine across time.";
   }
   if (getIncomingOverrulers(selectedCase.id).length) {
-    return "Use this case to show how later decisions can overrule and replace earlier doctrine.";
+    return "This case shows how later decisions can overrule and replace earlier doctrine.";
   }
   if (selectedCase.citedBy.length > selectedCase.cites.length) {
-    return "Use this case as an influence node: later cases depend on it to develop the doctrine.";
+    return "This case functions as an influence point because later cases rely on it to develop the doctrine.";
   }
   if (selectedCase.cites.length) {
-    return "Use this case as a synthesis node: it draws older doctrine into a newer constitutional rule.";
+    return "This case synthesizes earlier doctrine into a newer constitutional rule.";
   }
-  return "Use this case as a foundation node for institutional power and constitutional structure.";
+  return "This case functions as a foundation for institutional power and constitutional structure.";
 }
 
 function buildCaseBrief(selectedCase) {
