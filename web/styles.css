@@ -1157,6 +1157,11 @@ button {
   line-height: 1.58;
 }
 
+.trialOutcome {
+  display: flex;
+  flex-direction: column;
+}
+
 .trialMeterGrid {
   display: grid;
   gap: 12px;
@@ -1206,15 +1211,44 @@ button {
 }
 
 .trialDisclaimer {
-  margin-top: 16px;
-  padding: 12px;
+  margin-top: 12px;
+  padding: 11px 12px;
   border: 1px solid rgba(59, 95, 130, 0.18);
   border-radius: 8px;
-  background: rgba(237, 243, 248, 0.72);
+  background: rgba(237, 243, 248, 0.52);
   color: var(--navy);
-  font-size: 0.86rem;
-  font-weight: 850;
+  font-size: 0.82rem;
+  font-weight: 760;
   line-height: 1.45;
+}
+
+.trialOutputNotes {
+  margin-top: auto;
+  padding-top: 38px;
+}
+
+.trialMethodologyCard {
+  margin-top: 0;
+  padding: 14px;
+  border: 1px solid rgba(47, 125, 107, 0.18);
+  border-radius: 8px;
+  background: rgba(245, 249, 247, 0.86);
+}
+
+.trialMethodologyCard span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.trialMethodologyCard p {
+  margin: 0;
+  color: #344251;
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .argumentGrid article {

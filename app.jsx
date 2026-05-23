@@ -719,7 +719,7 @@ function SiteNav({ view, setView }) {
           <strong>Kamran Eisenberg</strong>
         </span>
       </button>
-      <div className="navMotto">May God Bless the United States of America</div>
+      <div className="navMotto">Equal Justice Under Law</div>
       <div className="navLinks">
         <button className={view === "home" ? "active" : ""} onClick={() => setView("home")}>Profile</button>
         <button className={view === "precedent" ? "active" : ""} onClick={() => setView("precedent")}>CourtMap</button>
@@ -1358,8 +1358,17 @@ function TrialOutcomePanel({ caseType, result }) {
         <TrialMeter label="Settlement / plea pressure" value={result.settlementPressure} />
         <TrialMeter label="Constitutional risk" value={result.constitutionalRisk} danger />
       </div>
-      <div className="trialDisclaimer">
-        Educational model only. This does not predict real outcomes or provide legal advice.
+      <div className="trialOutputNotes">
+        <div className="trialMethodologyCard">
+          <span>Methodology</span>
+          <p>
+            TrialSim uses a transparent weighted model to show how evidence, witness reliability,
+            constitutional issues, forum, and strategy can shift an educational legal scenario.
+          </p>
+        </div>
+        <div className="trialDisclaimer">
+          Educational model only. This does not predict real outcomes or provide legal advice.
+        </div>
       </div>
     </section>
   );
